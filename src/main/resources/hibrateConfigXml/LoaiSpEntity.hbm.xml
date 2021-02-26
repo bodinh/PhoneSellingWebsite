@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.example.demo.Hibernate.LoaiSpEntity" table="LoaiSP" schema="dbo" catalog="Sellphones">
+        <id name="maLoai">
+            <column name="MaLoai" sql-type="int"/>
+        </id>
+        <property name="tenLoai">
+            <column name="TenLoai" sql-type="nvarchar(100)" length="100"/>
+        </property>
+    </class>
+</hibernate-mapping>

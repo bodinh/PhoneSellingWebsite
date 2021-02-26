@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.example.demo.Hibernate.AccountEntity" table="Account" schema="dbo" catalog="Sellphones">
+        <id name="idAccount">
+            <column name="IDAccount" sql-type="int"/>
+        </id>
+        <property name="username">
+            <column name="Username" sql-type="nvarchar(50)" length="50"/>
+        </property>
+        <property name="password">
+            <column name="Password" sql-type="nvarchar(50)" length="50"/>
+        </property>
+        <property name="hoten">
+            <column name="Hoten" sql-type="nvarchar(100)" length="100"/>
+        </property>
+        <property name="ngaysinh">
+            <column name="Ngaysinh" sql-type="date"/>
+        </property>
+        <property name="email">
+            <column name="Email" sql-type="nvarchar(500)" length="500" not-null="true"/>
+        </property>
+        <property name="phonenumber">
+            <column name="Phonenumber" sql-type="nvarchar(50)" length="50"/>
+        </property>
+        <property name="address">
+            <column name="Address" sql-type="nvarchar(200)" length="200"/>
+        </property>
+        <property name="avatar">
+            <column name="Avatar" sql-type="nvarchar(500)" length="500" not-null="true"/>
+        </property>
+        <property name="type">
+            <column name="Type" sql-type="nvarchar(10)" length="10" not-null="true"/>
+        </property>
+    </class>
+</hibernate-mapping>

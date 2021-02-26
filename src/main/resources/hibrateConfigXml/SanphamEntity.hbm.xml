@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.example.demo.Hibernate.SanphamEntity" table="Sanpham" schema="dbo" catalog="Sellphones">
+        <id name="maSp">
+            <column name="MaSP" sql-type="int"/>
+        </id>
+        <property name="tenSp">
+            <column name="TenSP" sql-type="nvarchar(500)" length="500"/>
+        </property>
+        <property name="loaiSp">
+            <column name="LoaiSP" sql-type="int"/>
+        </property>
+        <property name="hangSx">
+            <column name="HangSX" sql-type="int"/>
+        </property>
+        <property name="xuatxu">
+            <column name="Xuatxu" sql-type="nvarchar(100)" length="100"/>
+        </property>
+        <property name="gia">
+            <column name="Gia" sql-type="float" precision="-1"/>
+        </property>
+        <property name="mota">
+            <column name="Mota" sql-type="nvarchar(500)" length="500" not-null="true"/>
+        </property>
+        <property name="anh">
+            <column name="Anh" sql-type="char(500)" length="500"/>
+        </property>
+        <property name="isnew">
+            <column name="Isnew" sql-type="int" not-null="true"/>
+        </property>
+        <property name="ishot">
+            <column name="Ishot" sql-type="int" not-null="true"/>
+        </property>
+        <property name="soLuong">
+            <column name="SoLuong" sql-type="int" not-null="true"/>
+        </property>
+        <property name="thoiDiemNhapHang">
+            <column name="ThoiDiemNhapHang" sql-type="datetime" not-null="true"/>
+        </property>
+    </class>
+</hibernate-mapping>

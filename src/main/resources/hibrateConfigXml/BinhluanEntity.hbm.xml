@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.example.demo.Hibernate.BinhluanEntity" table="Binhluan" schema="dbo" catalog="Sellphones">
+        <id name="maBl">
+            <column name="MaBL" sql-type="int"/>
+        </id>
+        <property name="maSp">
+            <column name="MaSP" sql-type="int"/>
+        </property>
+        <property name="maKh">
+            <column name="MaKH" sql-type="int" not-null="true"/>
+        </property>
+        <property name="noidung">
+            <column name="Noidung" sql-type="nvarchar(500)" length="500" not-null="true"/>
+        </property>
+        <property name="ngaydang">
+            <column name="Ngaydang" sql-type="datetime"/>
+        </property>
+        <property name="hoten">
+            <column name="Hoten" sql-type="nvarchar(50)" length="50"/>
+        </property>
+        <property name="email">
+            <column name="Email" sql-type="nvarchar(50)" length="50" not-null="true"/>
+        </property>
+    </class>
+</hibernate-mapping>

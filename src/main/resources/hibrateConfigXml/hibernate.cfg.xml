@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+    "-//Hibernate/Hibernate Configuration DTD//EN"
+    "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+  <session-factory>
+    <property name="hibernate.ejb.metamodel.population">disabled</property>
+    <property name="hbm2ddl.auto">update</property>
+    <property name="connection.url">jdbc:sqlserver://localhost:1433;database=Sellphones</property>
+    <property name="connection.driver_class">com.microsoft.sqlserver.jdbc.SQLServerDriver</property>
+    <property name="connection.username">sa</property>
+    <property name="connection.password">100799</property>
+      <mapping class="com.example.demo.Hibernate.AccountEntity"/>
+      <mapping resource="hibrateConfigXml/AccountEntity.hbm.xml"/>
+      <mapping class="com.example.demo.Hibernate.BaoHanhEntity"/>
+      <mapping resource="hibrateConfigXml/BaoHanhEntity.hbm.xml"/>
+      <mapping class="com.example.demo.Hibernate.BinhluanEntity"/>
+      <mapping resource="hibrateConfigXml/BinhluanEntity.hbm.xml"/>
+      <mapping class="com.example.demo.Hibernate.ChitietDhEntity"/>
+      <mapping resource="hibrateConfigXml/ChitietDhEntity.hbm.xml"/>
+      <mapping class="com.example.demo.Hibernate.DonhangKhEntity"/>
+      <mapping resource="hibrateConfigXml/DonhangKhEntity.hbm.xml"/>
+      <mapping class="com.example.demo.Hibernate.HangSxEntity"/>
+      <mapping resource="hibrateConfigXml/HangSxEntity.hbm.xml"/>
+      <mapping class="com.example.demo.Hibernate.HopdongEntity"/>
+      <mapping resource="hibrateConfigXml/HopdongEntity.hbm.xml"/>
+      <mapping class="com.example.demo.Hibernate.KhuyenmaiEntity"/>
+      <mapping resource="hibrateConfigXml/KhuyenmaiEntity.hbm.xml"/>
+      <mapping class="com.example.demo.Hibernate.LoaiSpEntity"/>
+      <mapping resource="hibrateConfigXml/LoaiSpEntity.hbm.xml"/>
+      <mapping class="com.example.demo.Hibernate.NhacungcapEntity"/>
+      <mapping resource="hibrateConfigXml/NhacungcapEntity.hbm.xml"/>
+      <mapping class="com.example.demo.Hibernate.SPkhuyenmaiEntity"/>
+      <mapping resource="hibrateConfigXml/SPkhuyenmaiEntity.hbm.xml"/>
+      <mapping class="com.example.demo.Hibernate.SanphamEntity"/>
+      <mapping resource="hibrateConfigXml/SanphamEntity.hbm.xml"/>
+      <mapping class="com.example.demo.Hibernate.ThongsokythuatEntity"/>
+      <mapping resource="hibrateConfigXml/ThongsokythuatEntity.hbm.xml"/>
+      <!-- <property name="connection.username"/> -->
+    <!-- <property name="connection.password"/> -->
+
+    <!-- DB schema will be updated if needed -->
+    <!-- <property name="hibernate.hbm2ddl.auto">update</property> -->
+  </session-factory>
+</hibernate-configuration>
