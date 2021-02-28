@@ -39,88 +39,109 @@ public class SanPhamController {
     String local = "localhost:8080";
 
     @GetMapping("/admin/sanpham/page/{pageNumber}")
-    public String SanPhamPaginated(@PathVariable int pageNumber, Model model,HttpSession httpSession,HttpServletRequest httpServletRequest) throws IOException {
-            List<SanphamEntity> sanPhams = new ArrayList<>();
-            List<LoaiSpEntity> loaiSPS = new ArrayList<>();
-            List<HangSxEntity> hangSXES = new ArrayList<>();
+    public String SanPhamPaginated(@PathVariable int pageNumber, Model model, HttpSession httpSession, HttpServletRequest httpServletRequest) throws IOException {
+        List<SanphamEntity> sanPhams = new ArrayList<>();
+        List<LoaiSpEntity> loaiSPS = new ArrayList<>();
+        List<HangSxEntity> hangSXES = new ArrayList<>();
 
-            //call api sanphams
-            OkHttpClient okHttpClient = new OkHttpClient();
-            Request request = new Request.Builder().url("http://"+local+"/api/sanphams/list").build();
+        //call api sanphams
+        OkHttpClient okHttpClient = new OkHttpClient();
+        Request request = new Request.Builder().url("http://" + local + "/api/sanphams/list").build();
 
-            Response response = okHttpClient.newCall(request).execute();
-            ObjectMapper objectMapper = new ObjectMapper();
-            try {
-                sanPhams = Arrays.asList(objectMapper.readValue(response.body().string(), SanphamEntity[].class));
-            } catch (IOException e) {
-            }
-            //===========
+        Response response = okHttpClient.newCall(request).execute();
+        ObjectMapper objectMapper = new ObjectMapper();
+        try {
+            sanPhams = Arrays.asList(objectMapper.readValue(response.body().string(), SanphamEntity[].class));
+        } catch (IOException e) {
+        }
+        //===========
 
-            //call api loaisps
-            OkHttpClient okHttpClientLoaiSP = new OkHttpClient();;
-            Request requestLoaiSP = new Request.Builder().url("http://"+local+"/api/loaisps/list").build();
+        //call api loaisps
+        OkHttpClient okHttpClientLoaiSP = new OkHttpClient();
+        ;
+        Request requestLoaiSP = new Request.Builder().url("http://" + local + "/api/loaisps/list").build();
 
-            Response responseLoaiSP = okHttpClientLoaiSP.newCall(requestLoaiSP).execute();
-            try {
-                loaiSPS = Arrays.asList(objectMapper.readValue(responseLoaiSP.body().string(),LoaiSpEntity[].class));
-            }catch (IOException e){
+        Response responseLoaiSP = okHttpClientLoaiSP.newCall(requestLoaiSP).execute();
+        try {
+            loaiSPS = Arrays.asList(objectMapper.readValue(responseLoaiSP.body().string(), LoaiSpEntity[].class));
+        } catch (IOException e) {
 
-            }
-            //================
+        }
+        //================
 
-            //call api hangsxs
-            OkHttpClient okHttpClientHangSX = new OkHttpClient();
-            Request requestHangSX = new Request.Builder().url("http://"+local+"/api/hangsxs/list").build();
+        //call api hangsxs
+        OkHttpClient okHttpClientHangSX = new OkHttpClient();
+        Request requestHangSX = new Request.Builder().url("http://" + local + "/api/hangsxs/list").build();
 
-            Response responseHangSX = okHttpClientHangSX.newCall(requestHangSX).execute();
-            try {
-                hangSXES = Arrays.asList(objectMapper.readValue(responseHangSX.body().string(),HangSxEntity[].class));
-            }catch (IOException e){
+        Response responseHangSX = okHttpClientHangSX.newCall(requestHangSX).execute();
+        try {
+            hangSXES = Arrays.asList(objectMapper.readValue(responseHangSX.body().string(), HangSxEntity[].class));
+        } catch (IOException e) {
 
-            }
-            //================
+        }
+        //================
 
-            PagedListHolder<SanphamEntity> pagedListHolder = (PagedListHolder<SanphamEntity>) httpServletRequest.getSession().getAttribute("sanphams");
-            int pageSize=10;
-            if(pagedListHolder == null){
-                pagedListHolder = new PagedListHolder<>(sanPhams);
-                pagedListHolder.setPageSize(pageSize);
-            }else {
-                pagedListHolder = new PagedListHolder<>(sanPhams);
-                pagedListHolder.setPageSize(pageSize);
-                final int goToPage = pageNumber-1;
-                if(goToPage <= pagedListHolder.getPageCount() && goToPage >=0){
-                    pagedListHolder.setPage(goToPage);
+        //xử lý khi có tìm kiếm
+        if (httpSession.getAttribute("search") != null) {
+            String sSearch = httpSession.getAttribute("search").toString().toLowerCase();
+            List<SanphamEntity> resultSearch = new ArrayList<>();
+            sanPhams.forEach(sanphamEntity -> {
+                if (sanphamEntity.getTenSp().toLowerCase().contains(sSearch) || String.valueOf(sanphamEntity.getMaSp()).toLowerCase().contains(sSearch)) {
+                    resultSearch.add(sanphamEntity);
                 }
+            });
+            model.addAttribute("search", sSearch);
+            sanPhams = resultSearch;
+        }
+
+        //====================
+
+        PagedListHolder<SanphamEntity> pagedListHolder = (PagedListHolder<SanphamEntity>) httpServletRequest.getSession().getAttribute("sanphams");
+        int pageSize = 10;
+        if (pagedListHolder == null) {
+            pagedListHolder = new PagedListHolder<>(sanPhams);
+            pagedListHolder.setPageSize(pageSize);
+        } else {
+            pagedListHolder = new PagedListHolder<>(sanPhams);
+            pagedListHolder.setPageSize(pageSize);
+            final int goToPage = pageNumber - 1;
+            if (goToPage <= pagedListHolder.getPageCount() && goToPage >= 0) {
+                pagedListHolder.setPage(goToPage);
             }
+        }
 
-            //Paginated
-            httpServletRequest.getSession().setAttribute("sanphams",pagedListHolder);
-            int current = pagedListHolder.getPage() +1;
-            int begin = 1;
-            int end = pagedListHolder.getPageCount();
-            int totalPageCount = pagedListHolder.getPageCount();
-            String baseUrl = "/admin/sanpham/page/";
+        //Paginated
+        httpServletRequest.getSession().setAttribute("sanphams", pagedListHolder);
+        int current = pagedListHolder.getPage() + 1;
+        int begin = 1;
+        int end = pagedListHolder.getPageCount();
+        int totalPageCount = pagedListHolder.getPageCount();
+        String baseUrl = "/admin/sanpham/page/";
 
-            model.addAttribute("beginIndex",begin);
-            model.addAttribute("endIndex",end);
-            model.addAttribute("currentIndex",current);
-            model.addAttribute("totalPageCount",totalPageCount);
-            model.addAttribute("baseUrl",baseUrl);
-            model.addAttribute("sanphamsPage",pagedListHolder);
-            //===========
+        model.addAttribute("beginIndex", begin);
+        model.addAttribute("endIndex", end);
+        model.addAttribute("currentIndex", current);
+        model.addAttribute("totalPageCount", totalPageCount);
+        model.addAttribute("baseUrl", baseUrl);
+        model.addAttribute("sanphamsPage", pagedListHolder);
+        //===========
 
 
-            model.addAttribute("HangSXs",hangSXES);
-            model.addAttribute("LoaiSPs",loaiSPS);
-            model.addAttribute("sanPhams", sanPhams);
-            return "/admin/all-product";
+        model.addAttribute("HangSXs", hangSXES);
+        model.addAttribute("LoaiSPs", loaiSPS);
+        model.addAttribute("sanPhams", sanPhams);
+        return "/admin/all-product";
     }
 
-    @RequestMapping("/admin/all-product")
-    public String allSanPham(Model model, HttpSession httpSession,HttpServletRequest request) throws IOException {
-            request.getSession().setAttribute("sanphams",null);
-            return "redirect:/admin/sanpham/page/1";
+    @GetMapping("/admin/all-product")
+    public String allSanPham(Model model, HttpSession httpSession, HttpServletRequest request, String search) throws IOException {
+        if (search != null) {
+            httpSession.setAttribute("search", search);
+        } else {
+            httpSession.setAttribute("search", null);
+        }
+        request.getSession().setAttribute("sanphams", null);
+        return "redirect:/admin/sanpham/page/1";
     }
 
     @PostMapping("/admin/addproduct")
@@ -158,7 +179,7 @@ public class SanPhamController {
         ObjectMapper objectMapper = new ObjectMapper();
         RequestBody requestBody = RequestBody.create(JSON, objectMapper.writeValueAsString(sanPham));
         //=========================================
-        Request request = new Request.Builder().url("http://"+local+"/api/sanphams/post").post(requestBody).build();
+        Request request = new Request.Builder().url("http://" + local + "/api/sanphams/post").post(requestBody).build();
         Response response = okHttpClient.newCall(request).execute();
         String stringResponse = response.body().string();
         if (stringResponse.equals("successful")) {
@@ -172,15 +193,15 @@ public class SanPhamController {
     }
 
     @PostMapping("/admin/editproduct")
-    public String SuaSanPham(@ModelAttribute SanphamEntity sanPham,@RequestParam(name = "nameImage") String nameImage, RedirectAttributes redirectAttributes, @RequestParam(name = "fileImage") MultipartFile multipartFile) throws IOException {
+    public String SuaSanPham(@ModelAttribute SanphamEntity sanPham, @RequestParam(name = "nameImage") String nameImage, RedirectAttributes redirectAttributes, @RequestParam(name = "fileImage") MultipartFile multipartFile) throws IOException {
 
         //Lấy thông tin sản phẩm muốn sửa
         SanphamEntity sp = GetSanpham(sanPham.getMaSp());
 
-        if(!nameImage.equals(sp.getAnh())){
-            if(nameImage.equals("empty")){
+        if (!nameImage.equals(sp.getAnh())) {
+            if (nameImage.equals("empty")) {
                 sanPham.setAnh("");
-            }else {
+            } else {
                 //Lưu ảnh
                 String nImage = StringUtils.cleanPath(multipartFile.getOriginalFilename());
                 sanPham.setAnh(nImage);
@@ -200,7 +221,7 @@ public class SanPhamController {
                 }
             }
             //=======================
-        }else {
+        } else {
             sanPham.setAnh(sp.getAnh());
         }
         sanPham.setIsnew(sp.getIsnew());
@@ -213,7 +234,7 @@ public class SanPhamController {
         ObjectMapper objectMapper = new ObjectMapper();
         OkHttpClient okHttpClient = new OkHttpClient();
         RequestBody requestBody = RequestBody.create(JSON, objectMapper.writeValueAsString(sanPham));
-        Request request = new Request.Builder().url("http://"+local+"/api/sanphams/put").put(requestBody).build();
+        Request request = new Request.Builder().url("http://" + local + "/api/sanphams/put").put(requestBody).build();
         Response response = okHttpClient.newCall(request).execute();
         String stringResponse = response.body().string();
         if (stringResponse.equals("successful")) {
@@ -231,7 +252,7 @@ public class SanPhamController {
     public String XoaSanPham(@RequestParam(name = "MaSp") int MaSp, RedirectAttributes redirectAttributes) throws IOException {
         OkHttpClient okHttpClient = new OkHttpClient();
 
-        Request request = new Request.Builder().url("http://"+local+"/api/sanphams/delete/" + MaSp).delete().build();
+        Request request = new Request.Builder().url("http://" + local + "/api/sanphams/delete/" + MaSp).delete().build();
 
         Response response = okHttpClient.newCall(request).execute();
         String stringResponse = response.body().string();
@@ -249,7 +270,7 @@ public class SanPhamController {
     private SanphamEntity GetSanpham(int MaSp) throws IOException {
         SanphamEntity sanPham = new SanphamEntity();
         OkHttpClient okHttpClient = new OkHttpClient();
-        Request request = new Request.Builder().url("http://"+local+"/api/sanphams/single/" + MaSp).build();
+        Request request = new Request.Builder().url("http://" + local + "/api/sanphams/single/" + MaSp).build();
         Response response = okHttpClient.newCall(request).execute();
         ObjectMapper objectMapper = new ObjectMapper();
         sanPham = objectMapper.readValue(response.body().string(), SanphamEntity.class);
@@ -265,7 +286,7 @@ public class SanPhamController {
             ObjectMapper objectMapper = new ObjectMapper();
             //call api loaisps
             OkHttpClient okHttpClientLoaiSP = new OkHttpClient();
-            Request requestLoaiSP = new Request.Builder().url("http://"+local+"/api/loaisps/list").build();
+            Request requestLoaiSP = new Request.Builder().url("http://" + local + "/api/loaisps/list").build();
 
             Response responseLoaiSP = okHttpClientLoaiSP.newCall(requestLoaiSP).execute();
             try {
@@ -277,7 +298,7 @@ public class SanPhamController {
 
             //call api hangsxs
             OkHttpClient okHttpClientHangSX = new OkHttpClient();
-            Request requestHangSX = new Request.Builder().url("http://"+local+"/api/hangsxs/list").build();
+            Request requestHangSX = new Request.Builder().url("http://" + local + "/api/hangsxs/list").build();
 
             Response responseHangSX = okHttpClientHangSX.newCall(requestHangSX).execute();
             try {
@@ -304,7 +325,7 @@ public class SanPhamController {
         ObjectMapper objectMapper = new ObjectMapper();
         RequestBody requestBody = RequestBody.create(JSON, objectMapper.writeValueAsString(loaiSP));
         //=========================================
-        Request request = new Request.Builder().url("http://"+local+"/api/loaisps/post").post(requestBody).build();
+        Request request = new Request.Builder().url("http://" + local + "/api/loaisps/post").post(requestBody).build();
         Response response = okHttpClient.newCall(request).execute();
         String stringResponse = response.body().string();
         if (stringResponse.equals("successful")) {
@@ -326,7 +347,7 @@ public class SanPhamController {
         ObjectMapper objectMapper = new ObjectMapper();
         RequestBody requestBody = RequestBody.create(JSON, objectMapper.writeValueAsString(hangSX));
         //=========================================
-        Request request = new Request.Builder().url("http://"+local+"/api/hangsxs/post").post(requestBody).build();
+        Request request = new Request.Builder().url("http://" + local + "/api/hangsxs/post").post(requestBody).build();
         Response response = okHttpClient.newCall(request).execute();
         String stringResponse = response.body().string();
         if (stringResponse.equals("successful")) {
