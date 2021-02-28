@@ -65,11 +65,7 @@ public class HomeController {
 
     @GetMapping("/admin/index")
     public String indexAdmin(HttpSession httpSession) {
-        if (httpSession.getAttribute("username") != null) {
             return "admin/index";
-        } else {
-            return "redirect:/login";
-        }
     }
 
 }

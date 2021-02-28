@@ -40,7 +40,6 @@ public class SanPhamController {
 
     @GetMapping("/admin/sanpham/page/{pageNumber}")
     public String SanPhamPaginated(@PathVariable int pageNumber, Model model,HttpSession httpSession,HttpServletRequest httpServletRequest) throws IOException {
-        if (httpSession.getAttribute("username") != null) {
             List<SanphamEntity> sanPhams = new ArrayList<>();
             List<LoaiSpEntity> loaiSPS = new ArrayList<>();
             List<HangSxEntity> hangSXES = new ArrayList<>();
@@ -116,20 +115,12 @@ public class SanPhamController {
             model.addAttribute("LoaiSPs",loaiSPS);
             model.addAttribute("sanPhams", sanPhams);
             return "/admin/all-product";
-        } else {
-            return "redirect:/login";
-        }
     }
 
     @RequestMapping("/admin/all-product")
     public String allSanPham(Model model, HttpSession httpSession,HttpServletRequest request) throws IOException {
-        if (httpSession.getAttribute("username") != null) {
             request.getSession().setAttribute("sanphams",null);
             return "redirect:/admin/sanpham/page/1";
-        } else {
-            return "redirect:/login";
-        }
-
     }
 
     @PostMapping("/admin/addproduct")
