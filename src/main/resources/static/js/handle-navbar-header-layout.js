@@ -14,6 +14,9 @@ $(document).ready(function () {
                     "                                <ul class=\"dropdown-menu\">\n" + listHangSxs +
                     "                                </ul>\n" +
                     "                            </li>");
+
+                $("#allCategories").append("<li role=\"presentation\"><a role=\"menuitem\" tabindex=\"-1\" href=\"#\">"+data[i].tenLoai+"</a></li>");
+
             }
         },async:false
     })

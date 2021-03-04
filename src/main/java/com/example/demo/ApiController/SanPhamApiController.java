@@ -7,6 +7,8 @@ import org.hibernate.Session;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 @RestController
@@ -30,7 +32,19 @@ public class SanPhamApiController {
         }
         return sanPham;
     }
-
+    //6 item random
+    @GetMapping("/random")
+    public List<SanphamEntity> GetRandomSanPham(){
+        List<SanphamEntity> sanphamEntityList = null;
+        try {
+            sanphamEntityList = (List<SanphamEntity>) openSession().createQuery("from SanphamEntity where hangSx=1000").list();
+            Collections.shuffle(sanphamEntityList);
+            sanphamEntityList = sanphamEntityList.subList(0,6);
+        } catch (Exception throwables) {
+            throwables.printStackTrace();
+        }
+        return sanphamEntityList;
+    }
     //list item
     @GetMapping("/list")
     public List<SanphamEntity> GetAllSanPham(){
