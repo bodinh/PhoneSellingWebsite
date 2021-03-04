@@ -4,6 +4,7 @@ import com.example.demo.Hibernate.HangSxEntity;
 import com.example.demo.Hibernate.LoaiSpEntity;
 import com.example.demo.Hibernate.SellPhonesDBContext;
 
+import com.example.demo.Model.HangSX;
 import com.example.demo.Model.LoaiSpHangSp;
 import org.hibernate.*;
 
@@ -53,7 +54,7 @@ public class LoaiSPApiController {
     public List<LoaiSpHangSp> getLoaiSpHangSp() {
         List<LoaiSpHangSp> loaiSpHangSps = new ArrayList<>();
         List<Object[]> listObject = openSession().createQuery(" SELECT DISTINCT  s.loaiSp,l.tenLoai,s.hangSx,h.tenhang,h.quocgia,h.trusochinh FROM SanphamEntity s INNER JOIN HangSxEntity h ON h.maHangSx = s.hangSx INNER JOIN LoaiSpEntity l ON l.maLoai = s.loaiSp").list();
-        List<HangSxEntity> hangSxEntities = new ArrayList<>();
+        List<HangSX> hangSXES = new ArrayList<>();
         for (int i = 0; i < listObject.size(); i++
         ) {
             int loaiSp = Integer.valueOf(listObject.get(i)[0].toString());
@@ -62,16 +63,16 @@ public class LoaiSPApiController {
             String tenhang = listObject.get(i)[3].toString();
             String quocgia = listObject.get(i)[4].toString();
             String trusochinh = listObject.get(i)[5].toString();
-            hangSxEntities.add(new HangSxEntity(hangSx, trusochinh, quocgia, tenhang));
+            hangSXES.add(new HangSX(hangSx, trusochinh, quocgia, tenhang));
             if (i < listObject.size() -1) {
                 int loaiSpNext= Integer.valueOf(listObject.get(i)[0].toString());
                 if (Integer.valueOf(listObject.get(i+1)[0].toString()) != loaiSpNext) {
-                    loaiSpHangSps.add(new LoaiSpHangSp(loaiSp, tenloai, hangSxEntities));
-                    hangSxEntities = new ArrayList<>();
+                    loaiSpHangSps.add(new LoaiSpHangSp(loaiSp, tenloai, hangSXES));
+                    hangSXES = new ArrayList<>();
                 }
             }else {
-                loaiSpHangSps.add(new LoaiSpHangSp(loaiSp, tenloai, hangSxEntities));
-                hangSxEntities = new ArrayList<>();
+                loaiSpHangSps.add(new LoaiSpHangSp(loaiSp, tenloai, hangSXES));
+                hangSXES = new ArrayList<>();
             }
         }
         return loaiSpHangSps;

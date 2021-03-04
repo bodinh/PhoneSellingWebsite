@@ -5,7 +5,7 @@ $(document).ready(function () {
         success: function (data) {
             for (let i = 0; i < data.length; i++) {
                 var listHangSxs = "";
-                data[i].hangSxEntityList.forEach(element=> {
+                data[i].hangSXES.forEach(element=> {
                     listHangSxs += "<li><a href=\"#\">"+element.tenhang+"</a></li>\n";
                 })
 

@@ -11,16 +11,16 @@ public class LoaiSpHangSp implements Serializable {
     private int LoaiSP;
     private String TenLoai;
 
-    List<HangSxEntity> hangSxEntityList;
+    List<HangSX> hangSXES;
 
     public LoaiSpHangSp() {
         super();
     }
 
-    public LoaiSpHangSp(int loaiSP, String tenLoai, List<HangSxEntity> hangSxEntityList) {
+    public LoaiSpHangSp(int loaiSP, String tenLoai, List<HangSX> hangSXES) {
         LoaiSP = loaiSP;
         TenLoai = tenLoai;
-        this.hangSxEntityList = hangSxEntityList;
+        this.hangSXES = hangSXES;
     }
 
     public int getLoaiSP() {
@@ -39,11 +39,11 @@ public class LoaiSpHangSp implements Serializable {
         TenLoai = tenLoai;
     }
 
-    public List<HangSxEntity> getHangSxEntityList() {
-        return hangSxEntityList;
+    public List<HangSX> getHangSXES() {
+        return hangSXES;
     }
 
-    public void setHangSxEntityList(List<HangSxEntity> hangSxEntityList) {
-        this.hangSxEntityList = hangSxEntityList;
+    public void setHangSXES(List<HangSX> hangSXES) {
+        this.hangSXES = hangSXES;
     }
 }
