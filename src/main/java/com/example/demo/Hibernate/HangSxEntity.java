@@ -11,6 +11,13 @@ public class HangSxEntity {
     private String quocgia;
     private String tenhang;
 
+    public HangSxEntity(int maHangSx, String trusochinh, String quocgia, String tenhang) {
+        this.maHangSx = maHangSx;
+        this.trusochinh = trusochinh;
+        this.quocgia = quocgia;
+        this.tenhang = tenhang;
+    }
+
     @Id
     @Column(name = "MaHangSX", nullable = false)
     public int getMaHangSx() {
