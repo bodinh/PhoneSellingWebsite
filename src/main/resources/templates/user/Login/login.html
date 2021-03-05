@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="user/fragments :: head"/>
+<body>
+<div class="wrapper">
+    <nav th:replace="user/fragments :: topBar"></nav>
+    <header th:replace="user/fragments :: navigation"></header>
+    <!--    ==============================================BODY==============================================-->
+
+    <main id="authentication" class="inner-bottom-md" style="padding-bottom: 0;padding-top: 90px;">
+        <div class="container">
+            <div class="row" style="border-color:cadetblue;border-style:double;border-radius:20px;">
+
+                <div class="col-md-6">
+                    <section class="section sign-in inner-right-xs">
+                        <h2 class="bordered">Đăng nhập</h2>
+                        <p>Xin chào, chào mừng bạn trở lại</p>
+
+                        <div class="social-auth-buttons">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <button class="btn-block btn-lg btn btn-facebook"><i class="fa fa-facebook"></i>
+                                        Đăng nhập với Facebook
+                                    </button>
+                                </div>
+                                <div class="col-md-6">
+                                    <button class="btn-block btn-lg btn btn-twitter"><i class="fa fa-twitter"></i> Đăng
+                                        nhập với Twitter
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <form role="form" class="login-form cf-style-1">
+                            <div class="field-row">
+                                <label>Email</label>
+                                <input type="text" class="le-input">
+                            </div><!-- /.field-row -->
+
+                            <div class="field-row">
+                                <label>Mật khẩu</label>
+                                <input type="text" class="le-input">
+                            </div><!-- /.field-row -->
+
+                            <div class="field-row clearfix">
+                        	<span class="pull-left">
+                        		<label class="content-color"><input type="checkbox"
+                                                                    class="le-checbox auto-width inline"> <span
+                                        class="bold">nhớ tài khoản</span></label>
+                        	</span>
+                                <span class="pull-right">
+                        		<a href="#" class="content-color bold">Quên mật khẩu ?</a>
+                        	</span>
+                            </div>
+
+                            <div class="buttons-holder">
+                                <button type="submit" class="le-button huge">Đăng nhập</button>
+                            </div><!-- /.buttons-holder -->
+                        </form><!-- /.cf-style-1 -->
+
+                    </section><!-- /.sign-in -->
+                </div><!-- /.col -->
+
+                <div class="col-md-6">
+                    <section class="section register inner-left-xs">
+                        <h2 class="bordered">Tạo mới tài khoản</h2>
+                        <p>Tạo tài khoản Media Center của riêng bạn</p>
+
+                        <form role="form" class="register-form cf-style-1">
+                            <div class="field-row" style="font-size: 18px;">
+                                Nếu bạn không có tài khoản vui lòng :
+                            </div><!-- /.field-row -->
+
+                            <div class="buttons-holder">
+                                <a href="/register/index" type="button" class="le-button huge">Đăng ký</a>
+                            </div><!-- /.buttons-holder -->
+                        </form>
+
+                    </section><!-- /.register -->
+
+                </div><!-- /.col -->
+
+            </div><!-- /.row -->
+        </div><!-- /.container -->
+    </main>
+
+    <!--    =============================================END BODY=========================================-->
+    <div th:replace="user/fragments :: recentlyViewed"></div>
+    <div th:replace="user/fragments :: footer"></div>
+</div>
+</body>
+<script>
+    document.title = "Đăng nhập";
+</script>
+</html>

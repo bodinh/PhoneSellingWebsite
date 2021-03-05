@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.Admin;
 
 import com.example.demo.Hibernate.AccountEntity;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -22,7 +22,7 @@ public class LoginController {
 
     @GetMapping("/login")
     public String login() {
-        return "login";
+        return "admin/login";
     }
 
     @GetMapping("/logout")
@@ -54,12 +54,12 @@ public class LoginController {
             else {
                 model.addAttribute("username", username);
                 model.addAttribute("err", "Loại tài khoản không hợp lệ.");
-                return "login";
+                return "admin/login";
             }
         } else {
             model.addAttribute("username", username);
             model.addAttribute("err", "Sai tài khoản hoặc mật khẩu.");
-            return "login";
+            return "admin/login";
         }
     }
 

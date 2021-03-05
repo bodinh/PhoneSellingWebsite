@@ -1,6 +1,6 @@
 $(document).ready(function () {
     $.ajax({
-        url: "api/sanphams/random",
+        url: "/api/sanphams/random",
         method: "get",
         success: function (data) {
             data.forEach(element =>{
