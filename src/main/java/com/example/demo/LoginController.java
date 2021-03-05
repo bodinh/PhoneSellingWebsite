@@ -16,7 +16,7 @@ import java.io.IOException;
 
 
 @Controller
-public class HomeController {
+public class LoginController {
 
     String local = "localhost:8080";
 

@@ -6,6 +6,7 @@ $(document).ready(function () {
             data.forEach(element =>{
                 var anh = element.anh;
                 anh = anh.replaceAll(" ","");
+                var gia =element.gia.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
                 $("#listProductRelation").append("                            <div class=\"owl-item\" style=\"width: 195px;\">\n" +
                     "                                <div class=\"owl-wrapper-outer\">\n" +
                     "                                    <div class=\"owl-wrapper-outer\">\n" +
@@ -27,7 +28,7 @@ $(document).ready(function () {
                     "\n" +
                     "                                                        </div>\n" +
                     "                                                        <div class=\"prices\">\n" +
-                    "                                                            <div class=\"price-current text-right\">"+element.gia+" VNĐ</div>\n" +
+                    "                                                            <div class=\"price-current text-right\">"+gia+" VNĐ</div>\n" +
                     "                                                        </div>\n" +
                     "                                                        <div class=\"hover-area\">\n" +
                     "\n" +
