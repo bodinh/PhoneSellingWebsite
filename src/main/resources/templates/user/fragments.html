@@ -55,7 +55,10 @@
                 </ul>
             </div><!-- /.col -->
             <div class="col-xs-12 col-sm-6 no-margin">
-                <ul class="right">
+                <ul class="right" th:if="${session.user}">
+                    <li><a href="#" th:text="${'Hello, ' + session.user}" style="font-size: 15px;"></a></li>
+                </ul>
+                <ul class="right" th:unless="${session.user}">
                     <li><a href="/login/index">Đăng nhập</a></li>
                     <li><a href="#">Đăng ký</a></li>
                 </ul>

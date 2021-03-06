@@ -7,6 +7,7 @@
     <class name="com.example.demo.Hibernate.ChitietDhEntity" table="ChitietDH" schema="dbo" catalog="Sellphones">
         <id name="maChitietDh">
             <column name="MaChitietDH" sql-type="int"/>
+            <generator class="identity"></generator>
         </id>
         <property name="maDh">
             <column name="MaDH" sql-type="int" not-null="true"/>
