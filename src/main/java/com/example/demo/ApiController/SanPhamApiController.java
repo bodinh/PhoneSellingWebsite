@@ -45,6 +45,49 @@ public class SanPhamApiController {
         }
         return sanphamEntityList;
     }
+    //loadMore 4 item Hot
+    @GetMapping("/hot/{start}/{number}")
+    public List<SanphamEntity> Get4Hot(@PathVariable(name = "start") int start,@PathVariable(name = "number") int number){
+        List<SanphamEntity> listitems=new ArrayList<>();
+        listitems = openSession().createQuery("from SanphamEntity where ishot=1").list();
+        try{
+            if(start+ number > listitems.size() ){
+                listitems=listitems.subList(start,listitems.size());
+            }else listitems=listitems.subList(start,start+number);
+        }catch (IllegalArgumentException e){
+            return null;
+        }
+        return listitems;
+    }
+    //loadMore 4 item New
+    @GetMapping("/new/{start}/{number}")
+    public List<SanphamEntity> Get4New(@PathVariable(name = "start") int start,@PathVariable(name = "number") int number){
+        List<SanphamEntity> listitems=new ArrayList<>();
+        listitems = openSession().createQuery("from SanphamEntity where isnew=1").list();
+        try{
+            if(start+ number > listitems.size() ){
+                listitems=listitems.subList(start,listitems.size());
+            }else listitems=listitems.subList(start,start+number);
+        }catch (IllegalArgumentException e){
+            return null;
+        }
+        return listitems;
+    }
+    //loadMore 4 item Hot
+    @GetMapping("/sale/{start}/{number}")
+    public List<SanphamEntity> Get4Sale(@PathVariable(name = "start") int start,@PathVariable(name = "number") int number){
+        List<SanphamEntity> listitems=new ArrayList<>();
+        listitems = openSession().createQuery("from SanphamEntity").list();
+        try{
+            if(start+ number > listitems.size() ){
+                listitems=listitems.subList(start,listitems.size());
+            }else listitems=listitems.subList(start,start+number);
+        }catch (IllegalArgumentException e){
+            return null;
+        }
+        return listitems;
+    }
+
     //list item
     @GetMapping("/list")
     public List<SanphamEntity> GetAllSanPham(){

@@ -22,7 +22,7 @@
                 <!-- Tab panes -->
                 <div class="tab-content">
                     <div class="tab-pane active" id="featured">
-                        <div class="product-grid-holder">
+                        <div class="product-grid-holder" id="listNoiBat">
                             <th:block th:each="item : ${listSanPham}" >
                                 <div class="col-sm-4 col-md-3  no-margin product-item-holder hover">
                                     <div class="product-item">
@@ -52,14 +52,14 @@
                             </th:block>
                         </div>
                         <div class="loadmore-holder text-center">
-                            <a class="btn-loadmore" href="#">
+                            <a class="btn-loadmore" id="noibat" style="cursor: pointer;">
                                 <i class="fa fa-plus"></i>
-                                load more products</a>
+                                Tải thêm</a>
                         </div>
 
                     </div>
                     <div class="tab-pane" id="new-arrivals">
-                        <div class="product-grid-holder">
+                        <div class="product-grid-holder" id="listnew">
                             <th:block th:each="item : ${listSanPham}" >
                                 <div class="col-sm-4 col-md-3  no-margin product-item-holder hover">
                                     <div class="product-item">
@@ -89,14 +89,14 @@
                             </th:block>
                         </div>
                         <div class="loadmore-holder text-center">
-                            <a class="btn-loadmore" href="#">
+                            <a class="btn-loadmore" id="new" style="cursor: pointer;">
                                 <i class="fa fa-plus"></i>
-                                load more products</a>
+                                 Tải thêm</a>
                         </div>
 
                     </div>
                     <div class="tab-pane" id="top-sales">
-                        <div class="product-grid-holder">
+                        <div class="product-grid-holder" id="listgiamgia">
                             <th:block th:each="item : ${listSanPham}" >
                                 <div class="col-sm-4 col-md-3  no-margin product-item-holder hover">
                                     <div class="product-item">
@@ -126,9 +126,9 @@
                             </th:block>
                         </div>
                         <div class="loadmore-holder text-center">
-                            <a class="btn-loadmore" href="#">
+                            <a class="btn-loadmore" id="giamgia" style="cursor: pointer;">
                                 <i class="fa fa-plus"></i>
-                                load more products</a>
+                                Tải thêm</a>
                         </div>
                     </div>
                 </div>

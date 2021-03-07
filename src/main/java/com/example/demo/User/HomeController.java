@@ -23,7 +23,7 @@ public class HomeController {
     public String home(Model model){
         List<SanphamEntity> listSanPhams=new ArrayList<>();
         listSanPhams = openSession().createQuery("from SanphamEntity ").list();
-        model.addAttribute("listSanPham",listSanPhams);
+        model.addAttribute("listSanPham",listSanPhams.subList(0,8));
         return "index";
     }
 }
