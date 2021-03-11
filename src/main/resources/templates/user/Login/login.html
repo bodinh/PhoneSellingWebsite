@@ -11,6 +11,7 @@
     <main id="authentication" class="inner-bottom-md" style="padding-bottom: 0;padding-top: 40px;">
         <div class="container">
             <div class="alert-danger" th:if="${alertMessage}" th:text="${alertMessage}" style="text-align: center;padding-top: 15px;padding-bottom: 15px;border-style:double;border-radius:20px;"></div>
+            <div class="alert-danger" th:if="${alertLogin}" th:text="${alertLogin}" style="text-align: center;padding-top: 15px;padding-bottom: 15px;border-style:double;border-radius:20px;"></div>
             <div class="row" style="border-color:cadetblue;border-style:double;border-radius:20px;">
                 <div class="col-md-6">
                     <section class="section sign-in inner-right-xs">

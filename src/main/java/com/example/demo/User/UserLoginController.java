@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.persistence.NoResultException;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.sql.Date;
 import java.util.ArrayList;
@@ -25,25 +26,20 @@ public class UserLoginController {
     }
 
     @PostMapping("/login/index")
-    public String login(String username, String password, Model model, HttpSession httpSession) {
-        List<AccountEntity> account = new ArrayList<>();
-        try {
-            account = openSession().createQuery("from AccountEntity where username='" + username + "' and  password='" + password + "'").list();
-        } catch (NullPointerException e) {
-            throw e;
-        }
-        if (account.size() > 0) {
-            if (account.get(0).getType().replace(" ", "").equals("customer")) {
-                httpSession.setAttribute("user", account.get(0).getUsername());
+    public String login(String username, String password, Model model, HttpSession httpSession, HttpServletRequest httpServletRequest) {
+        AccountEntity account = new AccountEntity();
+        if (username != null && password != null) {
+            try {
+                account = (AccountEntity) openSession().createQuery("from AccountEntity where username='" + username + "' and  password='" + password + "'").getSingleResult();
+                httpSession.setAttribute("user", account.getUsername());
                 return "redirect:/index";
-            } else {
+            } catch (NoResultException e) {
                 model.addAttribute("alertMessage", "sai tài khoản hoặc mật khẩu.");
                 model.addAttribute("username", username);
                 return "/user/Login/login";
             }
         } else {
-            model.addAttribute("alertMessage", "sai tài khoản hoặc mật khẩu.");
-            model.addAttribute("username", username);
+            model.addAttribute("alertLogin", httpServletRequest.getAttribute("alertLogin").toString());
             return "/user/Login/login";
         }
     }
@@ -51,6 +47,12 @@ public class UserLoginController {
     @GetMapping("/login/index")
     public String login() {
         return "/user/Login/login";
+    }
+
+    @GetMapping("/login/logout")
+    public String logout(HttpSession httpSession) {
+        httpSession.removeAttribute("user");
+        return "redirect:/";
     }
 
     @GetMapping("/register/index")
