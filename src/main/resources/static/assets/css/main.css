@@ -2406,7 +2406,7 @@ header .top-cart-row .top-cart-holder .total-price-basket {
   margin: 0 10px;
 }
 .product-item-holder.hover .product-item .hover-area .add-cart-button {
-  position: relative;
+  /*position: relative;*/
   margin-bottom: 10px;
 }
 .product-item-holder.hover .product-item .hover-area .add-cart-button a {
@@ -2420,8 +2420,8 @@ header .top-cart-row .top-cart-holder .total-price-basket {
   height: 1px;
   background-color: #e0e0e0;
   content: "";
-  position: absolute;
-  top: 50%;
+  /*position: absolute;*/
+  /*top: 50%;*/
   left: 0;
 }
 .product-item-holder.hover:hover .product-item,

@@ -26,10 +26,10 @@ public class SellPhonesDBContext {
         session.close();
     }
 
-    public static void deleteObject(int maSP){
+    public static void deleteObject(Object o){
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
-        session.createQuery("delete from SanphamEntity where maSp='"+maSP+"'").executeUpdate();
+        session.delete(o);
         transaction.commit();
         session.close();
     }

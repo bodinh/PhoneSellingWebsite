@@ -105,7 +105,8 @@ public class SanPhamApiController {
         String result = null;
 
         try {
-            SellPhonesDBContext.deleteObject(MaSP);
+            SanphamEntity sanphamEntity = (SanphamEntity) openSession().createQuery("from SanphamEntity where maSp="+MaSP).getSingleResult();
+            SellPhonesDBContext.deleteObject(sanphamEntity);
             result="successful";
         }catch (Exception e){
             result="Không thể xoá sản phẩm này.";

@@ -10,7 +10,7 @@ public class ChitietDhEntity {
     private Integer maDh;
     private Integer maSp;
     private Integer soluong;
-    private Double thanhtien;
+    private long thanhtien;
 
     @Id
     @Column(name = "MaChitietDH", nullable = false)
@@ -54,11 +54,11 @@ public class ChitietDhEntity {
 
     @Basic
     @Column(name = "Thanhtien", nullable = true, precision = 0)
-    public Double getThanhtien() {
+    public long getThanhtien() {
         return thanhtien;
     }
 
-    public void setThanhtien(Double thanhtien) {
+    public void setThanhtien(long thanhtien) {
         this.thanhtien = thanhtien;
     }
 

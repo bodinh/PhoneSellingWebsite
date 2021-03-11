@@ -34,11 +34,14 @@ $(document).ready(function () {
                             "                                            <div class=\"price-current pull-right\">" + gia + " VNĐ</div>\n" +
                             "                                        </div>\n" +
                             "\n" +
-                            "                                        <div class=\"hover-area\">\n" +
+                            "<div class=\"hover-area\">\n" +
                             "                                            <div class=\"add-cart-button\">\n" +
-                            "                                                <a href=\"#\" class=\"le-button\">add to cart</a>\n" +
+                            "                                                <form action=\"/cart\" method=\"post\">\n" +
+                            "                                                    <button type=\"submit\" class=\"le-button\">add to cart</button>\n" +
+                            "                                                    <input type=\"hidden\" name=\"maSP\" value=\""+item.maSp+"\"/>\n" +
+                            "                                                </form>\n" +
                             "                                            </div>\n" +
-                            "                                        </div>\n" +
+                            "                                        </div>" +
                             "                                    </div>\n" +
                             "                                </div>");
                     });
@@ -77,11 +80,14 @@ $(document).ready(function () {
                             "                                            <div class=\"price-current pull-right\">" + gia + " VNĐ</div>\n" +
                             "                                        </div>\n" +
                             "\n" +
-                            "                                        <div class=\"hover-area\">\n" +
+                            "<div class=\"hover-area\">\n" +
                             "                                            <div class=\"add-cart-button\">\n" +
-                            "                                                <a href=\"#\" class=\"le-button\">add to cart</a>\n" +
+                            "                                                <form action=\"/cart\" method=\"post\">\n" +
+                            "                                                    <button type=\"submit\" class=\"le-button\">add to cart</button>\n" +
+                            "                                                    <input type=\"hidden\" name=\"maSP\" value=\""+item.maSp+"\"/>\n" +
+                            "                                                </form>\n" +
                             "                                            </div>\n" +
-                            "                                        </div>\n" +
+                            "                                        </div>" +
                             "                                    </div>\n" +
                             "                                </div>");
                     });
@@ -120,11 +126,14 @@ $(document).ready(function () {
                             "                                            <div class=\"price-current pull-right\">" + gia + " VNĐ</div>\n" +
                             "                                        </div>\n" +
                             "\n" +
-                            "                                        <div class=\"hover-area\">\n" +
+                            "<div class=\"hover-area\">\n" +
                             "                                            <div class=\"add-cart-button\">\n" +
-                            "                                                <a href=\"#\" class=\"le-button\">add to cart</a>\n" +
+                            "                                                <form action=\"/cart\" method=\"post\">\n" +
+                            "                                                    <button type=\"submit\" class=\"le-button\">add to cart</button>\n" +
+                            "                                                    <input type=\"hidden\" name=\"maSP\" value=\""+item.maSp+"\"/>\n" +
+                            "                                                </form>\n" +
                             "                                            </div>\n" +
-                            "                                        </div>\n" +
+                            "                                        </div>" +
                             "                                    </div>\n" +
                             "                                </div>");
                     });

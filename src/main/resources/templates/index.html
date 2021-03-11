@@ -44,13 +44,17 @@
 
                                         <div class="hover-area">
                                             <div class="add-cart-button">
-                                                <a href="#" class="le-button">add to cart</a>
+                                                <form action="/cart" method="post">
+                                                    <button type="submit" class="le-button">add to cart</button>
+                                                    <input type="hidden" name="maSP" th:value="${item.maSp}"/>
+                                                </form>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </th:block>
                         </div>
+
                         <div class="loadmore-holder text-center">
                             <a class="btn-loadmore" id="noibat" style="cursor: pointer;">
                                 <i class="fa fa-plus"></i>
@@ -81,7 +85,10 @@
 
                                         <div class="hover-area">
                                             <div class="add-cart-button">
-                                                <a href="#" class="le-button">add to cart</a>
+                                                <form action="/cart" method="post">
+                                                    <button type="submit" class="le-button">add to cart</button>
+                                                    <input type="hidden" name="maSP" th:value="${item.maSp}"/>
+                                                </form>
                                             </div>
                                         </div>
                                     </div>
@@ -118,7 +125,10 @@
 
                                         <div class="hover-area">
                                             <div class="add-cart-button">
-                                                <a href="#" class="le-button">add to cart</a>
+                                                <form action="/cart" method="post">
+                                                    <button type="submit" class="le-button">add to cart</button>
+                                                    <input type="hidden" name="maSP" th:value="${item.maSp}"/>
+                                                </form>
                                             </div>
                                         </div>
                                     </div>
