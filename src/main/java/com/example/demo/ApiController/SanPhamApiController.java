@@ -37,7 +37,7 @@ public class SanPhamApiController {
     public List<SanphamEntity> GetRandomSanPham(){
         List<SanphamEntity> sanphamEntityList = null;
         try {
-            sanphamEntityList = (List<SanphamEntity>) openSession().createQuery("from SanphamEntity where hangSx=1000").list();
+            sanphamEntityList = (List<SanphamEntity>) openSession().createQuery("from SanphamEntity").list();
             Collections.shuffle(sanphamEntityList);
             sanphamEntityList = sanphamEntityList.subList(0,6);
         } catch (Exception throwables) {

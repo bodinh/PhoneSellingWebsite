@@ -26,12 +26,12 @@
                             <th:block th:each="item : ${listSanPham}" >
                                 <div class="col-sm-4 col-md-3  no-margin product-item-holder hover">
                                     <div class="product-item">
-                                        <div class="ribbon red"><span>sale</span></div>
+                                        <div class="ribbon red"><span>giảm giá</span></div>
                                         <div class="image">
                                             <img th:alt="${item.getTenSp()}" th:src="${'/image/' + item.getMaSp()+ '/' + item.getAnh()}" />
                                         </div>
                                         <div class="body">
-                                            <div class="label-discount green">-50% sale</div>
+                                            <div class="label-discount green">-20%</div>
                                             <div class="title">
                                                 <a href="single-product.html" th:text="${item.getTenSp()}"></a>
                                             </div>
@@ -45,7 +45,7 @@
                                         <div class="hover-area">
                                             <div class="add-cart-button">
                                                 <form action="/cart" method="post">
-                                                    <button type="submit" class="le-button">add to cart</button>
+                                                    <button type="submit" class="le-button">thêm vào giỏ</button>
                                                     <input type="hidden" name="maSP" th:value="${item.maSp}"/>
                                                 </form>
                                             </div>
@@ -67,12 +67,12 @@
                             <th:block th:each="item : ${listSanPham}" >
                                 <div class="col-sm-4 col-md-3  no-margin product-item-holder hover">
                                     <div class="product-item">
-                                        <div class="ribbon red"><span>sale</span></div>
+                                        <div class="ribbon red"><span>giảm giá</span></div>
                                         <div class="image">
                                             <img th:alt="${item.getTenSp()}" th:src="${'/image/' + item.getMaSp()+ '/' + item.getAnh()}" />
                                         </div>
                                         <div class="body">
-                                            <div class="label-discount green">-50% sale</div>
+                                            <div class="label-discount green">-20%</div>
                                             <div class="title">
                                                 <a href="single-product.html" th:text="${item.getTenSp()}"></a>
                                             </div>
@@ -86,7 +86,7 @@
                                         <div class="hover-area">
                                             <div class="add-cart-button">
                                                 <form action="/cart" method="post">
-                                                    <button type="submit" class="le-button">add to cart</button>
+                                                    <button type="submit" class="le-button">thêm vào giỏ</button>
                                                     <input type="hidden" name="maSP" th:value="${item.maSp}"/>
                                                 </form>
                                             </div>
@@ -107,12 +107,12 @@
                             <th:block th:each="item : ${listSanPham}" >
                                 <div class="col-sm-4 col-md-3  no-margin product-item-holder hover">
                                     <div class="product-item">
-                                        <div class="ribbon red"><span>sale</span></div>
+                                        <div class="ribbon red"><span>giảm giá</span></div>
                                         <div class="image">
                                             <img th:alt="${item.getTenSp()}" th:src="${'/image/' + item.getMaSp()+ '/' + item.getAnh()}" />
                                         </div>
                                         <div class="body">
-                                            <div class="label-discount green">-50% sale</div>
+                                            <div class="label-discount green">-20%</div>
                                             <div class="title">
                                                 <a href="single-product.html" th:text="${item.getTenSp()}"></a>
                                             </div>
@@ -126,7 +126,7 @@
                                         <div class="hover-area">
                                             <div class="add-cart-button">
                                                 <form action="/cart" method="post">
-                                                    <button type="submit" class="le-button">add to cart</button>
+                                                    <button type="submit" class="le-button">thêm vào giỏ</button>
                                                     <input type="hidden" name="maSP" th:value="${item.maSp}"/>
                                                 </form>
                                             </div>

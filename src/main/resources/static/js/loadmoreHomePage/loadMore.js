@@ -18,12 +18,12 @@ $(document).ready(function () {
                         var gia = item.gia.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
                         $("#listnew").append(" <div class=\"col-sm-4 col-md-3  no-margin product-item-holder hover\">\n" +
                             "                                    <div class=\"product-item\">\n" +
-                            "                                        <div class=\"ribbon red\"><span>sale</span></div>\n" +
+                            "                                        <div class=\"ribbon red\"><span>giảm giá</span></div>\n" +
                             "                                        <div class=\"image\">\n" +
                             "                                            <img alt= '" + item.tenSp + "' src='/image/" + item.maSp + "/" + anh + " '/>\n" +
                             "                                        </div>\n" +
                             "                                        <div class=\"body\">\n" +
-                            "                                            <div class=\"label-discount green\">-50% sale</div>\n" +
+                            "                                            <div class=\"label-discount green\">-10%</div>\n" +
                             "                                            <div class=\"title\">\n" +
                             "                                                <a href=\"single-product.html\">" + item.tenSp + "</a>\n" +
                             "                                            </div>\n" +
@@ -37,7 +37,7 @@ $(document).ready(function () {
                             "<div class=\"hover-area\">\n" +
                             "                                            <div class=\"add-cart-button\">\n" +
                             "                                                <form action=\"/cart\" method=\"post\">\n" +
-                            "                                                    <button type=\"submit\" class=\"le-button\">add to cart</button>\n" +
+                            "                                                    <button type=\"submit\" class=\"le-button\">thêm vào giỏ</button>\n" +
                             "                                                    <input type=\"hidden\" name=\"maSP\" value=\""+item.maSp+"\"/>\n" +
                             "                                                </form>\n" +
                             "                                            </div>\n" +
@@ -64,12 +64,12 @@ $(document).ready(function () {
                         var gia = item.gia.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
                         $("#listNoiBat").append(" <div class=\"col-sm-4 col-md-3  no-margin product-item-holder hover\">\n" +
                             "                                    <div class=\"product-item\">\n" +
-                            "                                        <div class=\"ribbon red\"><span>sale</span></div>\n" +
+                            "                                        <div class=\"ribbon red\"><span>giảm giá</span></div>\n" +
                             "                                        <div class=\"image\">\n" +
                             "                                            <img alt= '" + item.tenSp + "' src='/image/" + item.maSp + "/" + anh + " '/>\n" +
                             "                                        </div>\n" +
                             "                                        <div class=\"body\">\n" +
-                            "                                            <div class=\"label-discount green\">-50% sale</div>\n" +
+                            "                                            <div class=\"label-discount green\">-30%</div>\n" +
                             "                                            <div class=\"title\">\n" +
                             "                                                <a href=\"single-product.html\">" + item.tenSp + "</a>\n" +
                             "                                            </div>\n" +
@@ -83,7 +83,7 @@ $(document).ready(function () {
                             "<div class=\"hover-area\">\n" +
                             "                                            <div class=\"add-cart-button\">\n" +
                             "                                                <form action=\"/cart\" method=\"post\">\n" +
-                            "                                                    <button type=\"submit\" class=\"le-button\">add to cart</button>\n" +
+                            "                                                    <button type=\"submit\" class=\"le-button\">thêm vào giỏ</button>\n" +
                             "                                                    <input type=\"hidden\" name=\"maSP\" value=\""+item.maSp+"\"/>\n" +
                             "                                                </form>\n" +
                             "                                            </div>\n" +
@@ -110,12 +110,12 @@ $(document).ready(function () {
                         var gia = item.gia.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
                         $("#listgiamgia").append(" <div class=\"col-sm-4 col-md-3  no-margin product-item-holder hover\">\n" +
                             "                                    <div class=\"product-item\">\n" +
-                            "                                        <div class=\"ribbon red\"><span>sale</span></div>\n" +
+                            "                                        <div class=\"ribbon red\"><span>giảm giá</span></div>\n" +
                             "                                        <div class=\"image\">\n" +
                             "                                            <img alt= '" + item.tenSp + "' src='/image/" + item.maSp + "/" + anh + " '/>\n" +
                             "                                        </div>\n" +
                             "                                        <div class=\"body\">\n" +
-                            "                                            <div class=\"label-discount green\">-50% sale</div>\n" +
+                            "                                            <div class=\"label-discount green\">-10%</div>\n" +
                             "                                            <div class=\"title\">\n" +
                             "                                                <a href=\"single-product.html\">" + item.tenSp + "</a>\n" +
                             "                                            </div>\n" +
@@ -129,7 +129,7 @@ $(document).ready(function () {
                             "<div class=\"hover-area\">\n" +
                             "                                            <div class=\"add-cart-button\">\n" +
                             "                                                <form action=\"/cart\" method=\"post\">\n" +
-                            "                                                    <button type=\"submit\" class=\"le-button\">add to cart</button>\n" +
+                            "                                                    <button type=\"submit\" class=\"le-button\">thêm vào giỏ</button>\n" +
                             "                                                    <input type=\"hidden\" name=\"maSP\" value=\""+item.maSp+"\"/>\n" +
                             "                                                </form>\n" +
                             "                                            </div>\n" +

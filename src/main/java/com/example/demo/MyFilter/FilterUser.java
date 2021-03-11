@@ -12,9 +12,15 @@ public class FilterUser implements Filter {
         HttpServletRequest httpServletRequest = (HttpServletRequest) servletRequest;
         HttpSession httpSession = httpServletRequest.getSession();
         if(httpSession.getAttribute("user") == null){
-            httpServletRequest.setAttribute("alertLogin","Đăng nhập trước khi thêm sản phẩm vào giỏ hàng.");
-            RequestDispatcher requestDispatcher=httpServletRequest.getRequestDispatcher("/login/index");
-            requestDispatcher.forward(servletRequest, servletResponse);
+            if(httpServletRequest.getServletPath().contains("/cart")){
+                httpServletRequest.setAttribute("alertLogin","Đăng nhập trước khi thêm sản phẩm vào giỏ hàng.");
+                RequestDispatcher requestDispatcher=httpServletRequest.getRequestDispatcher("/login/index");
+                requestDispatcher.forward(servletRequest, servletResponse);
+            }else if(httpServletRequest.getServletPath().contains("/account")){
+                httpServletRequest.setAttribute("alertLogin","Bạn cần đăng nhập để thực hiện thao tác này.");
+                RequestDispatcher requestDispatcher=httpServletRequest.getRequestDispatcher("/login/index");
+                requestDispatcher.forward(servletRequest, servletResponse);
+            }
         }else filterChain.doFilter(servletRequest,servletResponse);
     }
 }

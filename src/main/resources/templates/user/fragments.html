@@ -59,12 +59,19 @@
             </div><!-- /.col -->
             <div class="col-xs-12 col-sm-6 no-margin">
                 <ul class="right" th:if="${session.user}">
-                    <li><a href="#" th:text="${'Hello, ' + session.user}" style="font-size: 15px;"></a></li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" style="font-size: 15px;" th:text="${'Hello, ' + session.user}" href="#"></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li role="presentation"><a role="menuitem" tabindex="-1" href="/account/password">Cài đặt mật khẩu</a></li>
+<!--                            <li role="presentation"><a role="menuitem" tabindex="-1" href="/Account/EditInfo">Thông tin cá nhân</a></li>-->
+<!--                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Xem đơn hàng</a></li>-->
+                        </ul>
+                    </li>
                     <li><a href="/login/logout">Đăng xuất</a></li>
                 </ul>
                 <ul class="right" th:unless="${session.user}">
                     <li><a href="/login/index">Đăng nhập</a></li>
-                    <li><a href="#">Đăng ký</a></li>
+                    <li><a href="/register/index">Đăng ký</a></li>
                 </ul>
             </div><!-- /.col -->
         </div><!-- /.container -->
@@ -176,7 +183,7 @@
                                 <div class="total-price-basket">
                                     <span class="lbl">your cart:</span>
                                     <span class="total-price">
-                        <span class="sign">$</span><span class="value">3219,00</span>
+                        <span class="sign"></span><span class="value">3,219,000 VNĐ</span>
                     </span>
                                 </div>
                             </a>
