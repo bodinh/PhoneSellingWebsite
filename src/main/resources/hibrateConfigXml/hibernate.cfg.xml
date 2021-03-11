@@ -9,7 +9,7 @@
     <property name="connection.url">jdbc:sqlserver://localhost:1433;database=Sellphones</property>
     <property name="connection.driver_class">com.microsoft.sqlserver.jdbc.SQLServerDriver</property>
     <property name="connection.username">sa</property>
-    <property name="connection.password">100799</property>
+    <property name="connection.password">123456</property>
       <mapping class="com.example.demo.Hibernate.AccountEntity"/>
       <mapping resource="hibrateConfigXml/AccountEntity.hbm.xml"/>
       <mapping class="com.example.demo.Hibernate.BaoHanhEntity"/>

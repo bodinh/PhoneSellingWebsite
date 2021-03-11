@@ -9,15 +9,16 @@
     <header th:replace="user/fragments :: navigation"></header>
     <!--    ==============================================BODY==============================================-->
     <section id="cart-page">
-        <div class="container">
+        <div class="container" id="listProductInCart">
             <!-- ========================================= CONTENT ========================================= -->
-            <div class="col-xs-12 col-md-9 items-holder no-margin">
+            <div class="col-xs-12 col-md-9 items-holder no-margin" >
 
                 <th:block th:each="item : ${listProductInCart}">
                     <div class="row no-margin cart-item">
                         <div class="col-xs-12 col-sm-2 no-margin">
                             <a href="#" class="thumb-holder">
-                                <img class="lazy" th:alt="${item.getSanpham().getAnh()}" th:src="${'/image/' + item.getSanpham().getMaSp()+ '/' + item.getSanpham().getAnh()}" />
+                                <img class="lazy" th:alt="${item.getSanpham().getAnh()}"
+                                     th:src="${'/image/' + item.getSanpham().getMaSp()+ '/' + item.getSanpham().getAnh()}"/>
                             </a>
                         </div>
 
@@ -27,21 +28,24 @@
                             </div>
                             <div class="brand">sony</div>
                         </div>
-
                         <div class="col-xs-12 col-sm-2 no-margin">
                             <div class="quantity">
                                 <div class="le-quantity">
-                                    <form>
-                                        <a class="minus" href="#reduce"></a>
-                                        <input name="quantity" readonly="readonly" type="text" th:value="${item.getSoluong()}" />
-                                        <a class="plus" href="#add"></a>
-                                    </form>
+                                    <a class="minus" id="reduceProduct"
+                                       th:onclick="'reduceNumberProduct('+${item.getSanpham().getMaSp()}+','+${maDH}+');'"
+                                       href="#reduce"></a>
+                                    <input name="quantity" readonly="readonly" type="text"
+                                           th:value="${item.getSoluong()}"/>
+                                    <a class="plus" id="addProduct"
+                                       th:onclick="'addNumberProduct('+${item.getSanpham().getMaSp()}+','+${maDH}+');'"
+                                       href="#add"></a>
                                 </div>
                             </div>
                         </div>
 
                         <div class="col-xs-12 col-sm-3 no-margin">
-                            <div class="price" th:text="${#numbers.formatDecimal(item.getTonggia(), 0, 'COMMA', 0, 'POINT') +' VNĐ'}">
+                            <div class="price"
+                                 th:text="${#numbers.formatDecimal(item.getTonggia(), 0, 'COMMA', 0, 'POINT') +' VNĐ'}">
                             </div>
                             <a class="close-btn"
                                onclick="return confirm('Bạn có chắc muốn xoá sản phẩm này ??')"
@@ -76,8 +80,11 @@
                             </li>
                         </ul>
                         <div class="buttons-holder">
-                            <a class="le-button big" href="http://localhost/~ibrahim/themeforest/HTML/mediacenter/upload/PHP/checkout" >checkout</a>
-                            <a class="simple-link block" href="http://localhost/~ibrahim/themeforest/HTML/mediacenter/upload/PHP/home" >continue shopping</a>
+                            <a class="le-button big"
+                               href="http://localhost/~ibrahim/themeforest/HTML/mediacenter/upload/PHP/checkout">checkout</a>
+                            <a class="simple-link block"
+                               href="http://localhost/~ibrahim/themeforest/HTML/mediacenter/upload/PHP/home">continue
+                                shopping</a>
                         </div>
                     </div>
                 </div><!-- /.widget -->
@@ -87,7 +94,7 @@
                     <div class="body">
                         <form>
                             <div class="inline-input">
-                                <input data-placeholder="enter coupon code" type="text" />
+                                <input data-placeholder="enter coupon code" type="text"/>
                                 <button class="le-button" type="submit">Apply</button>
                             </div>
                         </form>
@@ -105,5 +112,13 @@
 </body>
 <script>
     document.title = "Đăng nhập";
+
+    function addNumberProduct(maSP, maDH) {
+        $("#listProductInCart").remove();
+    }
+
+    function reduceNumberProduct(maSP,maDH) {
+        $("#listProductInCart").remove();
+    }
 </script>
 </html>

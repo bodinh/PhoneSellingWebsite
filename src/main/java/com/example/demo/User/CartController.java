@@ -24,6 +24,7 @@ public class CartController {
         donHangKH.addToCart(maSP,donhangKhEntity);
         List<CartEntity> listInCart = donHangKH.getAllInCart(donhangKhEntity);
         model.addAttribute( "listProductInCart",listInCart);
+        model.addAttribute("maDH",donhangKhEntity.getMaDh());
         return "/user/Cart/cart";
     }
 
@@ -32,13 +33,13 @@ public class CartController {
         DonhangKhEntity donhangKhEntity  = donHangKH.createCart(UID.getUID(httpSession));
         List<CartEntity> listInCart = donHangKH.getAllInCart(donhangKhEntity);
         model.addAttribute( "listProductInCart",listInCart);
+        model.addAttribute("maDH",donhangKhEntity.getMaDh());
         return "/user/Cart/cart";
     }
     @GetMapping("/cart/delete")
     public String Cart(int maSP,HttpSession httpSession){
         DonhangKhEntity donhangKhEntity  = donHangKH.createCart(UID.getUID(httpSession));
         donHangKH.deleteFromCart(maSP,donhangKhEntity);
-        List<CartEntity> listInCart = donHangKH.getAllInCart(donhangKhEntity);
         return "redirect:/cart";
     }
 }
