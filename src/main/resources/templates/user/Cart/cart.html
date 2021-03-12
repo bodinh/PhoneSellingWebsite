@@ -9,9 +9,9 @@
     <header th:replace="user/fragments :: navigation"></header>
     <!--    ==============================================BODY==============================================-->
     <section id="cart-page">
-        <div class="container" id="listProductInCart">
+        <div class="container" >
             <!-- ========================================= CONTENT ========================================= -->
-            <div class="col-xs-12 col-md-9 items-holder no-margin" >
+            <div class="col-xs-12 col-md-9 items-holder no-margin" id="listProductInCart" >
 
                 <th:block th:each="item : ${listProductInCart}">
                     <div class="row no-margin cart-item">
@@ -32,12 +32,12 @@
                             <div class="quantity">
                                 <div class="le-quantity">
                                     <a class="minus" id="reduceProduct"
-                                       th:onclick="'reduceNumberProduct('+${item.getSanpham().getMaSp()}+','+${maDH}+');'"
+                                       th:onclick="'changeNumberProduct('+${item.getSanpham().getMaSp()}+','+${maDH}+',-1);'"
                                        href="#reduce"></a>
                                     <input name="quantity" readonly="readonly" type="text"
                                            th:value="${item.getSoluong()}"/>
                                     <a class="plus" id="addProduct"
-                                       th:onclick="'addNumberProduct('+${item.getSanpham().getMaSp()}+','+${maDH}+');'"
+                                       th:onclick="'changeNumberProduct('+${item.getSanpham().getMaSp()}+','+${maDH}+',1);'"
                                        href="#add"></a>
                                 </div>
                             </div>
@@ -59,7 +59,7 @@
 
             <!-- ========================================= SIDEBAR ========================================= -->
 
-            <div class="col-xs-12 col-md-3 no-margin sidebar ">
+            <div class="col-xs-12 col-md-3 no-margin sidebar " id="listTotalPrice">
                 <div class="widget cart-summary">
                     <h1 class="border">shopping cart</h1>
                     <div class="body">
@@ -113,12 +113,53 @@
 <script>
     document.title = "Đăng nhập";
 
-    function addNumberProduct(maSP, maDH) {
-        $("#listProductInCart").remove();
-    }
+    function changeNumberProduct(maSP, maDH, n) {
+        $("#listProductInCart").empty();
+        $("#listTotalPrice").empty();
+        var s = "";
+        if(n == 1){
+            s="add";
+        }else if(n == -1){
+            s="reduce";
+        }
+        $.ajax({
+            url:"/api/cart/"+s+"/"+maSP+"/"+maDH,
+            method:"get",
+            success:function (data) {
+                data.forEach(item =>{
+                    var gia = item.tonggia.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+                    $("#listProductInCart").append("<div class=\"row no-margin cart-item\">\n" +
+                        "                        <div class=\"col-xs-12 col-sm-2 no-margin\">\n" +
+                        "                            <a href=\"#\" class=\"thumb-holder\">\n" +
+                        "                                <img class=\"lazy\" alt=\""+item.sanpham.tenSp+"\" src=\"/image/"+item.sanpham.maSp+"/"+item.sanpham.anh+"\">\n" +
+                        "                            </a>\n" +
+                        "                        </div>\n" +
+                        "\n" +
+                        "                        <div class=\"col-xs-12 col-sm-5 \">\n" +
+                        "                            <div class=\"title\">\n" +
+                        "                                <a href=\"#\">"+item.sanpham.tenSp+"</a>\n" +
+                        "                            </div>\n" +
+                        "                            <div class=\"brand\">sony</div>\n" +
+                        "                        </div>\n" +
+                        "                        <div class=\"col-xs-12 col-sm-2 no-margin\">\n" +
+                        "                            <div class=\"quantity\">\n" +
+                        "                                <div class=\"le-quantity\">\n" +
+                        "                                    <a class=\"minus\" id=\"reduceProduct\" onclick=\"changeNumberProduct("+item.sanpham.maSp+","+maDH+",-1);\" href=\"#reduce\"></a>\n" +
+                        "                                    <input name=\"quantity\" readonly=\"readonly\" type=\"text\" value=\""+item.soluong+"\">\n" +
+                        "                                    <a class=\"plus\" id=\"addProduct\" onclick=\"changeNumberProduct("+item.sanpham.maSp+","+maDH+",1);\" href=\"#add\"></a>\n" +
+                        "                                </div>\n" +
+                        "                            </div>\n" +
+                        "                        </div>\n" +
+                        "\n" +
+                        "                        <div class=\"col-xs-12 col-sm-3 no-margin\">\n" +
+                        "                            <div class=\"price\">"+gia+" VNĐ</div>\n" +
+                        "                            <a class=\"close-btn\" onclick=\"return confirm('Bạn có chắc muốn xoá sản phẩm này ??')\" href=\"/cart/delete?maSP=1002\"></a>\n" +
+                        "                        </div>\n" +
+                        "                    </div>");
+                })
 
-    function reduceNumberProduct(maSP,maDH) {
-        $("#listProductInCart").remove();
+            }
+        })
     }
 </script>
 </html>
