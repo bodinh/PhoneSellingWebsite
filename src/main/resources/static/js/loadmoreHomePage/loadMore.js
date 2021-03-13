@@ -16,9 +16,15 @@ $(document).ready(function () {
                     data.forEach(item => {
                         var anh = item.anh.toString().replaceAll(" ", "");
                         var gia = item.gia.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+                        if(item.ishot == 1){
+                            var displayHot = "flex";
+                        }else {
+                            var displayHot = "none";
+                        }
                         $("#listnew").append(" <div class=\"col-sm-4 col-md-3  no-margin product-item-holder hover\">\n" +
                             "                                    <div class=\"product-item\">\n" +
-                            "                                        <div class=\"ribbon red\"><span>giảm giá</span></div>\n" +
+                            "                                        <div class=\"ribbon blue\"><span>mới !</span></div>\n" +
+                            "                                    <div id=\"divCheckbox\" class=\"ribbon green\" style=\"display: "+displayHot+";\"><span>bán chạy</span></div>"+
                             "                                        <div class=\"image\">\n" +
                             "                                            <img alt= '" + item.tenSp + "' src='/image/" + item.maSp + "/" + anh + " '/>\n" +
                             "                                        </div>\n" +
@@ -62,9 +68,15 @@ $(document).ready(function () {
                     data.forEach(item => {
                         var anh = item.anh.toString().replaceAll(" ", "");
                         var gia = item.gia.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+                        if(item.isnew == 1){
+                            var displayNew = "flex";
+                        }else {
+                            var displayNew = "none";
+                        }
                         $("#listNoiBat").append(" <div class=\"col-sm-4 col-md-3  no-margin product-item-holder hover\">\n" +
                             "                                    <div class=\"product-item\">\n" +
-                            "                                        <div class=\"ribbon red\"><span>giảm giá</span></div>\n" +
+                            "                                         <div class=\"ribbon green\"><span>bán chạy</span></div>\n" +
+                            "                                        <div id=\"divCheckbox\" class=\"ribbon blue\" style=\"display: "+displayNew+";\"><span>mới !</span></div>" +
                             "                                        <div class=\"image\">\n" +
                             "                                            <img alt= '" + item.tenSp + "' src='/image/" + item.maSp + "/" + anh + " '/>\n" +
                             "                                        </div>\n" +

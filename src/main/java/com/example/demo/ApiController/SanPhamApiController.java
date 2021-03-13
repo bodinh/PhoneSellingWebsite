@@ -73,7 +73,7 @@ public class SanPhamApiController {
         }
         return listitems;
     }
-    //loadMore 4 item Hot
+    //loadMore 4 item Sale
     @GetMapping("/sale/{start}/{number}")
     public List<SanphamEntity> Get4Sale(@PathVariable(name = "start") int start,@PathVariable(name = "number") int number){
         List<SanphamEntity> listitems=new ArrayList<>();

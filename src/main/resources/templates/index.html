@@ -23,10 +23,11 @@
                 <div class="tab-content">
                     <div class="tab-pane active" id="featured">
                         <div class="product-grid-holder" id="listNoiBat">
-                            <th:block th:each="item : ${listSanPham}" >
+                            <th:block th:each="item : ${listSanPhamsHot}" >
                                 <div class="col-sm-4 col-md-3  no-margin product-item-holder hover">
                                     <div class="product-item">
-                                        <div class="ribbon red"><span>giảm giá</span></div>
+                                        <div class="ribbon green"><span>bán chạy</span></div>
+                                        <div class="ribbon blue" th:if="${item.isnew}"><span>mới !</span></div>
                                         <div class="image">
                                             <img th:alt="${item.getTenSp()}" th:src="${'/image/' + item.getMaSp()+ '/' + item.getAnh()}" />
                                         </div>
@@ -64,10 +65,12 @@
                     </div>
                     <div class="tab-pane" id="new-arrivals">
                         <div class="product-grid-holder" id="listnew">
-                            <th:block th:each="item : ${listSanPham}" >
+                            <th:block th:each="item : ${listSanPhamsNew}" >
                                 <div class="col-sm-4 col-md-3  no-margin product-item-holder hover">
                                     <div class="product-item">
-                                        <div class="ribbon red"><span>giảm giá</span></div>
+                                        <div class="ribbon blue"><span>mới !</span></div>
+                                        <div class="ribbon green"  th:if="${item.ishot}"><span>bán chạy</span></div>
+
                                         <div class="image">
                                             <img th:alt="${item.getTenSp()}" th:src="${'/image/' + item.getMaSp()+ '/' + item.getAnh()}" />
                                         </div>
@@ -104,7 +107,7 @@
                     </div>
                     <div class="tab-pane" id="top-sales">
                         <div class="product-grid-holder" id="listgiamgia">
-                            <th:block th:each="item : ${listSanPham}" >
+                            <th:block th:each="item : ${listSanPhamsSale}" >
                                 <div class="col-sm-4 col-md-3  no-margin product-item-holder hover">
                                     <div class="product-item">
                                         <div class="ribbon red"><span>giảm giá</span></div>
