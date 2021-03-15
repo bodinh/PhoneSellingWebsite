@@ -4,7 +4,6 @@ import com.example.demo.Hibernate.SanphamEntity;
 import com.example.demo.Hibernate.SellPhonesDBContext;
 
 import com.example.demo.constant.ProductConstant;
-import com.example.demo.repository.SanphamRepository;
 import org.hibernate.Session;
 import org.springframework.beans.support.PagedListHolder;
 import org.springframework.lang.Nullable;
@@ -25,8 +24,6 @@ public class SanPhamApiController {
     private Session openSession() {
         return session = SellPhonesDBContext.getSession();
     }
-
-    private final SanphamRepository sanphamRepository = null;
 
     //single item
     @GetMapping("/single/{MaSP}")
