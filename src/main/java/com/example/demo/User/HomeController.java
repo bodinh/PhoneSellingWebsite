@@ -32,9 +32,9 @@ public class HomeController {
         listSanPhamsNew = openSession().createQuery("from SanphamEntity where isnew=1").list();
 //        listSanPhamsSale = openSession().createSQLQuery("SELECT s.MaSP ,s.TenSP ,s.LoaiSP ,s.HangSX ,s.Anh ,s.Isnew ,s.Ishot ,s.Gia ,sk.Giamgia FROM Sanpham s LEFT JOIN SPkhuyenmai sk ON sk.MaSP = s.MaSP  LEFT JOIN Khuyenmai k ON k.MaKM = sk.MaSPKM").setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP).list();
         listSanPhamsSale = openSession().createQuery("from SanphamEntity ").list();
-        model.addAttribute("listSanPhamsHot", listSanPhamsHot.subList(0, 8));
-        model.addAttribute("listSanPhamsNew", listSanPhamsNew.subList(0, 8));
-        model.addAttribute("listSanPhamsSale", listSanPhamsSale.subList(0, 8));
+        model.addAttribute("listSanPhamsHot", listSanPhamsHot.subList(0, 1));
+        model.addAttribute("listSanPhamsNew", listSanPhamsNew.subList(0, 1));
+        model.addAttribute("listSanPhamsSale", listSanPhamsSale.subList(0, 1));
         return "index";
     }
 }

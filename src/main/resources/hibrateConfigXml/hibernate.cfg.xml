@@ -8,8 +8,8 @@
     <property name="hbm2ddl.auto">update</property>
     <property name="connection.url">jdbc:sqlserver://localhost:1433;database=Sellphones</property>
     <property name="connection.driver_class">com.microsoft.sqlserver.jdbc.SQLServerDriver</property>
-    <property name="connection.username">sa</property>
-    <property name="connection.password">123456</property>
+    <property name="connection.username">anhtrt2</property>
+    <property name="connection.password">tta9799mta</property>
       <mapping class="com.example.demo.Hibernate.AccountEntity"/>
       <mapping resource="hibrateConfigXml/AccountEntity.hbm.xml"/>
       <mapping class="com.example.demo.Hibernate.BaoHanhEntity"/>
