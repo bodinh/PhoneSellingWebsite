@@ -33,7 +33,7 @@ $(document).ready(function () {
                                 "                                            <div class=\"title\">\n" +
                                 "                                                <a href=\"single-product.html\">" + item.sanphamEntity.tenSp + "</a>\n" +
                                 "                                            </div>\n" +
-                                "                                            <div class=\"brand\">sony</div>\n" +
+                                "                                            <div class=\"brand\">"+item.brand+"</div>\n" +
                                 "                                        </div>\n" +
                                 "                                        <div class=\"prices\">\n" +
                                 "                                            <div class=\"price-current pull-right\">" + gia + " VNĐ</div>\n" +
@@ -50,7 +50,7 @@ $(document).ready(function () {
                                 "                                    </div>\n" +
                                 "                                </div>");
                         } else {
-                            var giaCu = (item.sanphamEntity.gia * (100 - item.sPkhuyenmaiEntity.giamgia) / 100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+                            var giaMoi = (item.sanphamEntity.gia * (100 - item.sPkhuyenmaiEntity.giamgia) / 100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
                             $("#listnew").append(" <div class=\"col-sm-4 col-md-3  no-margin product-item-holder hover\">\n" +
                                 "                                    <div class=\"product-item\">\n" +
                                 "                                        <div class=\"ribbon blue\"><span>mới !</span></div>\n" +
@@ -64,11 +64,11 @@ $(document).ready(function () {
                                 "                                            <div class=\"title\">\n" +
                                 "                                                <a href=\"single-product.html\">" + item.sanphamEntity.tenSp + "</a>\n" +
                                 "                                            </div>\n" +
-                                "                                            <div class=\"brand\">sony</div>\n" +
+                                "                                            <div class=\"brand\">"+item.brand+"</div>\n" +
                                 "                                        </div>\n" +
                                 "                                        <div class=\"prices\">\n" +
-                                "                                            <div class=\"price-prev\">" + giaCu + "</div>\n" +
-                                "                                            <div class=\"price-current pull-right\">" + gia + " VNĐ</div>\n" +
+                                "                                            <div class=\"price-prev\">" + gia + "</div>\n" +
+                                "                                            <div class=\"price-current pull-right\">" + giaMoi + " VNĐ</div>\n" +
                                 "                                        </div>\n" +
                                 "\n" +
                                 "<div class=\"hover-area\">\n" +
@@ -118,7 +118,7 @@ $(document).ready(function () {
                                 "                                            <div class=\"title\">\n" +
                                 "                                                <a href=\"single-product.html\">" + item.sanphamEntity.tenSp + "</a>\n" +
                                 "                                            </div>\n" +
-                                "                                            <div class=\"brand\">sony</div>\n" +
+                                "                                            <div class=\"brand\">"+item.brand+"</div>\n" +
                                 "                                        </div>\n" +
                                 "                                        <div class=\"prices\">\n" +
                                 "                                            <div class=\"price-current pull-right\">" + gia + " VNĐ</div>\n" +
@@ -135,7 +135,7 @@ $(document).ready(function () {
                                 "                                    </div>\n" +
                                 "                                </div>");
                         } else {
-                            var giaCu = (item.sanphamEntity.gia * (100 - item.sPkhuyenmaiEntity.giamgia) / 100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+                            var giaMoi = (item.sanphamEntity.gia * (100 - item.sPkhuyenmaiEntity.giamgia) / 100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
                             $("#listNoiBat").append(" <div class=\"col-sm-4 col-md-3  no-margin product-item-holder hover\">\n" +
                                 "                                    <div class=\"product-item\">\n" +
                                 "                                         <div class=\"ribbon green\"><span>bán chạy</span></div>\n" +
@@ -149,11 +149,11 @@ $(document).ready(function () {
                                 "                                            <div class=\"title\">\n" +
                                 "                                                <a href=\"single-product.html\">" + item.sanphamEntity.tenSp + "</a>\n" +
                                 "                                            </div>\n" +
-                                "                                            <div class=\"brand\">sony</div>\n" +
+                                "                                            <div class=\"brand\">"+item.brand+"</div>\n" +
                                 "                                        </div>\n" +
                                 "                                        <div class=\"prices\">\n" +
-                                "                                            <div class=\"price-prev\">" + giaCu + "</div>\n" +
-                                "                                            <div class=\"price-current pull-right\">" + gia + " VNĐ</div>\n" +
+                                "                                            <div class=\"price-prev\">" + gia + "</div>\n" +
+                                "                                            <div class=\"price-current pull-right\">" + giaMoi + " VNĐ</div>\n" +
                                 "                                        </div>\n" +
                                 "\n" +
                                 "<div class=\"hover-area\">\n" +
@@ -186,7 +186,7 @@ $(document).ready(function () {
                     data.forEach(item => {
                         var anh = item.sanphamEntity.anh.toString().replaceAll(" ", "");
                         var gia = item.sanphamEntity.gia.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-                        var giaCu = (item.sanphamEntity.gia * (100 - item.sPkhuyenmaiEntity.giamgia) / 100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+                        var giaMoi = (item.sanphamEntity.gia * (100 - item.sPkhuyenmaiEntity.giamgia) / 100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
                         if (item.sanphamEntity.isnew == 1) {
                             var displayNew = "flex";
                         } else {
@@ -210,11 +210,11 @@ $(document).ready(function () {
                             "                                            <div class=\"title\">\n" +
                             "                                                <a href=\"single-product.html\">" + item.sanphamEntity.tenSp + "</a>\n" +
                             "                                            </div>\n" +
-                            "                                            <div class=\"brand\">sony</div>\n" +
+                            "                                            <div class=\"brand\">"+item.brand+"</div>\n" +
                             "                                        </div>\n" +
                             "                                        <div class=\"prices\">\n" +
-                            "                                            <div class=\"price-prev\">" + giaCu + "</div>\n" +
-                            "                                            <div class=\"price-current pull-right\">" + gia + " VNĐ</div>\n" +
+                            "                                            <div class=\"price-prev\">" + gia + "</div>\n" +
+                            "                                            <div class=\"price-current pull-right\">" + giaMoi + " VNĐ</div>\n" +
                             "                                        </div>\n" +
                             "\n" +
                             "<div class=\"hover-area\">\n" +

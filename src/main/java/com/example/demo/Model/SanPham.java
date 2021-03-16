@@ -8,14 +8,16 @@ import java.util.List;
 public class SanPham {
     private SanphamEntity sanphamEntity;
     private SPkhuyenmaiEntity sPkhuyenmaiEntity;
+    private String brand;
 
     public SanPham() {
 
     }
 
-    public SanPham(SanphamEntity sanphamEntity, SPkhuyenmaiEntity sPkhuyenmaiEntity) {
+    public SanPham(SanphamEntity sanphamEntity, SPkhuyenmaiEntity sPkhuyenmaiEntity, String brand) {
         this.sanphamEntity = sanphamEntity;
         this.sPkhuyenmaiEntity = sPkhuyenmaiEntity;
+        this.brand = brand;
     }
 
     public SanphamEntity getSanphamEntity() {
@@ -32,5 +34,13 @@ public class SanPham {
 
     public void setsPkhuyenmaiEntity(SPkhuyenmaiEntity sPkhuyenmaiEntity) {
         this.sPkhuyenmaiEntity = sPkhuyenmaiEntity;
+    }
+
+    public String getBrand() {
+        return brand;
+    }
+
+    public void setBrand(String brand) {
+        this.brand = brand;
     }
 }

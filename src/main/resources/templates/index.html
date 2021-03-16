@@ -42,11 +42,15 @@
                                                 <a href="single-product.html"
                                                    th:text="${item.sanphamEntity.getTenSp()}"></a>
                                             </div>
-                                            <div class="brand">sony</div>
+                                            <div class="brand" th:text="${item.brand}"></div>
                                         </div>
-                                        <div class="prices">
+                                        <div class="prices" th:if="${item.sPkhuyenmaiEntity.giamgia}">
                                             <div class="price-prev" th:if="${item.sPkhuyenmaiEntity.giamgia}"
-                                                 th:text="${#numbers.formatDecimal((item.sanphamEntity.getGia() * (100 - item.sPkhuyenmaiEntity.giamgia) / 100 ),0,'DEFAULT',0,'DEFAULT')}"></div>
+                                                 th:text="${#numbers.formatDecimal(item.sanphamEntity.getGia(),0,'DEFAULT',0,'DEFAULT')}"></div>
+                                            <div class="price-current pull-right"
+                                                 th:text="${#numbers.formatDecimal((item.sanphamEntity.getGia() * (100 - item.sPkhuyenmaiEntity.giamgia) / 100 ),0,'DEFAULT',0,'DEFAULT') +' '+ 'VNĐ'}"></div>
+                                        </div>
+                                        <div class="prices" th:unless="${item.sPkhuyenmaiEntity.giamgia}">
                                             <div class="price-current pull-right"
                                                  th:text="${#numbers.formatDecimal(item.sanphamEntity.getGia(),0,'DEFAULT',0,'DEFAULT')} +' '+ VNĐ"></div>
                                         </div>
@@ -93,15 +97,18 @@
                                                 <a href="single-product.html"
                                                    th:text="${item.sanphamEntity.getTenSp()}"></a>
                                             </div>
-                                            <div class="brand">sony</div>
+                                            <div class="brand" th:text="${item.brand}"></div>
                                         </div>
-                                        <div class="prices">
+                                        <div class="prices" th:if="${item.sPkhuyenmaiEntity.giamgia}">
                                             <div class="price-prev" th:if="${item.sPkhuyenmaiEntity.giamgia}"
-                                                 th:text="${#numbers.formatDecimal((item.sanphamEntity.getGia() * (100 - item.sPkhuyenmaiEntity.giamgia) / 100 ),0,'DEFAULT',0,'DEFAULT')}"></div>
+                                                 th:text="${#numbers.formatDecimal(item.sanphamEntity.getGia(),0,'DEFAULT',0,'DEFAULT')}"></div>
+                                            <div class="price-current pull-right"
+                                                 th:text="${#numbers.formatDecimal((item.sanphamEntity.getGia() * (100 - item.sPkhuyenmaiEntity.giamgia) / 100 ),0,'DEFAULT',0,'DEFAULT') +' '+ 'VNĐ'}"></div>
+                                        </div>
+                                        <div class="prices" th:unless="${item.sPkhuyenmaiEntity.giamgia}">
                                             <div class="price-current pull-right"
                                                  th:text="${#numbers.formatDecimal(item.sanphamEntity.getGia(),0,'DEFAULT',0,'DEFAULT')} +' '+ VNĐ"></div>
                                         </div>
-
                                         <div class="hover-area">
                                             <div class="add-cart-button">
                                                 <form action="/cart" method="post">
@@ -145,13 +152,13 @@
                                                 <a href="single-product.html"
                                                    th:text="${item.sanphamEntity.getTenSp()}"></a>
                                             </div>
-                                            <div class="brand">sony</div>
+                                            <div class="brand" th:text="${item.brand}"></div>
                                         </div>
                                         <div class="prices">
                                             <div class="price-prev" th:if="${item.sPkhuyenmaiEntity.giamgia}"
-                                                 th:text="${#numbers.formatDecimal((item.sanphamEntity.getGia() * (100 - item.sPkhuyenmaiEntity.giamgia) / 100 ),0,'DEFAULT',0,'DEFAULT')}"></div>
+                                                 th:text="${#numbers.formatDecimal(item.sanphamEntity.getGia(),0,'DEFAULT',0,'DEFAULT')}"></div>
                                             <div class="price-current pull-right"
-                                                 th:text="${#numbers.formatDecimal(item.sanphamEntity.getGia(),0,'DEFAULT',0,'DEFAULT')} +' '+ VNĐ"></div>
+                                                 th:text="${#numbers.formatDecimal((item.sanphamEntity.getGia() * (100 - item.sPkhuyenmaiEntity.giamgia) / 100 ),0,'DEFAULT',0,'DEFAULT')  +' '+ 'VNĐ'}"></div>
                                         </div>
 
                                         <div class="hover-area">

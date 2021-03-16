@@ -1,5 +1,6 @@
 package com.example.demo.Model;
 
+import com.example.demo.Hibernate.HangSxEntity;
 import com.example.demo.Hibernate.SPkhuyenmaiEntity;
 import com.example.demo.Hibernate.SanphamEntity;
 import com.example.demo.Hibernate.SellPhonesDBContext;
@@ -29,13 +30,15 @@ public class ListSanPham {
     public List<SanPham> getAllHot(){
         List<SanPham> listitems = new ArrayList<>();
         List<SanphamEntity> sanphamEntityList = openSession().createQuery("from SanphamEntity where ishot=1").list();
+        HangSxEntity hangSX = new HangSxEntity();
         for (SanphamEntity sp:sanphamEntityList
         ) {
             try{
+                hangSX = (HangSxEntity) openSession().createQuery("from HangSxEntity where maHangSx="+sp.getHangSx()).getSingleResult();
                 SPkhuyenmaiEntity sPkhuyenmaiEntity = (SPkhuyenmaiEntity) openSession().createQuery("from SPkhuyenmaiEntity where maSp="+sp.getMaSp()).getSingleResult();
-                listitems.add(new SanPham(sp,sPkhuyenmaiEntity));
+                listitems.add(new SanPham(sp,sPkhuyenmaiEntity,hangSX.getTenhang()));
             }catch (NoResultException e){
-                listitems.add(new SanPham(sp,new SPkhuyenmaiEntity()));
+                listitems.add(new SanPham(sp,new SPkhuyenmaiEntity(),hangSX.getTenhang()));
             }
         }
         return listitems;
@@ -43,13 +46,15 @@ public class ListSanPham {
     public List<SanPham> getAllNew(){
         List<SanPham> listitems = new ArrayList<>();
         List<SanphamEntity> sanphamEntityList = openSession().createQuery("from SanphamEntity where isnew=1").list();
+        HangSxEntity hangSX = new HangSxEntity();
         for (SanphamEntity sp:sanphamEntityList
         ) {
             try{
+                hangSX = (HangSxEntity) openSession().createQuery("from HangSxEntity where maHangSx="+sp.getHangSx()).getSingleResult();
                 SPkhuyenmaiEntity sPkhuyenmaiEntity = (SPkhuyenmaiEntity) openSession().createQuery("from SPkhuyenmaiEntity where maSp="+sp.getMaSp()).getSingleResult();
-                listitems.add(new SanPham(sp,sPkhuyenmaiEntity));
+                listitems.add(new SanPham(sp,sPkhuyenmaiEntity,hangSX.getTenhang()));
             }catch (NoResultException e){
-                listitems.add(new SanPham(sp,new SPkhuyenmaiEntity()));
+                listitems.add(new SanPham(sp,new SPkhuyenmaiEntity(),hangSX.getTenhang()));
             }
         }
         return listitems;
@@ -57,11 +62,13 @@ public class ListSanPham {
     public List<SanPham> getAllSale(){
         List<SanPham> listitems = new ArrayList<>();
         List<SanphamEntity> sanphamEntityList = openSession().createQuery("from SanphamEntity").list();
+        HangSxEntity hangSX = new HangSxEntity();
         for (SanphamEntity sp:sanphamEntityList
         ) {
             try{
+                hangSX = (HangSxEntity) openSession().createQuery("from HangSxEntity where maHangSx="+sp.getHangSx()).getSingleResult();
                 SPkhuyenmaiEntity sPkhuyenmaiEntity = (SPkhuyenmaiEntity) openSession().createQuery("from SPkhuyenmaiEntity where maSp="+sp.getMaSp()).getSingleResult();
-                listitems.add(new SanPham(sp,sPkhuyenmaiEntity));
+                listitems.add(new SanPham(sp,sPkhuyenmaiEntity,hangSX.getTenhang()));
             }catch (NoResultException e){
                 e.printStackTrace();
             }
