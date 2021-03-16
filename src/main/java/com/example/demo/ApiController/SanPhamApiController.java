@@ -1,8 +1,11 @@
 package com.example.demo.ApiController;
 
+import com.example.demo.Hibernate.SPkhuyenmaiEntity;
 import com.example.demo.Hibernate.SanphamEntity;
 import com.example.demo.Hibernate.SellPhonesDBContext;
 
+import com.example.demo.Model.ListSanPham;
+import com.example.demo.Model.SanPham;
 import com.example.demo.constant.ProductConstant;
 import org.hibernate.Session;
 import org.springframework.beans.support.PagedListHolder;
@@ -10,6 +13,7 @@ import org.springframework.lang.Nullable;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.persistence.NoResultException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -20,7 +24,7 @@ import java.util.List;
 public class SanPhamApiController {
 
     private Session session;
-
+    private ListSanPham listSanPham;
     private Session openSession() {
         return session = SellPhonesDBContext.getSession();
     }
@@ -53,9 +57,9 @@ public class SanPhamApiController {
 
     //loadMore 4 item Hot
     @GetMapping("/hot/{start}/{number}")
-    public List<SanphamEntity> Get4Hot(@PathVariable(name = "start") int start, @PathVariable(name = "number") int number) {
-        List<SanphamEntity> listitems = new ArrayList<>();
-        listitems = openSession().createQuery("from SanphamEntity where ishot=1").list();
+    public List<SanPham> Get4Hot(@PathVariable(name = "start") int start, @PathVariable(name = "number") int number) {
+        listSanPham = new ListSanPham();
+        List<SanPham> listitems = listSanPham.getAllHot();
         try {
             if (start + number > listitems.size()) {
                 listitems = listitems.subList(start, listitems.size());
@@ -68,9 +72,9 @@ public class SanPhamApiController {
 
     //loadMore 4 item New
     @GetMapping("/new/{start}/{number}")
-    public List<SanphamEntity> Get4New(@PathVariable(name = "start") int start, @PathVariable(name = "number") int number) {
-        List<SanphamEntity> listitems = new ArrayList<>();
-        listitems = openSession().createQuery("from SanphamEntity where isnew=1").list();
+    public List<SanPham> Get4New(@PathVariable(name = "start") int start, @PathVariable(name = "number") int number) {
+        listSanPham = new ListSanPham();
+        List<SanPham> listitems = listSanPham.getAllNew();
         try {
             if (start + number > listitems.size()) {
                 listitems = listitems.subList(start, listitems.size());
@@ -83,9 +87,9 @@ public class SanPhamApiController {
 
     //loadMore 4 item Sale
     @GetMapping("/sale/{start}/{number}")
-    public List<SanphamEntity> Get4Sale(@PathVariable(name = "start") int start, @PathVariable(name = "number") int number) {
-        List<SanphamEntity> listitems = new ArrayList<>();
-        listitems = openSession().createQuery("from SanphamEntity").list();
+    public List<SanPham> Get4Sale(@PathVariable(name = "start") int start, @PathVariable(name = "number") int number) {
+        listSanPham = new ListSanPham();
+        List<SanPham> listitems = listSanPham.getAllSale();
         try {
             if (start + number > listitems.size()) {
                 listitems = listitems.subList(start, listitems.size());
