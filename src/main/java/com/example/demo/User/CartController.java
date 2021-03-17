@@ -25,6 +25,12 @@ public class CartController {
         List<CartEntity> listInCart = donHangKH.getAllInCart(donhangKhEntity);
         model.addAttribute( "listProductInCart",listInCart);
         model.addAttribute("maDH",donhangKhEntity.getMaDh());
+        // get tổng giá của giỏ hàng
+        long tongTien = 0;
+        for (CartEntity item: listInCart) {
+            tongTien += item.getTonggia();
+        }
+        model.addAttribute("tongTienCart", tongTien);
         return "/user/Cart/cart";
     }
 
@@ -34,6 +40,11 @@ public class CartController {
         List<CartEntity> listInCart = donHangKH.getAllInCart(donhangKhEntity);
         model.addAttribute( "listProductInCart",listInCart);
         model.addAttribute("maDH",donhangKhEntity.getMaDh());
+        long tongTien = 0;
+        for (CartEntity item: listInCart) {
+            tongTien += item.getTonggia();
+        }
+        model.addAttribute("tongTienCart", tongTien);
         return "/user/Cart/cart";
     }
     @GetMapping("/cart/delete")
@@ -41,5 +52,29 @@ public class CartController {
         DonhangKhEntity donhangKhEntity  = donHangKH.createCart(UID.getUID(httpSession));
         donHangKH.deleteFromCart(maSP,donhangKhEntity);
         return "redirect:/cart";
+    }
+
+    @GetMapping("/cart/deleteAll")
+    public String CartDelete(HttpSession httpSession){
+        DonhangKhEntity donhangKhEntity  = donHangKH.createCart(UID.getUID(httpSession));
+        List<CartEntity> listInCart = donHangKH.getAllInCart(donhangKhEntity);
+        for (CartEntity item: listInCart) {
+            donHangKH.deleteFromCart(item.getSanpham().getMaSp(), donhangKhEntity);
+        }
+        return "redirect:/cart";
+    }
+
+    @GetMapping("/cart/check-out")
+    public String CheckOut(HttpSession httpSession, Model model){
+        DonhangKhEntity donhangKhEntity  = donHangKH.createCart(UID.getUID(httpSession));
+        List<CartEntity> listInCart = donHangKH.getAllInCart(donhangKhEntity);
+        model.addAttribute( "listProductInCart",listInCart);
+        model.addAttribute("maDH",donhangKhEntity.getMaDh());
+        long tongTien = 0;
+        for (CartEntity item: listInCart) {
+            tongTien += item.getTonggia();
+        }
+        model.addAttribute("tongTienCart", tongTien);
+        return "/user/Cart/CheckOut";
     }
 }
