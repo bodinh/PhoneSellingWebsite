@@ -47,6 +47,9 @@ public class DoanhThuApiController {
             }
             DoanhThuThang dtt = doanhThuThang.get(Integer.valueOf(sa[1]) - 1);
             dtt.setDoanhThuThang(khEntities.get(i).getTongTien());
+            if(khEntities.size() == 1){
+                doanhThuNam.add(new DoanhThu(Integer.valueOf(sa[0]), doanhThuThang));
+            }
         }
         return doanhThuNam;
     }
