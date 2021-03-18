@@ -35,14 +35,17 @@
                                         Doanh thu
                                     </div>
                                     <div class="col">
-                                        <select style="border: none;background-color: #f7f7f7;width: 100%;">
-                                            <option> 1212</option>
+                                        <select style="border: none;background-color: #f7f7f7;width: 100%;" onchange="doanhthu(value);">
+                                            <option th:text="${yearLastest}" th:value="${yearLastest}"></option>
+                                            <th:block th:each="item : ${year}">
+                                                <option th:text="${item.getNam()}" th:value="${item.getNam()}"></option>
+                                            </th:block>
                                         </select>
                                     </div>
                                     <div class="col"></div>
                                 </div>
                             </div>
-                            <div class="card-body">
+                            <div class="card-body" id="contain-bar-chart">
                                 <canvas id="bar-chart" width="100%" height="40"></canvas>
                             </div>
                         </div>
@@ -64,38 +67,4 @@
 </html>
 <script>
     document.title = "Trang chủ";
-    $(document).ready(function () {
-        $.ajax({
-            url: "/api/doanhthu/",
-            method: "get",
-            success: function (jdata) {
-                // Bar chart
-                var data = [];
-                var label = [];
-                jdata.forEach(item => {
-                    console.log("a");
-                    if (item.nam == 2021) {
-                        item.doanhthu.forEach(it => {
-                            label.push(it.thang.toString());
-                            console.log(it.doanhThuThang);
-                            data.push(it.doanhThuThang / 1000000);
-                        });
-                    }
-                });
-                new Chart(document.getElementById("bar-chart"), {
-                    type: 'bar',
-                    data: {
-                        labels: label,
-                        datasets: [
-                            {
-                                label: "Doanh thu ( Triệu VNĐ)",
-                                backgroundColor: ["#3e95cd", "#3e95cd", "#3e95cd", "#3e95cd", "#3e95cd", "#3e95cd", "#3e95cd", "#3e95cd", "#3e95cd", "#3e95cd", "#3e95cd", "#3e95cd"],
-                                data: data
-                            }
-                        ]
-                    }
-                });
-            }
-        })
-    })
 </script>

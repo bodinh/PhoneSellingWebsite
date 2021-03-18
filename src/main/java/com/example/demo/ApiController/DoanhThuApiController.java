@@ -36,38 +36,41 @@ public class DoanhThuApiController {
                 if (!sa[0].equals(sap[0])) {
                     doanhThuNam.add(new DoanhThu(Integer.valueOf(sap[0]), doanhThuThang));
                     doanhThuThang = initdDoanhThuThang();
-                } else if (i == khEntities.size() - 1) {
-                    doanhThuNam.add(new DoanhThu(Integer.valueOf(sap[0]), doanhThuThang));
                 } else
                     //nếu một tháng có nhiều đơn hàng
                     if (sa[1].equals(sap[1])) {
-                        DoanhThuThang dtt = doanhThuThang.get(doanhThuThang.size() - 1);
+                        DoanhThuThang dtt = doanhThuThang.get(Integer.valueOf(sap[1]) - 1);
                         dtt.setDoanhThuThang(dtt.getDoanhThuThang() + khEntities.get(i).getTongTien());
                     }
+                if (i == khEntities.size() - 1) {
+                    DoanhThuThang dtt = doanhThuThang.get(Integer.valueOf(sa[1]) - 1);
+                    dtt.setDoanhThuThang(khEntities.get(i).getTongTien());
+                    doanhThuNam.add(new DoanhThu(Integer.valueOf(sa[0]), doanhThuThang));
+                }
             }
             DoanhThuThang dtt = doanhThuThang.get(Integer.valueOf(sa[1]) - 1);
             dtt.setDoanhThuThang(khEntities.get(i).getTongTien());
-            if(khEntities.size() == 1){
+            if (khEntities.size() == 1) {
                 doanhThuNam.add(new DoanhThu(Integer.valueOf(sa[0]), doanhThuThang));
             }
         }
         return doanhThuNam;
     }
 
-    public List<DoanhThuThang> initdDoanhThuThang(){
+    public List<DoanhThuThang> initdDoanhThuThang() {
         List<DoanhThuThang> doanhThuThang = new ArrayList<>();
-        doanhThuThang.add(new DoanhThuThang(1,0));
-        doanhThuThang.add(new DoanhThuThang(2,0));
-        doanhThuThang.add(new DoanhThuThang(3,0));
-        doanhThuThang.add(new DoanhThuThang(4,0));
-        doanhThuThang.add(new DoanhThuThang(5,0));
-        doanhThuThang.add(new DoanhThuThang(6,0));
-        doanhThuThang.add(new DoanhThuThang(7,0));
-        doanhThuThang.add(new DoanhThuThang(8,0));
-        doanhThuThang.add(new DoanhThuThang(9,0));
-        doanhThuThang.add(new DoanhThuThang(10,0));
-        doanhThuThang.add(new DoanhThuThang(11,0));
-        doanhThuThang.add(new DoanhThuThang(12,0));
+        doanhThuThang.add(new DoanhThuThang(1, 0));
+        doanhThuThang.add(new DoanhThuThang(2, 0));
+        doanhThuThang.add(new DoanhThuThang(3, 0));
+        doanhThuThang.add(new DoanhThuThang(4, 0));
+        doanhThuThang.add(new DoanhThuThang(5, 0));
+        doanhThuThang.add(new DoanhThuThang(6, 0));
+        doanhThuThang.add(new DoanhThuThang(7, 0));
+        doanhThuThang.add(new DoanhThuThang(8, 0));
+        doanhThuThang.add(new DoanhThuThang(9, 0));
+        doanhThuThang.add(new DoanhThuThang(10, 0));
+        doanhThuThang.add(new DoanhThuThang(11, 0));
+        doanhThuThang.add(new DoanhThuThang(12, 0));
         return doanhThuThang;
     }
 }

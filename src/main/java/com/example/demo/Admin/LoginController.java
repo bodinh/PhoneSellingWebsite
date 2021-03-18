@@ -62,11 +62,5 @@ public class LoginController {
             return "admin/login";
         }
     }
-
-    @GetMapping("/admin/index")
-    public String indexAdmin(HttpSession httpSession) {
-            return "admin/index";
-    }
-
 }
 
