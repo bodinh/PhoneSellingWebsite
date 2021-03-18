@@ -27,6 +27,28 @@ function doanhthu(nam) {
               data: data
             }
           ]
+        },options: {
+          scales: {
+            xAxes: [{
+              time: {
+                unit: 'month'
+              },
+              gridLines: {
+                display: true
+              },
+              ticks: {
+                maxTicksLimit: 9
+              }
+            }],
+            yAxes: [{
+              gridLines: {
+                display: true
+              }
+            }],
+          },
+          legend: {
+            display: false
+          }
         }
       });
     }
@@ -61,6 +83,28 @@ $(document).ready(function () {
               data: data
             }
           ]
+        },options: {
+          scales: {
+            xAxes: [{
+              time: {
+                unit: 'month'
+              },
+              gridLines: {
+                display: true
+              },
+              ticks: {
+                maxTicksLimit: 9
+              }
+            }],
+            yAxes: [{
+              gridLines: {
+                display: true
+              }
+            }],
+          },
+          legend: {
+            display: false
+          }
         }
       });
     }
