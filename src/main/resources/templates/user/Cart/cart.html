@@ -110,6 +110,7 @@
     function changeNumberProduct(maSP, maDH, n) {
         $("#listProductInCart").empty();
         $("#listTotalPrice").empty();
+        $("#listProductInCart1").empty();
         var s = "";
         if(n == 1){
             s="add";
@@ -121,9 +122,12 @@
             method:"get",
             success:function (data) {
                 var totalPrice=0;
+                var allNumber=0;
                 data.forEach(item =>{
                     var gia = item.tonggia.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+
                     totalPrice += item.tonggia;
+                    allNumber+=item.soluong;
                     $("#listProductInCart").append("<div class=\"row no-margin cart-item\">\n" +
                         "                        <div class=\"col-xs-12 col-sm-2 no-margin\">\n" +
                         "                            <a href=\"#\" class=\"thumb-holder\">\n" +
@@ -149,12 +153,12 @@
                         "\n" +
                         "                        <div class=\"col-xs-12 col-sm-3 no-margin\">\n" +
                         "                            <div class=\"price\">"+gia+" VNĐ</div>\n" +
-                        "                            <a class=\"close-btn\" onclick=\"return confirm('Bạn có chắc muốn xoá sản phẩm này ??')\" href=\"/cart/delete?maSP=1002\"></a>\n" +
+                        "                            <a class=\"close-btn\" onclick=\"return confirm('Bạn có chắc muốn xoá sản phẩm này ??')\" href=\"/cart/delete?maSP="+item.sanpham.maSp+"\"></a>\n" +
                         "                        </div>\n" +
                         "                    </div>");
                 });
                 var totalPriceS = totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-                $("#listTotalPrice").append("                <div class=\"widget cart-summary\">\n" +
+                $("#listTotalPrice").append("<div class=\"widget cart-summary\">\n" +
                     "                    <h1 class=\"border\">shopping cart</h1>\n" +
                     "                    <div class=\"body\">\n" +
                     "                        <ul class=\"tabled-data no-border inverse-bold\">\n" +
@@ -181,8 +185,60 @@
                     "                                shopping</a>\n" +
                     "                        </div>\n" +
                     "                    </div>\n" +
-                    "                </div><!-- /.widget -->");
-
+                    "                </div>");
+                $("#listProductInCart1").append("<div class=\"top-cart-holder dropdown animate-dropdown\" >\n" +
+                    "\n" +
+                    "                                <div class=\"basket\">\n" +
+                    "\n" +
+                    "                                    <a class=\"dropdown-toggle\" data-toggle=\"dropdown\" href=\"#\">\n" +
+                    "                                        <div class=\"basket-item-count\">\n" +
+                    "                                            <span class=\"count\">"+allNumber+"</span>\n" +
+                    "                                            <img src=\"/assets/images/icon-cart.png\" alt=\"\"/>\n" +
+                    "                                        </div>\n" +
+                    "\n" +
+                    "                                        <div class=\"total-price-basket\">\n" +
+                    "                                            <span class=\"lbl\">your cart:</span>\n" +
+                    "                                            <span class=\"total-price\">\n" +
+                    "                                                <span class=\"sign\"></span><span class=\"value\" > "+totalPriceS+" VND</span>\n" +
+                    "                                            </span>\n" +
+                    "                                        </div>\n" +
+                    "                                    </a>\n" +
+                    "\n" +
+                    "                                    <ul class=\"dropdown-menu\">\n" +
+                    "                                        <!<li>\n" +
+                    "                                            <div class=\"basket-item\">\n" +
+                    "                                                <div class=\"row\">\n" +
+                    "                                                    <div class=\"col-xs-4 col-sm-4 no-margin text-center\">\n" +
+                    "                                                        <div class=\"thumb\">\n" +
+                    "                                                            <img alt=\"\" src=\"/assets/images/products/product-small-01.jpg\"/>\n" +
+                    "                                                        </div>\n" +
+                    "                                                    </div>\n" +
+                    "                                                    <div class=\"col-xs-8 col-sm-8 no-margin\">\n" +
+                    "                                                        <div class=\"title\">Blueberry</div>\n" +
+                    "                                                        <div class=\"price\">$270.00</div>\n" +
+                    "                                                    </div>\n" +
+                    "                                                </div>\n" +
+                    "                                                <a class=\"close-btn\" href=\"#\"></a>\n" +
+                    "                                            </div>\n" +
+                    "                                        </li>\n" +
+                    "\n" +
+                    "                                        <li class=\"checkout\">\n" +
+                    "                                            <div class=\"basket-item\">\n" +
+                    "                                                <div class=\"row\">\n" +
+                    "                                                    <div class=\"col-xs-12 col-sm-6\">\n" +
+                    "                                                        <a href=\"cart\" class=\"le-button inverse\">View cart</a>\n" +
+                    "                                                    </div>\n" +
+                    "                                                    <div class=\"col-xs-12 col-sm-6\">\n" +
+                    "                                                        <a href=\"checkout\" class=\"le-button\">Checkout</a>\n" +
+                    "                                                    </div>\n" +
+                    "                                                </div>\n" +
+                    "                                            </div>\n" +
+                    "                                        </li>\n" +
+                    "\n" +
+                    "                                    </ul>\n" +
+                    "                                </div><!-- /.basket -->\n" +
+                    "\n" +
+                    "                        </div>");
             }
         })
     }

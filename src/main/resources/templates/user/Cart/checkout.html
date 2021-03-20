@@ -125,8 +125,10 @@
                 </div><!-- /#payment-method-options -->
 
                 <div class="place-order-button">
-                    <button class="le-button big">place order</button>
-                </div><!-- /.place-order-button -->
+                    <form action="/cart/deleteAll">
+                    <button class="le-button big" id="btn-place-order" onclick="return confirm('bạn đã đặt hàng thành công')">place order</button>
+                    </form>
+                </div>
 
             </div><!-- /.col -->
         </div><!-- /.container -->
@@ -136,5 +138,4 @@
     <div th:replace="user/fragments :: footer"></div>
 </div>
 </body>
-
 </html>

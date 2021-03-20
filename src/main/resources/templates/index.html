@@ -43,11 +43,11 @@
                                         </div>
 
                                         <div class="hover-area">
-                                            <div class="add-cart-button">
-                                                <form action="/cart" method="post">
-                                                    <button type="submit" class="le-button">thêm vào giỏ</button>
+                                            <div class="add-cart-button" id="AddToCart">
+
+                                                    <button class="le-button">thêm vào giỏ</button>
                                                     <input type="hidden" name="maSP" th:value="${item.maSp}"/>
-                                                </form>
+
                                             </div>
                                         </div>
                                     </div>
@@ -85,10 +85,8 @@
 
                                         <div class="hover-area">
                                             <div class="add-cart-button">
-                                                <form action="/cart" method="post">
-                                                    <button type="submit" class="le-button">thêm vào giỏ</button>
-                                                    <input type="hidden" name="maSP" th:value="${item.maSp}"/>
-                                                </form>
+                                                <button class="le-button">thêm vào giỏ</button>
+                                                <input type="hidden" name="maSP" th:value="${item.maSp}"/>
                                             </div>
                                         </div>
                                     </div>
@@ -125,10 +123,8 @@
 
                                         <div class="hover-area">
                                             <div class="add-cart-button">
-                                                <form action="/cart" method="post">
-                                                    <button type="submit" class="le-button">thêm vào giỏ</button>
-                                                    <input type="hidden" name="maSP" th:value="${item.maSp}"/>
-                                                </form>
+                                                <button class="le-button">thêm vào giỏ</button>
+                                                <input type="hidden" name="maSP" th:value="${item.maSp}"/>
                                             </div>
                                         </div>
                                     </div>
@@ -152,4 +148,5 @@
     <div th:replace="user/fragments :: footer"></div>
 </div>
 </body>
+
 </html>
