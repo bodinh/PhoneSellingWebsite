@@ -12,7 +12,7 @@
         <div class="container">
             <div class="col-xs-12 no-margin">
 
-                <div class="billing-address">
+                <!--<div class="billing-address">
                     <h2 class="border h1">billing address</h2>
                     <form>
                         <div class="row field-row">
@@ -21,7 +21,7 @@
                                 <input class="le-input" >
                             </div>
 
-                        </div><!-- /.field-row -->
+                        </div>&lt;!&ndash; /.field-row &ndash;&gt;
 
                         <div class="row field-row">
                             <div class="col-xs-12 col-sm-6">
@@ -29,7 +29,7 @@
                                 <input class="le-input" data-placeholder="street address" >
                             </div>
 
-                        </div><!-- /.field-row -->
+                        </div>&lt;!&ndash; /.field-row &ndash;&gt;
 
                         <div class="row field-row">
 
@@ -42,34 +42,54 @@
                                 <label>phone number*</label>
                                 <input class="le-input" >
                             </div>
-                        </div><!-- /.field-row -->
+                        </div>&lt;!&ndash; /.field-row &ndash;&gt;
 
                         <div class="row field-row">
                             <div id="create-account" class="col-xs-12">
                                 <input  class="le-checkbox big" type="checkbox"  />
                                 <a class="simple-link bold" href="#">Create Account?</a> - you will receive email with temporary generated password after login you need to change it.
                             </div>
-                        </div><!-- /.field-row -->
+                        </div>&lt;!&ndash; /.field-row &ndash;&gt;
 
                     </form>
-                </div><!-- /.billing-address -->
+                </div>&lt;!&ndash; /.billing-address &ndash;&gt;-->
                 <section id="your-order">
                     <h2 class="border h1">your order</h2>
                     <form>
-                        <div class="row no-margin order-item" id="listProductInCart">
-                            <div class="col-xs-12 col-sm-1 no-margin">
-                                <a href="#" class="qty">1 x</a>
-                            </div>
+                        <div class="col-xs-12 col-md-9 items-holder no-margin" id="listProductInCart" >
 
-                            <div class="col-xs-12 col-sm-9 ">
-                                <div class="title"><a href="#">white lumia 9001 </a></div>
-                                <div class="brand">sony</div>
-                            </div>
+                            <th:block th:each="item : ${listProductInCart}">
+                                <div class="row no-margin cart-item">
+                                    <div class="col-xs-12 col-sm-2 no-margin">
+                                        <a href="#" class="thumb-holder">
+                                            <img class="lazy" th:alt="${item.getSanpham().getAnh()}"
+                                                 th:src="${'/image/' + item.getSanpham().getMaSp()+ '/' + item.getSanpham().getAnh()}"/>
+                                        </a>
+                                    </div>
 
-                            <div class="col-xs-12 col-sm-2 no-margin">
-                                <div class="price">$2000.00</div>
-                            </div>
-                        </div><!-- /.order-item -->
+                                    <div class="col-xs-12 col-sm-5 ">
+                                        <div class="title">
+                                            <a href="#" th:text="${item.getSanpham().getTenSp()}"></a>
+                                        </div>
+                                        <div class="brand">sony</div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-2 no-margin">
+                                        <div class="quantity">
+                                                <span class="count" th:text="${item.getSoluong()}"></span>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xs-12 col-sm-3 no-margin">
+                                        <div class="price"
+                                             th:text="${#numbers.formatDecimal(item.getTonggia(), 0, 'COMMA', 0, 'POINT') +' VNĐ'}">
+                                        </div>
+
+                                    </div>
+                                </div><!-- /.cart-item -->
+                            </th:block>
+
+                        </div>
                     </form>
                 </section><!-- /#your-order -->
 
@@ -103,26 +123,7 @@
                     </div><!-- /.col -->
                 </div><!-- /#total-area -->
 
-                <div id="payment-method-options">
-                    <form>
-                        <div class="payment-method-option">
-                            <input class="le-radio" type="radio" name="group2" value="Direct">
-                            <div class="radio-label bold ">Direct Bank Transfer<br>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce rutrum tempus elit, vestibulum vestibulum erat ornare id.</p>
-                            </div>
-                        </div><!-- /.payment-method-option -->
 
-                        <div class="payment-method-option">
-                            <input class="le-radio" type="radio" name="group2" value="cheque">
-                            <div class="radio-label bold ">cheque payment</div>
-                        </div><!-- /.payment-method-option -->
-
-                        <div class="payment-method-option">
-                            <input class="le-radio" type="radio" name="group2" value="paypal">
-                            <div class="radio-label bold ">paypal system</div>
-                        </div><!-- /.payment-method-option -->
-                    </form>
-                </div><!-- /#payment-method-options -->
 
                 <div class="place-order-button">
                     <form action="/cart/deleteAll">

@@ -1469,7 +1469,8 @@
             $.fn.CallUpdate();
             $('.add-cart-button .le-button').click(function (e) {
                 e.preventDefault();
-                var maSP = $('.add-cart-button .input-masp').val();
+                var input_masp = $(this).closest(".add-cart-button").find('.input-masp');
+                var maSP = input_masp.val();
                 $.when($.fn.AddToCart(parseInt(maSP))).done(function () {
                     $.fn.CallUpdate();
                 });
