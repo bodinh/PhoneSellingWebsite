@@ -22,7 +22,6 @@ public class ConfigFilter {
 
         registrationBean.setFilter(new FilterUser());
         registrationBean.addUrlPatterns("/cart/*");
-        registrationBean.addUrlPatterns("/cart");
         registrationBean.addUrlPatterns("/account/*");
         return registrationBean;
     }

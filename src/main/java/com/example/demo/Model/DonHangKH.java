@@ -30,7 +30,7 @@ public class DonHangKH {
             donhangKhEntity.setPhivanchuyen((double) 0);
             donhangKhEntity.setPhuongthucTt("null");
             donhangKhEntity.setNgaydatmua(Timestamp.valueOf(LocalDateTime.now()));
-            donhangKhEntity.setTongTien((double) 0);
+            donhangKhEntity.setTongTien(0);
             donhangKhEntity.setTinhtrangdonhang(0);
             donhangKhEntity.setGhichu("null");
 

@@ -142,9 +142,9 @@
                 </div><!-- /.contact-row -->
                 <!-- ============================================================= SEARCH AREA ============================================================= -->
                 <div class="search-area">
-                    <form>
+                    <form action="/api/sanphams/1", method="get">
                         <div class="control-group">
-                            <input class="search-field" placeholder="Tìm kiếm sản phẩm"/>
+                            <input class="search-field" placeholder="Tìm kiếm sản phẩm" name="key" style="width:64%"/>
 
                             <ul class="categories-filter animate-dropdown">
                                 <li class="dropdown">
@@ -159,8 +159,7 @@
                                 </li>
                             </ul>
 
-                            <a class="search-button" href="#"></a>
-
+                            <button class="search-button" type="submit" style="padding: 10px 15px 13px 15px"></button>
                         </div>
                     </form>
                 </div><!-- /.search-area -->
@@ -1467,14 +1466,13 @@
         <script src="/js/displayCart_Layout.js"></script>
         <script>
             $.fn.CallUpdate();
-            $('.add-cart-button .le-button').click(function (e) {
+            $('#addcart').click(function (e) {
                 e.preventDefault();
                 var input_masp = $(this).closest(".add-cart-button").find('.input-masp');
                 var maSP = input_masp.val();
                 $.when($.fn.AddToCart(parseInt(maSP))).done(function () {
                     $.fn.CallUpdate();
                 });
-
             })
         </script>
 
