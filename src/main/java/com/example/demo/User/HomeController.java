@@ -30,7 +30,11 @@ public class HomeController {
         List<SanPham> listSanPhamsSale = listSanPham.getAllSale();
         model.addAttribute("listSanPhamsHot", listSanPhamsHot.subList(0, 8));
         model.addAttribute("listSanPhamsNew", listSanPhamsNew.subList(0, 8));
-        model.addAttribute("listSanPhamsSale", listSanPhamsSale.subList(0, 8));
+        if(listSanPhamsHot.size() != 0){
+            model.addAttribute("listSanPhamsSale", listSanPhamsSale.subList(0, 8));
+        }else {
+            model.addAttribute("listSanPhamsSale", listSanPhamsSale);
+        }
         return "index";
     }
 }
