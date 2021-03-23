@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.persistence.NoResultException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,13 +32,32 @@ public class CartApiController {
         return list;
     }
 
+    //Thêm mới 1 sản phẩm vào giỏ
+    @GetMapping("/addnew/{maSP}/{maDH}")
+    public List<CartEntity> addToCart(@PathVariable(name = "maSP") int maSP, @PathVariable(name = "maDH") int maDH) {
+        ChitietDhEntity chitietDhEntity = new ChitietDhEntity();
+        try {
+            chitietDhEntity = (ChitietDhEntity) openSession().createQuery("from ChitietDhEntity where maDh=" + maDH + " and maSp=" + maSP).getSingleResult();
+            chitietDhEntity.setSoluong(chitietDhEntity.getSoluong() + 1);
+            chitietDhEntity.setThanhtien(chitietDhEntity.getSoluong() * getPrice(maSP));
+            SellPhonesDBContext.updateObject(chitietDhEntity);
+        } catch (NoResultException e) {
+            chitietDhEntity.setMaDh(maDH);
+            chitietDhEntity.setMaSp(maSP);
+            chitietDhEntity.setSoluong(1);
+            chitietDhEntity.setThanhtien(getPrice(maSP));
+            SellPhonesDBContext.addNewObject(chitietDhEntity);
+        }
+        return getAllInCart(maDH);
+    }
+
     @GetMapping("/reduce/{maSP}/{maDH}")
     public List<CartEntity> reduceProduct(@PathVariable(name = "maSP") int maSP, @PathVariable(name = "maDH") int maDH) {
         ChitietDhEntity chitietDhEntity = new ChitietDhEntity();
         chitietDhEntity = (ChitietDhEntity) openSession().createQuery("from ChitietDhEntity where maDh=" + maDH + " and maSp=" + maSP).getSingleResult();
-        if(chitietDhEntity.getSoluong() == 0){
+        if (chitietDhEntity.getSoluong() == 0) {
             SellPhonesDBContext.deleteObject(chitietDhEntity);
-        }else {
+        } else {
             chitietDhEntity.setSoluong(chitietDhEntity.getSoluong() - 1);
             chitietDhEntity.setThanhtien(chitietDhEntity.getSoluong() * getPrice(maSP));
             SellPhonesDBContext.updateObject(chitietDhEntity);
@@ -49,10 +69,10 @@ public class CartApiController {
     public List<CartEntity> addProduct(@PathVariable(name = "maSP") int maSP, @PathVariable(name = "maDH") int maDH) {
         ChitietDhEntity chitietDhEntity = new ChitietDhEntity();
         chitietDhEntity = (ChitietDhEntity) openSession().createQuery("from ChitietDhEntity where maDh=" + maDH + " and maSp=" + maSP).getSingleResult();
-        if(chitietDhEntity.getSoluong() == getNumberInWareHouse(maSP)){
+        if (chitietDhEntity.getSoluong() == getNumberInWareHouse(maSP)) {
             chitietDhEntity.setSoluong(chitietDhEntity.getSoluong());
             SellPhonesDBContext.updateObject(chitietDhEntity);
-        }else {
+        } else {
             chitietDhEntity.setSoluong(chitietDhEntity.getSoluong() + 1);
             chitietDhEntity.setThanhtien(chitietDhEntity.getSoluong() * getPrice(maSP));
             SellPhonesDBContext.updateObject(chitietDhEntity);
@@ -60,13 +80,13 @@ public class CartApiController {
         return getAllInCart(maDH);
     }
 
-    public long getPrice(int maSP){
-        SanphamEntity sanphamEntity = (SanphamEntity) openSession().createQuery("from SanphamEntity where maSp="+maSP).getSingleResult();
+    public long getPrice(int maSP) {
+        SanphamEntity sanphamEntity = (SanphamEntity) openSession().createQuery("from SanphamEntity where maSp=" + maSP).getSingleResult();
         return sanphamEntity.getGia();
     }
 
-    public int getNumberInWareHouse(int maSP){
-        SanphamEntity sanphamEntity = (SanphamEntity) openSession().createQuery("from SanphamEntity where maSp="+maSP).getSingleResult();
+    public int getNumberInWareHouse(int maSP) {
+        SanphamEntity sanphamEntity = (SanphamEntity) openSession().createQuery("from SanphamEntity where maSp=" + maSP).getSingleResult();
         return sanphamEntity.getSoLuong();
     }
 }

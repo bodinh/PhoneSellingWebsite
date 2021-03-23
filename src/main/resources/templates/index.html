@@ -58,7 +58,7 @@
                                         <div class="hover-area">
                                             <div class="add-cart-button">
                                                 <form action="/cart" method="post">
-                                                    <button type="submit" class="le-button" id="addcart">thêm vào giỏ</button>
+                                                    <button type="button" th:onclick="'addnewProduct('+${item.sanphamEntity.maSp}+','+${donHangKH}+')'" class="le-button" id="addcart">thêm vào giỏ</button>
                                                     <input type="hidden" name="maSP"
                                                            th:value="${item.sanphamEntity.maSp}"/>
                                                 </form>
@@ -192,3 +192,7 @@
 </div>
 </body>
 </html>
+<script>
+    var maDH = [[${donHangKH}]]; //get data use thymeleaf in js
+    getFirstCart(maDH);
+</script>
