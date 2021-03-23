@@ -1,53 +1,112 @@
-/**
- * Font chữ và màu
- * BTTu - 22/12/2020
- */
-Chart.defaults.global.defaultFontFamily = '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
-Chart.defaults.global.defaultFontColor = '#292b2c';
-
-
-/**
- * Data thống kê doanh thu
- * BTTu - 22/12/2020
- */
-var ctx = document.getElementById("myBarChart");
-var myLineChart = new Chart(ctx, {
-  type: 'bar',
-  data: {
-    labels: ["Tháng giêng", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6","Tháng 7","Tháng 8","Tháng 9","Tháng 10","Tháng 11","Tháng 12"],
-    datasets: [{
-      label: "Tổng thu",
-      backgroundColor: "rgba(2,117,216,1)",
-      borderColor: "rgba(2,117,216,1)",
-      data: [4215, 5312, 6251, 7841, 9821, 14984,2133,5435,3213,3213,1112,1234],
-    }],
-  },
-  options: {
-    scales: {
-      xAxes: [{
-        time: {
-          unit: 'month'
-        },
-        gridLines: {
-          display: false
-        },
-        ticks: {
-          maxTicksLimit: 6
+function doanhthu(nam) {
+  $("#bar-chart").remove();
+  $("#contain-bar-chart").append("<canvas id=\"bar-chart\" width=\"100%\" height=\"40\"></canvas>");
+  $.ajax({
+    url: "/api/doanhthu/",
+    method: "get",
+    success: function (jdata) {
+      // Bar chart
+      var data = [];
+      var label = [];
+      jdata.forEach(item => {
+        if (item.nam == nam) {
+          item.doanhthu.forEach(it => {
+            label.push("Tháng "+it.thang.toString());
+            data.push(it.doanhThuThang / 1000000);
+          });
         }
-      }],
-      yAxes: [{
-        ticks: {
-          min: 0,
-          max: 15000,
-          maxTicksLimit: 5
-        },
-        gridLines: {
-          display: true
+      });
+      new Chart(document.getElementById("bar-chart"), {
+        type: 'bar',
+        data: {
+          labels: label,
+          datasets: [
+            {
+              label: "Doanh thu ( Triệu VNĐ)",
+              backgroundColor: ["#3e95cd", "#3e95cd", "#3e95cd", "#3e95cd", "#3e95cd", "#3e95cd", "#3e95cd", "#3e95cd", "#3e95cd", "#3e95cd", "#3e95cd", "#3e95cd"],
+              data: data
+            }
+          ]
+        },options: {
+          scales: {
+            xAxes: [{
+              time: {
+                unit: 'month'
+              },
+              gridLines: {
+                display: true
+              },
+              ticks: {
+                maxTicksLimit: 9
+              }
+            }],
+            yAxes: [{
+              gridLines: {
+                display: true
+              }
+            }],
+          },
+          legend: {
+            display: false
+          }
         }
-      }],
-    },
-    legend: {
-      display: false
+      });
     }
-  }
+  })
+}
+
+$(document).ready(function () {
+  $("#bar-chart").remove();
+  $("#contain-bar-chart").append("<canvas id=\"bar-chart\" width=\"100%\" height=\"40\"></canvas>");
+  $.ajax({
+    url: "/api/doanhthu/",
+    method: "get",
+    success: function (jdata) {
+      // Bar chart
+      var data = [];
+      var label = [];
+      for (var i = 0; i < 1; i++) {
+        var item = jdata[0];
+        item.doanhthu.forEach(it => {
+          label.push("Tháng " + it.thang.toString());
+          data.push(it.doanhThuThang / 1000000);
+        });
+      }
+      new Chart(document.getElementById("bar-chart"), {
+        type: 'bar',
+        data: {
+          labels: label,
+          datasets: [
+            {
+              label: "Doanh thu ( Triệu VNĐ)",
+              backgroundColor: ["#3e95cd", "#3e95cd", "#3e95cd", "#3e95cd", "#3e95cd", "#3e95cd", "#3e95cd", "#3e95cd", "#3e95cd", "#3e95cd", "#3e95cd", "#3e95cd"],
+              data: data
+            }
+          ]
+        },options: {
+          scales: {
+            xAxes: [{
+              time: {
+                unit: 'month'
+              },
+              gridLines: {
+                display: true
+              },
+              ticks: {
+                maxTicksLimit: 9
+              }
+            }],
+            yAxes: [{
+              gridLines: {
+                display: true
+              }
+            }],
+          },
+          legend: {
+            display: false
+          }
+        }
+      });
+    }
+  })
 });

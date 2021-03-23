@@ -36,6 +36,8 @@
       <mapping resource="hibrateConfigXml/SanphamEntity.hbm.xml"/>
       <mapping class="com.example.demo.Hibernate.ThongsokythuatEntity"/>
       <mapping resource="hibrateConfigXml/ThongsokythuatEntity.hbm.xml"/>
+      <mapping class="com.example.demo.Hibernate.NhapHangEntity"/>
+      <mapping resource="NhapHangEntity.hbm.xml"/>
       <!-- <property name="connection.username"/> -->
     <!-- <property name="connection.password"/> -->
 

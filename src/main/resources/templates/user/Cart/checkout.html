@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="user/fragments :: head"/>
+<body>
+
+<div class="wrapper">
+    <nav th:replace="user/fragments :: topBar"></nav>
+    <header th:replace="user/fragments :: navigation"></header>
+    <!--    ==============================================BODY==============================================-->
+    <section id="checkout-page">
+        <div class="container">
+            <div class="col-xs-12 no-margin">
+
+                <!--<div class="billing-address">
+                    <h2 class="border h1">billing address</h2>
+                    <form>
+                        <div class="row field-row">
+                            <div class="col-xs-12 col-sm-6">
+                                <label>full name*</label>
+                                <input class="le-input" >
+                            </div>
+
+                        </div>&lt;!&ndash; /.field-row &ndash;&gt;
+
+                        <div class="row field-row">
+                            <div class="col-xs-12 col-sm-6">
+                                <label>address*</label>
+                                <input class="le-input" data-placeholder="street address" >
+                            </div>
+
+                        </div>&lt;!&ndash; /.field-row &ndash;&gt;
+
+                        <div class="row field-row">
+
+                            <div class="col-xs-12 col-sm-4">
+                                <label>email address*</label>
+                                <input class="le-input" >
+                            </div>
+
+                            <div class="col-xs-12 col-sm-4">
+                                <label>phone number*</label>
+                                <input class="le-input" >
+                            </div>
+                        </div>&lt;!&ndash; /.field-row &ndash;&gt;
+
+                        <div class="row field-row">
+                            <div id="create-account" class="col-xs-12">
+                                <input  class="le-checkbox big" type="checkbox"  />
+                                <a class="simple-link bold" href="#">Create Account?</a> - you will receive email with temporary generated password after login you need to change it.
+                            </div>
+                        </div>&lt;!&ndash; /.field-row &ndash;&gt;
+
+                    </form>
+                </div>&lt;!&ndash; /.billing-address &ndash;&gt;-->
+                <section id="your-order">
+                    <h2 class="border h1">your order</h2>
+                    <form>
+                        <div class="col-xs-12 col-md-9 items-holder no-margin" id="listProductInCart" >
+
+                            <th:block th:each="item : ${listProductInCart}">
+                                <div class="row no-margin cart-item">
+                                    <div class="col-xs-12 col-sm-2 no-margin">
+                                        <a href="#" class="thumb-holder">
+                                            <img class="lazy" th:alt="${item.getSanpham().getAnh()}"
+                                                 th:src="${'/image/' + item.getSanpham().getMaSp()+ '/' + item.getSanpham().getAnh()}"/>
+                                        </a>
+                                    </div>
+
+                                    <div class="col-xs-12 col-sm-5 ">
+                                        <div class="title">
+                                            <a href="#" th:text="${item.getSanpham().getTenSp()}"></a>
+                                        </div>
+                                        <div class="brand">sony</div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-2 no-margin">
+                                        <div class="quantity">
+                                                <span class="count" th:text="${item.getSoluong()}"></span>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xs-12 col-sm-3 no-margin">
+                                        <div class="price"
+                                             th:text="${#numbers.formatDecimal(item.getTonggia(), 0, 'COMMA', 0, 'POINT') +' VNĐ'}">
+                                        </div>
+
+                                    </div>
+                                </div><!-- /.cart-item -->
+                            </th:block>
+
+                        </div>
+                    </form>
+                </section><!-- /#your-order -->
+
+                <div id="total-area" class="row no-margin">
+                    <div class="col-xs-12 col-lg-4 col-lg-offset-8 no-margin-right">
+                        <div id="subtotal-holder">
+                            <ul class="tabled-data inverse-bold no-border">
+                                <li>
+                                    <label>cart subtotal</label>
+                                    <div class="value ">$8434.00</div>
+                                </li>
+                                <li>
+                                    <label>shipping</label>
+                                    <div class="value">
+                                        <div class="radio-group">
+                                            <input class="le-radio" type="radio" name="group1" value="free"> <div class="radio-label bold">free shipping</div><br>
+                                            <input class="le-radio" type="radio" name="group1" value="local" checked>  <div class="radio-label">local delivery<br><span class="bold">$15</span></div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul><!-- /.tabled-data -->
+
+                            <ul id="total-field" class="tabled-data inverse-bold ">
+                                <li>
+                                    <label>order total</label>
+                                    <div class="value">$8434.00</div>
+                                </li>
+                            </ul><!-- /.tabled-data -->
+
+                        </div><!-- /#subtotal-holder -->
+                    </div><!-- /.col -->
+                </div><!-- /#total-area -->
+
+
+
+                <div class="place-order-button">
+                    <form action="/cart/deleteAll">
+                    <button class="le-button big" id="btn-place-order" onclick="return confirm('bạn đã đặt hàng thành công')">place order</button>
+                    </form>
+                </div>
+
+            </div><!-- /.col -->
+        </div><!-- /.container -->
+    </section><!-- /#checkout-page -->
+    <!--    =============================================END BODY=========================================-->
+    <div th:replace="user/fragments :: recentlyViewed"></div>
+    <div th:replace="user/fragments :: footer"></div>
+</div>
+</body>
+</html>

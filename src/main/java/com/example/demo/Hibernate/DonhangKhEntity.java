@@ -12,7 +12,7 @@ public class DonhangKhEntity {
     private Double phivanchuyen;
     private String phuongthucTt;
     private Timestamp ngaydatmua;
-    private Double tongTien;
+    private long tongTien;
     private Integer tinhtrangdonhang;
     private String ghichu;
 
@@ -68,11 +68,11 @@ public class DonhangKhEntity {
 
     @Basic
     @Column(name = "TongTien", nullable = true, precision = 0)
-    public Double getTongTien() {
+    public long getTongTien() {
         return tongTien;
     }
 
-    public void setTongTien(Double tongTien) {
+    public void setTongTien(long tongTien) {
         this.tongTien = tongTien;
     }
 
