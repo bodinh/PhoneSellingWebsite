@@ -100,7 +100,10 @@ public class CartController {
             donhangKhEntity.setTongTien(getTongTien(cartEntities));
 
             SellPhonesDBContext.updateObject(donhangKhEntity);
+            //delete maDH in Session
+            DonhangKhEntity khEntity = donHangKH.createCart(UID.getUID(httpSession));
             httpSession.removeAttribute("maDH");
+            httpSession.setAttribute("maDH",khEntity.getMaDh());
             //============================
 
             //cập nhật lại số lượng trong kho

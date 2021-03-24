@@ -41,19 +41,19 @@ public class DoanhThuApiController {
                 } else
                     //nếu một tháng có nhiều đơn hàng thì cộng dồn vào doanh thu tháng đó
                     if (sa[1].equals(sap[1])) {
-                        DoanhThuThang dtt = doanhThuThang.get(Integer.valueOf(sap[1]) - 1);
-                        dtt.setDoanhThuThang(dtt.getDoanhThuThang() + khEntities.get(i).getTongTien());
+                        DoanhThuThang dtt = doanhThuThang.get(Integer.valueOf(sa[1]) - 1);
+                        doanhThuThang.get(Integer.valueOf(sap[1]) - 1).setDoanhThuThang(dtt.getDoanhThuThang() + khEntities.get(i).getTongTien());
                     }
                     //cuối cùng xét xem phần tủ có phải cuối cùng danh sách không, nếu đúng thì thêm mới doanh thu của năm đó và kết thúc.
                 if (i == khEntities.size() - 1) {
                     DoanhThuThang dtt = doanhThuThang.get(Integer.valueOf(sa[1]) - 1);
-                    dtt.setDoanhThuThang(khEntities.get(i).getTongTien());
+                    doanhThuThang.get(Integer.valueOf(sa[1]) - 1).setDoanhThuThang(dtt.getDoanhThuThang() + khEntities.get(i).getTongTien());
                     doanhThuNam.add(new DoanhThu(Integer.valueOf(sa[0]), doanhThuThang));
                 }
                 continue;
             }
             DoanhThuThang dtt = doanhThuThang.get(Integer.valueOf(sa[1]) - 1);
-            dtt.setDoanhThuThang(khEntities.get(i).getTongTien());
+            doanhThuThang.get(Integer.valueOf(sa[1]) - 1).setDoanhThuThang(khEntities.get(i).getTongTien());
             if (khEntities.size() == 1) {
                 doanhThuNam.add(new DoanhThu(Integer.valueOf(sa[0]), doanhThuThang));
             }
@@ -100,7 +100,7 @@ public class DoanhThuApiController {
                 //cuối cùng xét xem phần tủ có phải cuối cùng danh sách không, nếu đúng thì thêm mới doanh thu của năm đó và kết thúc.
                 if (i == khEntities.size() - 1) {
                     DoanhThuThang dtt = doanhThuThang.get(Integer.valueOf(sa[1]) - 1);
-                    dtt.setDoanhThuThang(laiThang);
+                    dtt.setDoanhThuThang(dtt.getDoanhThuThang() + laiThang);
                     doanhThuNam.add(new DoanhThu(Integer.valueOf(sa[0]), doanhThuThang));
                 }
                 continue;
