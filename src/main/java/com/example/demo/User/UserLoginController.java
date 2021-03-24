@@ -2,6 +2,7 @@ package com.example.demo.User;
 
 import com.example.demo.Hibernate.AccountEntity;
 import com.example.demo.Hibernate.SellPhonesDBContext;
+import com.example.demo.Model.DonHangKH;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.springframework.stereotype.Controller;
@@ -10,7 +11,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.persistence.NoResultException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.sql.Date;
 import java.util.ArrayList;
@@ -26,13 +29,14 @@ public class UserLoginController {
     }
 
     @PostMapping("/login/index")
-    public String login(String username, String password, Model model, HttpSession httpSession, HttpServletRequest httpServletRequest) {
+    public String login(String username, String password, Model model, HttpSession httpSession, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
         AccountEntity account = new AccountEntity();
         if (username != null && password != null) {
             try {
                 account = (AccountEntity) openSession().createQuery("from AccountEntity where username='" + username + "' and  password='" + password + "'").getSingleResult();
                 httpSession.setAttribute("user", account.getUsername());
-                httpSession.setAttribute("maDH", 19);
+                DonHangKH donHangKH = new DonHangKH();
+                httpSession.setAttribute("maDH", donHangKH.createCart(UID.getUID(httpSession)).getMaDh());
                 return "redirect:/index";
             } catch (NoResultException e) {
                 model.addAttribute("alertMessage", "sai tài khoản hoặc mật khẩu.");

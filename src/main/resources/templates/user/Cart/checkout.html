@@ -10,128 +10,167 @@
     <!--    ==============================================BODY==============================================-->
     <section id="checkout-page">
         <div class="container">
-            <div class="col-xs-12 no-margin">
-
-                <!--<div class="billing-address">
-                    <h2 class="border h1">billing address</h2>
-                    <form>
-                        <div class="row field-row">
-                            <div class="col-xs-12 col-sm-6">
-                                <label>full name*</label>
-                                <input class="le-input" >
-                            </div>
-
-                        </div>&lt;!&ndash; /.field-row &ndash;&gt;
-
-                        <div class="row field-row">
-                            <div class="col-xs-12 col-sm-6">
-                                <label>address*</label>
-                                <input class="le-input" data-placeholder="street address" >
-                            </div>
-
-                        </div>&lt;!&ndash; /.field-row &ndash;&gt;
-
-                        <div class="row field-row">
-
-                            <div class="col-xs-12 col-sm-4">
-                                <label>email address*</label>
-                                <input class="le-input" >
-                            </div>
-
-                            <div class="col-xs-12 col-sm-4">
-                                <label>phone number*</label>
-                                <input class="le-input" >
-                            </div>
-                        </div>&lt;!&ndash; /.field-row &ndash;&gt;
-
-                        <div class="row field-row">
-                            <div id="create-account" class="col-xs-12">
-                                <input  class="le-checkbox big" type="checkbox"  />
-                                <a class="simple-link bold" href="#">Create Account?</a> - you will receive email with temporary generated password after login you need to change it.
-                            </div>
-                        </div>&lt;!&ndash; /.field-row &ndash;&gt;
-
-                    </form>
-                </div>&lt;!&ndash; /.billing-address &ndash;&gt;-->
-                <section id="your-order">
-                    <h2 class="border h1">your order</h2>
-                    <form>
-                        <div class="col-xs-12 col-md-9 items-holder no-margin" id="listProductInCart" >
-
-                            <th:block th:each="item : ${listProductInCart}">
-                                <div class="row no-margin cart-item">
-                                    <div class="col-xs-12 col-sm-2 no-margin">
-                                        <a href="#" class="thumb-holder">
-                                            <img class="lazy" th:alt="${item.getSanpham().getAnh()}"
-                                                 th:src="${'/image/' + item.getSanpham().getMaSp()+ '/' + item.getSanpham().getAnh()}"/>
-                                        </a>
-                                    </div>
-
-                                    <div class="col-xs-12 col-sm-5 ">
-                                        <div class="title">
-                                            <a href="#" th:text="${item.getSanpham().getTenSp()}"></a>
-                                        </div>
-                                        <div class="brand">sony</div>
-                                    </div>
-                                    <div class="col-xs-12 col-sm-2 no-margin">
-                                        <div class="quantity">
-                                                <span class="count" th:text="${item.getSoluong()}"></span>
-
-                                        </div>
-                                    </div>
-
-                                    <div class="col-xs-12 col-sm-3 no-margin">
-                                        <div class="price"
-                                             th:text="${#numbers.formatDecimal(item.getTonggia(), 0, 'COMMA', 0, 'POINT') +' VNĐ'}">
-                                        </div>
-
-                                    </div>
-                                </div><!-- /.cart-item -->
-                            </th:block>
-
+            <div class="main">
+                <div class="container">
+                    <!-- BEGIN SIDEBAR & CONTENT -->
+                    <div class="row margin-bottom-40">
+                        <!-- BEGIN CONTENT -->
+                        <div class="col-md-12 col-sm-12">
+                            <h1>Sản phẩm đã chọn</h1>
                         </div>
-                    </form>
-                </section><!-- /#your-order -->
+                        <div class="goods-page" id="Cart1">
+                            <div class="container">
+                                <div class="col-xs-12 col-md-9 items-holder no-margin">
+                                    <th:block th:each="item : ${listProductInCart}">
+                                        <div class="row no-margin cart-item">
+                                            <div class="col-xs-12 col-sm-2 no-margin" style="border: 1px solid #e0e0e0;">
+                                                <a href="#">
+                                                    <img style="padding: 10px;height:146px;"
+                                                         th:alt="${item.getSanpham().getTenSp()}"
+                                                         th:src="${'/image/'+ item.getSanpham().getMaSp() +'/' + item.getSanpham().getAnh()}">
+                                                </a>
+                                            </div>
 
-                <div id="total-area" class="row no-margin">
-                    <div class="col-xs-12 col-lg-4 col-lg-offset-8 no-margin-right">
-                        <div id="subtotal-holder">
-                            <ul class="tabled-data inverse-bold no-border">
-                                <li>
-                                    <label>cart subtotal</label>
-                                    <div class="value ">$8434.00</div>
-                                </li>
-                                <li>
-                                    <label>shipping</label>
-                                    <div class="value">
-                                        <div class="radio-group">
-                                            <input class="le-radio" type="radio" name="group1" value="free"> <div class="radio-label bold">free shipping</div><br>
-                                            <input class="le-radio" type="radio" name="group1" value="local" checked>  <div class="radio-label">local delivery<br><span class="bold">$15</span></div>
+                                            <div class="col-xs-12 col-sm-5 ">
+                                                <div class="title">
+                                                    <a href="#" th:text="${item.getSanpham().getTenSp()}"></a>
+                                                </div>
+                                                <div class="brand">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-xs-12 col-sm-3 no-margin">
+                                                <div class="quantity">
+                                                    <strong style="font-size:15px;" th:text="${#numbers.formatDecimal(item.getSanpham().getGia(),0,'DEFAULT',0,'DEFAULT') + ' * ' + item.getSoluong()}"></strong>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-2 no-margin">
+                                                <div class="price" style="padding-right:15px;">
+                                                    <strong th:text="${#numbers.formatDecimal(item.getTonggia(),0,'DEFAULT',0,'DEFAULT') + ' VNĐ'}"></strong>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </th:block>
+                                </div>
+                                <!-- ========================================= SIDEBAR ========================================= -->
+                                <div class="col-xs-12 col-md-3 no-margin sidebar">
+                                    <div class="widget cart-summary">
+                                        <h1 class="border">Giỏ hàng</h1>
+                                        <div class="body">
+                                            <ul class="tabled-data no-border inverse-bold">
+                                                <li>
+                                                    <label>tổng tiền sản phẩm</label>
+                                                    <div class="value pull-right sum-prices"  th:text="${#numbers.formatDecimal(tongTienCart,0,'DEFAULT',0,'DEFAULT') + ' VNĐ'}"></div>
+                                                </li>
+                                                <li>
+                                                    <label>Phí vận chuyển</label>
+                                                    <div class="value pull-right">miễn phí</div>
+                                                </li>
+                                            </ul>
+                                            <ul id="total-price" class="tabled-data inverse-bold no-border" style="padding-top: 5px;">
+                                                <li>
+                                                    <label>Tổng tiền thanh toán</label>
+                                                    <div style="padding: 5px;font-size: 18px;" class="value pull-right sum-prices"  th:text="${#numbers.formatDecimal(tongTienCart,0,'DEFAULT',0,'DEFAULT') + ' VNĐ'}"></div>
+                                                </li>
+                                            </ul>
+                                            <div class="buttons-holder" style="text-align: end;">
+                                                <a class="le-button big" style="margin-top: 5px;"
+                                                   href="/cart/checkout">Thủ tục thanh toán</a>
+                                                <a class="simple-link block" style="padding-top: 10px;"
+                                                   href="/index">Tiếp tục mua hàng</a>
+                                            </div>
+                                        </div>
+                                    </div><!-- /.widget -->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row margin-bottom-40">
+                            <!-- BEGIN CONTENT -->
+                            <div class="goods-page" id="Cart">
+                                <form action="/cart/checkout" class="form-horizontal" method="post" role="form">
+                                    <div class="col-md-12 col-sm-12">
+                                        <h1>Thông tin khách hàng</h1>
+                                    </div>
+                                    <div class="goods-data clearfix">
+                                        <div class="table-wrapper-responsive">
+                                            <div class="form-group">
+                                                <label class="col-md-2 control-label">Người nhận :</label>
+                                                <div class="col-md-10">
+                                                    <input class="form-control" name="hoTen" required="true" type="text"
+                                                           th:value="${userInformation.getHoten()}">
+                                                    <span class="field-validation-valid" data-valmsg-for="buyer"
+                                                          data-valmsg-replace="true"></span>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-2 control-label">Email :</label>
+                                                <div class="col-md-10">
+                                                    <input class="form-control" name="email" required="true type=" th:value="${userInformation.getEmail().replace(' ','')}">
+                                                    <span class="field-validation-valid" data-valmsg-for="seller"
+                                                          data-valmsg-replace="true"></span>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-2 control-label" type="number">Điện thoại :</label>
+                                                <div class="col-md-10">
+                                                    <input class="form-control" name="soDienThoai" required="true"
+                                                           type="number" th:value="${userInformation.getPhonenumber()}">
+                                                    <span class="field-validation-valid" data-valmsg-for="phoneNumber"
+                                                          data-valmsg-replace="true"></span>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-2 control-label">Địa chỉ :</label>
+                                                <div class="col-md-10">
+                                                    <input class="form-control" name="diaChi" required="true"
+                                                           type="text" th:value="${userInformation.getAddress()}" aria-required="true">
+                                                    <span class="field-validation-valid" data-valmsg-for="address"
+                                                          data-valmsg-replace="true"></span>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-2 control-label">Ghi chú :</label>
+                                                <div class="col-md-10">
+                                                    <textarea class="form-control" cols="20" id="Note" name="ghiChu"
+                                                              rows="2"></textarea>
+                                                    <span class="field-validation-valid" data-valmsg-for="Note"
+                                                          data-valmsg-replace="true"></span>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                </li>
-                            </ul><!-- /.tabled-data -->
+                                    <div class="col-md-12 col-sm-12" style="margin-top: 40px;">
+                                        <h1>Phương thức thanh toán</h1>
+                                    </div>
+                                    <div class="goods-data clearfix">
+                                        <div id="payment-method-options">
+                                            <div class="payment-method-option">
+                                                <input class="le-radio" type="radio" name="deliver"
+                                                       value="Thanh toán khi giao hàng"><i class="fake-box"></i><i
+                                                    class="fake-box"></i>
+                                                <div class="radio-label bold " style="display:inline;">Thanh toán khi
+                                                    giao hàng
+                                                </div>
+                                            </div><!-- /.payment-method-option -->
+                                        </div><!-- /#payment-method-options -->
+                                    </div>
+                                    <div class="buttons-holder" style="margin-top:20px;text-align:right;">
+                                        <a class="le-button big" href="/"> <i class="fa fa-shopping-cart"> </i> Tiếp tục
+                                            mua hàng</a>
+                                        <button type="submit"
+                                                style="border:none;overflow:hidden;margin-left:20px;background:none;"><a
+                                                class="le-button big"><i class="fa fa-check"> </i> Thanh toán</a>
+                                        </button>
 
-                            <ul id="total-field" class="tabled-data inverse-bold ">
-                                <li>
-                                    <label>order total</label>
-                                    <div class="value">$8434.00</div>
-                                </li>
-                            </ul><!-- /.tabled-data -->
-
-                        </div><!-- /#subtotal-holder -->
-                    </div><!-- /.col -->
-                </div><!-- /#total-area -->
-
-
-
-                <div class="place-order-button">
-                    <form action="/cart/deleteAll">
-                    <button class="le-button big" id="btn-place-order" onclick="return confirm('bạn đã đặt hàng thành công')">place order</button>
-                    </form>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <!-- END CONTENT -->
+                    </div>
                 </div>
-
-            </div><!-- /.col -->
+            </div>
         </div><!-- /.container -->
     </section><!-- /#checkout-page -->
     <!--    =============================================END BODY=========================================-->
@@ -140,3 +179,6 @@
 </div>
 </body>
 </html>
+<script>
+    document.title = "Thanh toán"
+</script>

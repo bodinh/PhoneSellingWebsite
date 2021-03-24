@@ -55,11 +55,6 @@ public class CartController {
             tongTien += item.getTonggia();
         }
         model.addAttribute("tongTienCart", tongTien);
-        long tongSoSP = 0;
-        for (CartEntity item: listInCart) {
-            tongSoSP += item.getSoluong();
-        }
-        model.addAttribute("tongsosp", tongSoSP);
         return "/user/Cart/cart";
     }
     @GetMapping("/cart/delete")
@@ -86,7 +81,7 @@ public class CartController {
         return "redirect:/";
     }
 
-    @PostMapping("/cart/check-out")
+    @PostMapping("/cart/checkout")
     public String CheckOut(int maSP, HttpSession httpSession, Model model){
         DonhangKhEntity donhangKhEntity  = donHangKH.createCart(UID.getUID(httpSession));
         donHangKH.addToCart(maSP,donhangKhEntity);
@@ -100,7 +95,13 @@ public class CartController {
         model.addAttribute("tongTienCart", tongTien);
         return "user/Cart/CheckOut";
     }
-    @GetMapping("/cart/check-out")
+
+    private Session session;
+    public Session openSession() {
+        return SellPhonesDBContext.getSession();
+    }
+
+    @GetMapping("/cart/checkout")
     public String CheckOut(HttpSession httpSession, Model model){
         DonhangKhEntity donhangKhEntity  = donHangKH.createCart(UID.getUID(httpSession));
         List<CartEntity> listInCart = donHangKH.getAllInCart(donhangKhEntity);
@@ -111,86 +112,13 @@ public class CartController {
             tongTien += item.getTonggia();
         }
         model.addAttribute("tongTienCart", tongTien);
-        return "user/Cart/CheckOut";
-    }
-    @PostMapping("/fragments")
-    public String Fragments(int maSP, HttpSession httpSession, Model model){
-        DonhangKhEntity donhangKhEntity  = donHangKH.createCart(UID.getUID(httpSession));
-        donHangKH.addToCart(maSP,donhangKhEntity);
-        List<CartEntity> listInCart = donHangKH.getAllInCart(donhangKhEntity);
-        model.addAttribute( "listProductInCart1",listInCart);
-        model.addAttribute("maDH",donhangKhEntity.getMaDh());
-        // get tổng giá của giỏ hàng
-        long tongTien = 0;
-        for (CartEntity item: listInCart) {
-            tongTien += item.getTonggia();
-        }
-        model.addAttribute("tongTienCart", tongTien);
-        long tongSoSP = 0;
-        for (CartEntity item: listInCart) {
-            tongSoSP += item.getSoluong();
-        }
-        model.addAttribute("tongsosp", tongSoSP);
-        return "/user/fragments";
+
+        //get user information
+        AccountEntity accountEntity = new AccountEntity();
+        accountEntity =(AccountEntity) openSession().createQuery("from AccountEntity where username='"+httpSession.getAttribute("user").toString()+"'").getSingleResult();
+        model.addAttribute("userInformation",accountEntity);
+
+        return "user/Cart/checkout";
     }
 
-    @GetMapping("/fragments")
-    public String Fragment(HttpSession httpSession, Model model){
-        DonhangKhEntity donhangKhEntity  = donHangKH.createCart(UID.getUID(httpSession));
-        List<CartEntity> listInCart = donHangKH.getAllInCart(donhangKhEntity);
-        model.addAttribute( "listProductInCart1",listInCart);
-        model.addAttribute("maDH",donhangKhEntity.getMaDh());
-        long tongTien = 0;
-        for (CartEntity item: listInCart) {
-            tongTien += item.getTonggia();
-        }
-        model.addAttribute("tongTienCart", tongTien);
-        long tongSoSP = 0;
-        for (CartEntity item: listInCart) {
-            tongSoSP += item.getSoluong();
-        }
-        model.addAttribute("tongsosp", tongSoSP);
-        return "/user/fragments";
-    }
-
-    /*@PostMapping("/check-out")
-    public String Check_Out(int maSP, HttpSession httpSession, Model model){
-        DonhangKhEntity donhangKhEntity  = donHangKH.createCart(UID.getUID(httpSession));
-        donHangKH.addToCart(maSP,donhangKhEntity);
-        List<CartEntity> listInCart = donHangKH.getAllInCart(donhangKhEntity);
-        model.addAttribute( "listProductInCart1",listInCart);
-        model.addAttribute("maDH",donhangKhEntity.getMaDh());
-        // get tổng giá của giỏ hàng
-        long tongTien = 0;
-        for (CartEntity item: listInCart) {
-            tongTien += item.getTonggia();
-        }
-        model.addAttribute("tongTienCart", tongTien);
-        long tongSoSP = 0;
-        for (CartEntity item: listInCart) {
-            tongSoSP += item.getSoluong();
-        }
-        model.addAttribute("tongsosp", tongSoSP);
-        return "/user/checkout";
-    }
-
-    @GetMapping("/check-out")
-    public String Check_Out( HttpSession httpSession, Model model) {
-        DonhangKhEntity donhangKhEntity = donHangKH.createCart(UID.getUID(httpSession));
-        List<CartEntity> listInCart = donHangKH.getAllInCart(donhangKhEntity);
-        model.addAttribute("listProductInCart2", listInCart);
-        model.addAttribute("maDH", donhangKhEntity.getMaDh());
-        // get tổng giá của giỏ hàng
-        long tongTien = 0;
-        for (CartEntity item : listInCart) {
-            tongTien += item.getTonggia();
-        }
-        model.addAttribute("tongTienCart", tongTien);
-        long tongSoSP = 0;
-        for (CartEntity item : listInCart) {
-            tongSoSP += item.getSoluong();
-        }
-        model.addAttribute("tongsosp", tongSoSP);
-        return "/user/checkout";
-    }*/
 }

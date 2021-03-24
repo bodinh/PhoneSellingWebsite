@@ -41,10 +41,10 @@ function addnewProduct(maSP, maDH) {
                     "                                            <div class=\"basket-item\">\n" +
                     "                                                <div class=\"row\">\n" +
                     "                                                    <div class=\"col-xs-12 col-sm-6\">\n" +
-                    "                                                        <a href=\"/cart\" class=\"le-button inverse\">View cart</a>\n" +
+                    "                                                        <a style='font-size: 13px;' href=\"/cart\" class=\"le-button inverse\">Giỏ hàng</a>\n" +
                     "                                                    </div>\n" +
                     "                                                    <div class=\"col-xs-12 col-sm-6\">\n" +
-                    "                                                        <a href=\"/Cart/CheckOut\" class=\"le-button\">Checkout</a>\n" +
+                    "                                                        <a style='font-size: 13px;' href=\"/cart/checkout\" class=\"le-button\">Thanh toán</a>\n" +
                     "                                                    </div>\n" +
                     "                                                </div>\n" +
                     "                                            </div>\n" +
@@ -121,10 +121,10 @@ function getFirstCart(maDH){
                 "                                            <div class=\"basket-item\">\n" +
                 "                                                <div class=\"row\">\n" +
                 "                                                    <div class=\"col-xs-12 col-sm-6\">\n" +
-                "                                                        <a href=\"/cart\" class=\"le-button inverse\">View cart</a>\n" +
+                "                                                        <a style='font-size: 13px;' href=\"/cart\" class=\"le-button inverse\">Giỏ hàng</a>\n" +
                 "                                                    </div>\n" +
                 "                                                    <div class=\"col-xs-12 col-sm-6\">\n" +
-                "                                                        <a href=\"/Cart/CheckOut\" class=\"le-button\">Checkout</a>\n" +
+                "                                                        <a style='font-size: 13px;' href=\"/cart/checkout\" class=\"le-button\">Thanh Toán</a>\n" +
                 "                                                    </div>\n" +
                 "                                                </div>\n" +
                 "                                            </div>\n" +
@@ -192,10 +192,10 @@ function addnewProductInLoadMore(maSP) {
                        "                                            <div class=\"basket-item\">\n" +
                        "                                                <div class=\"row\">\n" +
                        "                                                    <div class=\"col-xs-12 col-sm-6\">\n" +
-                       "                                                        <a href=\"/cart\" class=\"le-button inverse\">View cart</a>\n" +
+                       "                                                        <a style='font-size: 13px;' href=\"/cart\" class=\"le-button inverse\">Giỏ hàng</a>\n" +
                        "                                                    </div>\n" +
                        "                                                    <div class=\"col-xs-12 col-sm-6\">\n" +
-                       "                                                        <a href=\"/Cart/CheckOut\" class=\"le-button\">Checkout</a>\n" +
+                       "                                                        <a style='font-size: 13px;' href=\"/cart/checkout\" class=\"le-button\">Thanh toán</a>\n" +
                        "                                                    </div>\n" +
                        "                                                </div>\n" +
                        "                                            </div>\n" +
