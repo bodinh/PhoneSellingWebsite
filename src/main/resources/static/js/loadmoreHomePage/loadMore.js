@@ -33,16 +33,17 @@ $(document).ready(function () {
                                 "                                            <div class=\"title\">\n" +
                                 "                                                <a href=\"single-product.html\">" + item.sanphamEntity.tenSp + "</a>\n" +
                                 "                                            </div>\n" +
-                                "                                            <div class=\"brand\">"+item.brand+"</div>\n" +
+                                "                                            <div class=\"brand\">" + item.brand + "</div>\n" +
                                 "                                        </div>\n" +
                                 "                                        <div class=\"prices\">\n" +
+                                "<div class=\"price-prev\"></div>\n" +
                                 "                                            <div class=\"price-current pull-right\">" + gia + " VNĐ</div>\n" +
                                 "                                        </div>\n" +
                                 "\n" +
                                 "<div class=\"hover-area\">\n" +
                                 "                                            <div class=\"add-cart-button\">\n" +
                                 "                                                <form action=\"/cart\" method=\"post\">\n" +
-                                "                                                    <button type=\"submit\" class=\"le-button\">thêm vào giỏ</button>\n" +
+                                "                                                    <button type=\"button\" onclick=\"addnewProductInLoadMore(" + item.sanphamEntity.maSp + ")\" class=\"le-button\">thêm vào giỏ</button>\n" +
                                 "                                                    <input type=\"hidden\" name=\"maSP\" value=\"" + item.sanphamEntity.maSp + "\"/>\n" +
                                 "                                                </form>\n" +
                                 "                                            </div>\n" +
@@ -64,7 +65,7 @@ $(document).ready(function () {
                                 "                                            <div class=\"title\">\n" +
                                 "                                                <a href=\"single-product.html\">" + item.sanphamEntity.tenSp + "</a>\n" +
                                 "                                            </div>\n" +
-                                "                                            <div class=\"brand\">"+item.brand+"</div>\n" +
+                                "                                            <div class=\"brand\">" + item.brand + "</div>\n" +
                                 "                                        </div>\n" +
                                 "                                        <div class=\"prices\">\n" +
                                 "                                            <div class=\"price-prev\">" + gia + "</div>\n" +
@@ -74,7 +75,7 @@ $(document).ready(function () {
                                 "<div class=\"hover-area\">\n" +
                                 "                                            <div class=\"add-cart-button\">\n" +
                                 "                                                <form action=\"/cart\" method=\"post\">\n" +
-                                "                                                    <button type=\"submit\" class=\"le-button\">thêm vào giỏ</button>\n" +
+                                "                                                    <button type=\"button\" onclick=\"addnewProductInLoadMore(" + item.sanphamEntity.maSp + ")\" class=\"le-button\">thêm vào giỏ</button>\n" +
                                 "                                                    <input type=\"hidden\" name=\"maSP\" value=\"" + item.sanphamEntity.maSp + "\"/>\n" +
                                 "                                                </form>\n" +
                                 "                                            </div>\n" +
@@ -118,16 +119,17 @@ $(document).ready(function () {
                                 "                                            <div class=\"title\">\n" +
                                 "                                                <a href=\"single-product.html\">" + item.sanphamEntity.tenSp + "</a>\n" +
                                 "                                            </div>\n" +
-                                "                                            <div class=\"brand\">"+item.brand+"</div>\n" +
+                                "                                            <div class=\"brand\">" + item.brand + "</div>\n" +
                                 "                                        </div>\n" +
                                 "                                        <div class=\"prices\">\n" +
+                                "<div class=\"price-prev\"></div>\n" +
                                 "                                            <div class=\"price-current pull-right\">" + gia + " VNĐ</div>\n" +
                                 "                                        </div>\n" +
                                 "\n" +
                                 "<div class=\"hover-area\">\n" +
                                 "                                            <div class=\"add-cart-button\">\n" +
                                 "                                                <form action=\"/cart\" method=\"post\">\n" +
-                                "                                                    <button type=\"submit\" class=\"le-button\">thêm vào giỏ</button>\n" +
+                                "                                                    <button type=\"button\" onclick=\"addnewProductInLoadMore(" + item.sanphamEntity.maSp + ")\" class=\"le-button\">thêm vào giỏ</button>\n" +
                                 "                                                    <input type=\"hidden\" name=\"maSP\" value=\"" + item.sanphamEntity.maSp + "\"/>\n" +
                                 "                                                </form>\n" +
                                 "                                            </div>\n" +
@@ -149,7 +151,7 @@ $(document).ready(function () {
                                 "                                            <div class=\"title\">\n" +
                                 "                                                <a href=\"single-product.html\">" + item.sanphamEntity.tenSp + "</a>\n" +
                                 "                                            </div>\n" +
-                                "                                            <div class=\"brand\">"+item.brand+"</div>\n" +
+                                "                                            <div class=\"brand\">" + item.brand + "</div>\n" +
                                 "                                        </div>\n" +
                                 "                                        <div class=\"prices\">\n" +
                                 "                                            <div class=\"price-prev\">" + gia + "</div>\n" +
@@ -159,7 +161,7 @@ $(document).ready(function () {
                                 "<div class=\"hover-area\">\n" +
                                 "                                            <div class=\"add-cart-button\">\n" +
                                 "                                                <form action=\"/cart\" method=\"post\">\n" +
-                                "                                                    <button type=\"submit\" class=\"le-button\">thêm vào giỏ</button>\n" +
+                                "                                                    <button type=\"button\" onclick=\"addnewProductInLoadMore(" + item.sanphamEntity.maSp + ")\" class=\"le-button\">thêm vào giỏ</button>\n" +
                                 "                                                    <input type=\"hidden\" name=\"maSP\" value=\"" + item.sanphamEntity.maSp + "\"/>\n" +
                                 "                                                </form>\n" +
                                 "                                            </div>\n" +
@@ -210,7 +212,7 @@ $(document).ready(function () {
                             "                                            <div class=\"title\">\n" +
                             "                                                <a href=\"single-product.html\">" + item.sanphamEntity.tenSp + "</a>\n" +
                             "                                            </div>\n" +
-                            "                                            <div class=\"brand\">"+item.brand+"</div>\n" +
+                            "                                            <div class=\"brand\">" + item.brand + "</div>\n" +
                             "                                        </div>\n" +
                             "                                        <div class=\"prices\">\n" +
                             "                                            <div class=\"price-prev\">" + gia + "</div>\n" +
@@ -220,7 +222,7 @@ $(document).ready(function () {
                             "<div class=\"hover-area\">\n" +
                             "                                            <div class=\"add-cart-button\">\n" +
                             "                                                <form action=\"/cart\" method=\"post\">\n" +
-                            "                                                    <button type=\"submit\" class=\"le-button\">thêm vào giỏ</button>\n" +
+                            "                                                    <button type=\"button\" onclick=\"addnewProductInLoadMore(" + item.sanphamEntity.maSp + ")\" class=\"le-button\">thêm vào giỏ</button>\n" +
                             "                                                    <input type=\"hidden\" name=\"maSP\" value=\"" + item.sanphamEntity.maSp + "\"/>\n" +
                             "                                                </form>\n" +
                             "                                            </div>\n" +

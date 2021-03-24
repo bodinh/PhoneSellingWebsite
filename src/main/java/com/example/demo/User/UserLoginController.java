@@ -32,6 +32,7 @@ public class UserLoginController {
             try {
                 account = (AccountEntity) openSession().createQuery("from AccountEntity where username='" + username + "' and  password='" + password + "'").getSingleResult();
                 httpSession.setAttribute("user", account.getUsername());
+                httpSession.setAttribute("maDH", 19);
                 return "redirect:/index";
             } catch (NoResultException e) {
                 model.addAttribute("alertMessage", "sai tài khoản hoặc mật khẩu.");

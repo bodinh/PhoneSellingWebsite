@@ -1,6 +1,8 @@
 package com.example.demo.ApiController;
 
 import com.example.demo.Hibernate.*;
+import com.example.demo.Model.DonHangKH;
+import com.example.demo.User.UID;
 import org.hibernate.Session;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -8,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.persistence.NoResultException;
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,6 +52,27 @@ public class CartApiController {
             SellPhonesDBContext.addNewObject(chitietDhEntity);
         }
         return getAllInCart(maDH);
+    }
+
+    //Thêm mới 1 sản phẩm vào giỏ
+    @GetMapping("/addnew/{maSP}")
+    public List<CartEntity> addToCart(@PathVariable(name = "maSP") int maSP, HttpSession httpSession) {
+        ChitietDhEntity chitietDhEntity = new ChitietDhEntity();
+        DonHangKH donHangKH = new DonHangKH();
+        DonhangKhEntity donhangKhEntity = donHangKH.createCart(UID.getUID(httpSession));
+        try {
+            chitietDhEntity = (ChitietDhEntity) openSession().createQuery("from ChitietDhEntity where maDh=" + donhangKhEntity.getMaDh() + " and maSp=" + maSP).getSingleResult();
+            chitietDhEntity.setSoluong(chitietDhEntity.getSoluong() + 1);
+            chitietDhEntity.setThanhtien(chitietDhEntity.getSoluong() * getPrice(maSP));
+            SellPhonesDBContext.updateObject(chitietDhEntity);
+        } catch (NoResultException e) {
+            chitietDhEntity.setMaDh(donhangKhEntity.getMaDh());
+            chitietDhEntity.setMaSp(maSP);
+            chitietDhEntity.setSoluong(1);
+            chitietDhEntity.setThanhtien(getPrice(maSP));
+            SellPhonesDBContext.addNewObject(chitietDhEntity);
+        }
+        return getAllInCart(donhangKhEntity.getMaDh());
     }
 
     @GetMapping("/reduce/{maSP}/{maDH}")

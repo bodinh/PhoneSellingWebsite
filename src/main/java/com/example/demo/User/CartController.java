@@ -78,6 +78,14 @@ public class CartController {
         }
         return "redirect:/index";
     }
+
+    @GetMapping("/cart/deleteInBasket")
+    public String CartDelete(int maSP,HttpSession httpSession){
+        DonhangKhEntity donhangKhEntity  = donHangKH.createCart(UID.getUID(httpSession));
+        donHangKH.deleteFromCart(maSP,donhangKhEntity);
+        return "redirect:/";
+    }
+
     @PostMapping("/cart/check-out")
     public String CheckOut(int maSP, HttpSession httpSession, Model model){
         DonhangKhEntity donhangKhEntity  = donHangKH.createCart(UID.getUID(httpSession));
