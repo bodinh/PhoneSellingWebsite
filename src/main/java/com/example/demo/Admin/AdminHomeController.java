@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -28,9 +29,16 @@ public class AdminHomeController {
             Response response = okHttpClient.newCall(request).execute();
             ObjectMapper objectMapper = new ObjectMapper();
             List<DoanhThu> doanhThus = Arrays.asList(objectMapper.readValue(response.body().string(), DoanhThu[].class));
-            model.addAttribute("yearLastest",doanhThus.get(0).getNam());
-           doanhThus =  doanhThus.subList(1,doanhThus.size());
-            model.addAttribute("year",doanhThus);
+            if(doanhThus.size() > 0){
+                model.addAttribute("yearLastest",doanhThus.get(0).getNam());
+                doanhThus =  doanhThus.subList(1,doanhThus.size());
+                model.addAttribute("year",doanhThus);
+            }else {
+                model.addAttribute("yearLastest",2050);
+                doanhThus =  new ArrayList<>();
+                model.addAttribute("year",doanhThus);
+            }
+
         } catch (IOException e) {
             e.printStackTrace();
         }

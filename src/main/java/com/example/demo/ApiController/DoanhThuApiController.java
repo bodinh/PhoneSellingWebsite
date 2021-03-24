@@ -50,6 +50,7 @@ public class DoanhThuApiController {
                     dtt.setDoanhThuThang(khEntities.get(i).getTongTien());
                     doanhThuNam.add(new DoanhThu(Integer.valueOf(sa[0]), doanhThuThang));
                 }
+                continue;
             }
             DoanhThuThang dtt = doanhThuThang.get(Integer.valueOf(sa[1]) - 1);
             dtt.setDoanhThuThang(khEntities.get(i).getTongTien());
@@ -73,7 +74,7 @@ public class DoanhThuApiController {
             int SoLuong = (int) hashMap.get("Soluong");
             int SoluongNhap = (int) hashMap.get("SoluongNhap");
             long DonGia = new Double(String.valueOf(hashMap.get("DonGia"))).longValue();
-            long laiThang = SoLuong * (Thanhtien - DonGia );
+            long laiThang = Thanhtien - (DonGia * SoLuong) ;
             //dùng split tách chuỗi lấy năm và tháng
             String[] sa = Ngaydatmua.split("-");
             if (i > 0) { //nếu i > 0, xét xem năm sau có bị trùng với năm trước không, tháng sau có trùng với tháng trước không
@@ -83,7 +84,7 @@ public class DoanhThuApiController {
                 int SoLuongl = (int) hashMapl.get("Soluong");
                 int SoluongNhapl = (int) hashMapl.get("SoluongNhap");
                 long DonGial = new Double(String.valueOf(hashMapl.get("DonGia"))).longValue();
-                long laiThangl = SoLuongl * (Thanhtienl - DonGial );
+                long laiThangl = Thanhtienl -( DonGial * SoLuongl );
 
                 String[] sap = Ngaydatmual.split("-");
                 //trường hợp năm hiện tại khác năm trước, thì thêm mới doanh thu của năm cũ
@@ -102,6 +103,7 @@ public class DoanhThuApiController {
                     dtt.setDoanhThuThang(laiThang);
                     doanhThuNam.add(new DoanhThu(Integer.valueOf(sa[0]), doanhThuThang));
                 }
+                continue;
             }
             DoanhThuThang dtt = doanhThuThang.get(Integer.valueOf(sa[1]) - 1);
             dtt.setDoanhThuThang(laiThang);
