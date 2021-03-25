@@ -27,22 +27,22 @@
                                             <div class="col-xs-12 col-sm-2 no-margin" style="border: 1px solid #e0e0e0;">
                                                 <a href="#">
                                                     <img style="padding: 10px;height:146px;"
-                                                         th:alt="${item.getSanpham().getTenSp()}"
-                                                         th:src="${'/image/'+ item.getSanpham().getMaSp() +'/' + item.getSanpham().getAnh()}">
+                                                         th:alt="${item.getSanPham().getSanphamEntity().getTenSp()}"
+                                                         th:src="${'/image/'+ item.getSanPham().getSanphamEntity().getMaSp() +'/' + item.getSanPham().getSanphamEntity().getAnh()}">
                                                 </a>
                                             </div>
 
                                             <div class="col-xs-12 col-sm-5 ">
                                                 <div class="title">
-                                                    <a href="#" th:text="${item.getSanpham().getTenSp()}"></a>
+                                                    <a href="#" th:text="${item.getSanPham().getSanphamEntity().getTenSp()}"></a>
                                                 </div>
-                                                <div class="brand">
+                                                <div class="brand" th:text="${item.getSanPham().getBrand()}">
                                                 </div>
                                             </div>
 
                                             <div class="col-xs-12 col-sm-3 no-margin">
                                                 <div class="quantity">
-                                                    <strong style="font-size:15px;" th:text="${#numbers.formatDecimal(item.getSanpham().getGia(),0,'DEFAULT',0,'DEFAULT') + ' * ' + item.getSoluong()}"></strong>
+                                                    <strong style="font-size:15px;" th:text="${#numbers.formatDecimal((item.getSanPham().getSanphamEntity().getGia() * (100 - item.getSanPham().getsPkhuyenmaiEntity().getGiamgia()) / 100),0,'DEFAULT',0,'DEFAULT') + ' * ' + item.getSoluong()}"></strong>
                                                 </div>
                                             </div>
                                             <div class="col-xs-12 col-sm-2 no-margin">

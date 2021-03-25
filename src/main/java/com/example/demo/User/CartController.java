@@ -69,7 +69,7 @@ public class CartController {
         DonhangKhEntity donhangKhEntity  = donHangKH.createCart(UID.getUID(httpSession));
         List<CartEntity> listInCart = donHangKH.getAllInCart(donhangKhEntity);
         for (CartEntity item: listInCart) {
-            donHangKH.deleteFromCart(item.getSanpham().getMaSp(), donhangKhEntity);
+            donHangKH.deleteFromCart(item.getSanPham().getSanphamEntity().getMaSp(), donhangKhEntity);
         }
         return "redirect:/index";
     }
@@ -108,7 +108,7 @@ public class CartController {
 
             //cập nhật lại số lượng trong kho
             cartEntities.forEach(cartEntity -> {
-                SanphamEntity sanphamEntity = cartEntity.getSanpham();
+                SanphamEntity sanphamEntity = cartEntity.getSanPham().getSanphamEntity();
                 sanphamEntity.setSoLuong(sanphamEntity.getSoLuong() - cartEntity.getSoluong());
                 SellPhonesDBContext.updateObject(sanphamEntity);
             });

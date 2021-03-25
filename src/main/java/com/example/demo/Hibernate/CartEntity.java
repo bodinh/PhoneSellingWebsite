@@ -1,18 +1,20 @@
 package com.example.demo.Hibernate;
 
+import com.example.demo.Model.SanPham;
+
 public class CartEntity {
     private int soluong;
     private long tonggia;
-    private SanphamEntity sanpham;
+    private SanPham sanPham;
 
     public CartEntity() {
 
     }
 
-    public CartEntity(int soluong, long tonggia, SanphamEntity sanpham) {
+    public CartEntity(int soluong, long tonggia, SanPham sanPham) {
         this.soluong = soluong;
         this.tonggia = tonggia;
-        this.sanpham = sanpham;
+        this.sanPham = sanPham;
     }
 
     public int getSoluong() {
@@ -31,11 +33,11 @@ public class CartEntity {
         this.tonggia = tonggia;
     }
 
-    public SanphamEntity getSanpham() {
-        return sanpham;
+    public SanPham getSanPham() {
+        return sanPham;
     }
 
-    public void setSanpham(SanphamEntity sanpham) {
-        this.sanpham = sanpham;
+    public void setSanPham(SanPham sanPham) {
+        this.sanPham = sanPham;
     }
 }

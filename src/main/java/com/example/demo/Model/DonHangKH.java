@@ -47,14 +47,34 @@ public class DonHangKH {
         try {
             chitietDhEntity = (ChitietDhEntity) openSession().createQuery("from ChitietDhEntity where maDh=" + donhangKh.getMaDh() + " and maSp=" + maSP).getSingleResult();
             chitietDhEntity.setSoluong(chitietDhEntity.getSoluong() + 1);
-            chitietDhEntity.setThanhtien(chitietDhEntity.getSoluong() * getPrice(maSP));
+            //kiểm tra sale của sản phẩm
+            if(checkSPKM(maSP) > 0){
+                chitietDhEntity.setThanhtien(chitietDhEntity.getSoluong() * getPrice(maSP));
+            }else
+                chitietDhEntity.setThanhtien(chitietDhEntity.getSoluong() * getPrice(maSP) * (100 - checkSPKM(maSP) ) / 100);
+            //==========================
             SellPhonesDBContext.updateObject(chitietDhEntity);
         } catch (NoResultException e) {
             chitietDhEntity.setMaDh(donhangKh.getMaDh());
             chitietDhEntity.setMaSp(maSP);
             chitietDhEntity.setSoluong(1);
+
+            //kiểm tra sale của sản phẩm
+            if(checkSPKM(maSP) > 0){
+                chitietDhEntity.setThanhtien(getPrice(maSP) * (100 - checkSPKM(maSP) )/ 100 );
+            }else
             chitietDhEntity.setThanhtien(getPrice(maSP));
+            //==========================
             SellPhonesDBContext.addNewObject(chitietDhEntity);
+        }
+    }
+
+    public int checkSPKM(int maSP){
+        try {
+            SPkhuyenmaiEntity sPkhuyenmaiEntity = (SPkhuyenmaiEntity) openSession().createQuery("from SPkhuyenmaiEntity where maSp="+maSP).getSingleResult();
+            return sPkhuyenmaiEntity.getGiamgia();
+        }catch (NoResultException e){
+            return -1;
         }
     }
 
@@ -73,8 +93,18 @@ public class DonHangKH {
         List<ChitietDhEntity> dhEntities = new ArrayList<>();
         dhEntities = openSession().createQuery("from ChitietDhEntity where maDh="+donhangKh.getMaDh()).list();
         dhEntities.forEach(chitietDhEntity -> {
-            SanphamEntity sanphamEntity =(SanphamEntity) openSession().createQuery("from SanphamEntity where maSp="+chitietDhEntity.getMaSp()).getSingleResult();
-            list.add(new CartEntity(chitietDhEntity.getSoluong(),chitietDhEntity.getThanhtien(),sanphamEntity));
+            SanphamEntity sanphamEntity = (SanphamEntity) openSession().createQuery("from SanphamEntity where maSp=" + chitietDhEntity.getMaSp()).getSingleResult();
+            SPkhuyenmaiEntity sPkhuyenmaiEntity = new SPkhuyenmaiEntity();
+            HangSxEntity hangSX = new HangSxEntity();
+            try {
+                hangSX = (HangSxEntity) openSession().createQuery("from HangSxEntity where maHangSx="+sanphamEntity.getHangSx()).getSingleResult();
+                sPkhuyenmaiEntity =   (SPkhuyenmaiEntity) openSession().createQuery("from SPkhuyenmaiEntity where maSp=" + sanphamEntity.getMaSp()).getSingleResult();
+            }catch (NoResultException e){
+                sPkhuyenmaiEntity = new SPkhuyenmaiEntity();
+                sPkhuyenmaiEntity.setGiamgia(0);
+            }
+            SanPham sanPham = new SanPham(sanphamEntity,sPkhuyenmaiEntity,hangSX.getTenhang());
+            list.add(new CartEntity(chitietDhEntity.getSoluong(), chitietDhEntity.getThanhtien(), sanPham));
         });
         return list;
     }

@@ -17,27 +17,27 @@
                     <div class="row no-margin cart-item">
                         <div class="col-xs-12 col-sm-2 no-margin">
                             <a href="#" class="thumb-holder">
-                                <img class="lazy" th:alt="${item.getSanpham().getAnh()}"
-                                     th:src="${'/image/' + item.getSanpham().getMaSp()+ '/' + item.getSanpham().getAnh()}"/>
+                                <img class="lazy" th:alt="${item.getSanPham().getSanphamEntity().getAnh()}"
+                                     th:src="${'/image/' + item.getSanPham().getSanphamEntity().getMaSp()+ '/' + item.getSanPham().getSanphamEntity().getAnh()}"/>
                             </a>
                         </div>
 
                         <div class="col-xs-12 col-sm-5 ">
                             <div class="title">
-                                <a href="#" th:text="${item.getSanpham().getTenSp()}"></a>
+                                <a href="#" th:text="${item.getSanPham().getSanphamEntity().getTenSp()}"></a>
                             </div>
-                            <div class="brand"></div>
+                            <div class="brand" th:text="${item.getSanPham().getBrand()}"></div>
                         </div>
                         <div class="col-xs-12 col-sm-2 no-margin">
                             <div class="quantity">
                                 <div class="le-quantity">
                                     <a class="minus" id="reduceProduct"
-                                       th:onclick="'changeNumberProduct('+${item.getSanpham().getMaSp()}+','+${maDH}+',-1);'"
+                                       th:onclick="'changeNumberProduct('+${item.getSanPham().getSanphamEntity().getMaSp()}+','+${maDH}+',-1);'"
                                        href="#reduce"></a>
                                     <input name="quantity" readonly="readonly" type="text"
                                            th:value="${item.getSoluong()}"/>
                                     <a class="plus" id="addProduct"
-                                       th:onclick="'changeNumberProduct('+${item.getSanpham().getMaSp()}+','+${maDH}+',1);'"
+                                       th:onclick="'changeNumberProduct('+${item.getSanPham().getSanphamEntity().getMaSp()}+','+${maDH}+',1);'"
                                        href="#add"></a>
                                 </div>
                             </div>
@@ -49,7 +49,7 @@
                             </div>
                             <a class="close-btn"
                                onclick="return confirm('Bạn có chắc muốn xoá sản phẩm này ??')"
-                               th:href="${'/cart/delete?maSP=' + item.getSanpham().maSp }"></a>
+                               th:href="${'/cart/delete?maSP=' + item.getSanPham().getSanphamEntity().maSp }"></a>
                         </div>
                     </div><!-- /.cart-item -->
                 </th:block>
@@ -123,35 +123,38 @@
                 var allNumber=0;
                 data.forEach(item =>{
                     var gia = item.tonggia.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-
                     totalPrice += item.tonggia;
                     allNumber+=item.soluong;
+                    var tenSp = item.sanPham.sanphamEntity.tenSp;
+                    var maSp = item.sanPham.sanphamEntity.maSp;
+                    var anh = item.sanPham.sanphamEntity.anh;
+                    var brand = item.sanPham.brand;
                     $("#listProductInCart").append("<div class=\"row no-margin cart-item\">\n" +
                         "                        <div class=\"col-xs-12 col-sm-2 no-margin\">\n" +
                         "                            <a href=\"#\" class=\"thumb-holder\">\n" +
-                        "                                <img class=\"lazy\" alt=\""+item.sanpham.tenSp+"\" src=\"/image/"+item.sanpham.maSp+"/"+item.sanpham.anh+"\">\n" +
+                        "                                <img class=\"lazy\" alt=\""+tenSp+"\" src=\"/image/"+maSp+"/"+anh+"\">\n" +
                         "                            </a>\n" +
                         "                        </div>\n" +
                         "\n" +
                         "                        <div class=\"col-xs-12 col-sm-5 \">\n" +
                         "                            <div class=\"title\">\n" +
-                        "                                <a href=\"#\">"+item.sanpham.tenSp+"</a>\n" +
+                        "                                <a href=\"#\">"+tenSp+"</a>\n" +
                         "                            </div>\n" +
-                        "                            <div class=\"brand\"></div>\n" +
+                        "                            <div class=\"brand\">"+brand+"</div>\n" +
                         "                        </div>\n" +
                         "                        <div class=\"col-xs-12 col-sm-2 no-margin\">\n" +
                         "                            <div class=\"quantity\">\n" +
                         "                                <div class=\"le-quantity\">\n" +
-                        "                                    <a class=\"minus\" id=\"reduceProduct\" onclick=\"changeNumberProduct("+item.sanpham.maSp+","+maDH+",-1);\" href=\"#reduce\"></a>\n" +
+                        "                                    <a class=\"minus\" id=\"reduceProduct\" onclick=\"changeNumberProduct("+maSp+","+maDH+",-1);\" href=\"#reduce\"></a>\n" +
                         "                                    <input name=\"quantity\" readonly=\"readonly\" type=\"text\" value=\""+item.soluong+"\">\n" +
-                        "                                    <a class=\"plus\" id=\"addProduct\" onclick=\"changeNumberProduct("+item.sanpham.maSp+","+maDH+",1);\" href=\"#add\"></a>\n" +
+                        "                                    <a class=\"plus\" id=\"addProduct\" onclick=\"changeNumberProduct("+maSp+","+maDH+",1);\" href=\"#add\"></a>\n" +
                         "                                </div>\n" +
                         "                            </div>\n" +
                         "                        </div>\n" +
                         "\n" +
                         "                        <div class=\"col-xs-12 col-sm-3 no-margin\">\n" +
                         "                            <div class=\"price\">"+gia+" VNĐ</div>\n" +
-                        "                            <a class=\"close-btn\" onclick=\"return confirm('Bạn có chắc muốn xoá sản phẩm này ??')\" href=\"/cart/delete?maSP="+item.sanpham.maSp+"\"></a>\n" +
+                        "                            <a class=\"close-btn\" onclick=\"return confirm('Bạn có chắc muốn xoá sản phẩm này ??')\" href=\"/cart/delete?maSP="+maSp+"\"></a>\n" +
                         "                        </div>\n" +
                         "                    </div>");
                 });

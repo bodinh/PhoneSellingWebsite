@@ -14,10 +14,11 @@ function addnewProduct(maSP, maDH) {
                 data.forEach(item =>{
                     totalPrice += item.tonggia;
                     numberProduct += item.soluong;
-                    var maSP = item.sanpham.maSp;
-                    var anh = item.sanpham.anh;
-                    var tenSP = item.sanpham.tenSp;
-                    var gia = item.sanpham.gia.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+                    var maSP = item.sanPham.sanphamEntity.maSp;
+                    var anh = item.sanPham.sanphamEntity.anh;
+                    var tenSP = item.sanPham.sanphamEntity.tenSp;
+                    var gia = item.sanPham.sanphamEntity.gia;
+                    var giaMoi = (gia * (100 - item.sanPham.sPkhuyenmaiEntity.giamgia) / 100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
                     var number = item.soluong;
                     itemInList += "                                        <li>\n" +
                         "                                            <div class=\"basket-item\">\n" +
@@ -29,7 +30,7 @@ function addnewProduct(maSP, maDH) {
                         "                                                    </div>\n" +
                         "                                                    <div class=\"col-xs-8 col-sm-8 no-margin\">\n" +
                         "                                                        <div class=\"title\">"+tenSP+"</div>\n" +
-                        "                                                        <div class=\"price\">"+gia+" VNĐ * "+number+"</div>\n" +
+                        "                                                        <div class=\"price\">"+giaMoi+" VNĐ * "+number+"</div>\n" +
                         "                                                    </div>\n" +
                         "                                                </div>\n" +
                         "                                                <a class=\"close-btn\" onclick='cf("+maSP+")' href=\"#\"></a>\n" +
@@ -94,10 +95,11 @@ function getFirstCart(maDH){
             data.forEach(item =>{
                 totalPrice += item.tonggia;
                 numberProduct += item.soluong;
-                var maSP = item.sanpham.maSp;
-                var anh = item.sanpham.anh;
-                var tenSP = item.sanpham.tenSp;
-                var gia = item.sanpham.gia.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+                var maSP = item.sanPham.sanphamEntity.maSp;
+                var anh = item.sanPham.sanphamEntity.anh;
+                var tenSP = item.sanPham.sanphamEntity.tenSp;
+                var gia = item.sanPham.sanphamEntity.gia;
+                var giaMoi = (gia * (100 - item.sanPham.sPkhuyenmaiEntity.giamgia) / 100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
                 var number = item.soluong;
                 itemInList += "                                        <li>\n" +
                     "                                            <div class=\"basket-item\">\n" +
@@ -109,7 +111,7 @@ function getFirstCart(maDH){
                     "                                                    </div>\n" +
                     "                                                    <div class=\"col-xs-8 col-sm-8 no-margin\">\n" +
                     "                                                        <div class=\"title\">"+tenSP+"</div>\n" +
-                    "                                                        <div class=\"price\">"+gia+" VNĐ * "+number+"</div>\n" +
+                    "                                                        <div class=\"price\">"+giaMoi+" VNĐ * "+number+"</div>\n" +
                     "                                                    </div>\n" +
                     "                                                </div>\n" +
                     "                                                <a class=\"close-btn\" onclick='cf("+maSP+")' href=\"#\"></a>\n" +
@@ -165,10 +167,11 @@ function addnewProductInLoadMore(maSP) {
                    data.forEach(item =>{
                        totalPrice += item.tonggia;
                        numberProduct += item.soluong;
-                       var maSP = item.sanpham.maSp;
-                       var anh = item.sanpham.anh;
-                       var tenSP = item.sanpham.tenSp;
-                       var gia = item.sanpham.gia.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+                       var maSP = item.sanPham.sanphamEntity.maSp;
+                       var anh = item.sanPham.sanphamEntity.anh;
+                       var tenSP = item.sanPham.sanphamEntity.tenSp;
+                       var gia = item.sanPham.sanphamEntity.gia;
+                       var giaMoi = (gia * (100 - item.sanPham.sPkhuyenmaiEntity.giamgia) / 100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
                        var number = item.soluong;
                        itemInList += "                                        <li>\n" +
                            "                                            <div class=\"basket-item\">\n" +
@@ -180,7 +183,7 @@ function addnewProductInLoadMore(maSP) {
                            "                                                    </div>\n" +
                            "                                                    <div class=\"col-xs-8 col-sm-8 no-margin\">\n" +
                            "                                                        <div class=\"title\">"+tenSP+"</div>\n" +
-                           "                                                        <div class=\"price\">"+gia+" VNĐ * "+number+"</div>\n" +
+                           "                                                        <div class=\"price\">"+giaMoi+" VNĐ * "+number+"</div>\n" +
                            "                                                    </div>\n" +
                            "                                                </div>\n" +
                            "                                                <a class=\"close-btn\" onclick='cf("+maSP+")' href=\"#\"></a>\n" +

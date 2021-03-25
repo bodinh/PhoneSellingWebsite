@@ -2,6 +2,7 @@ package com.example.demo.ApiController;
 
 import com.example.demo.Hibernate.*;
 import com.example.demo.Model.DonHangKH;
+import com.example.demo.Model.SanPham;
 import com.example.demo.User.UID;
 import org.hibernate.Session;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,7 +31,17 @@ public class CartApiController {
         dhEntities = openSession().createQuery("from ChitietDhEntity where maDh=" + maDH).list();
         dhEntities.forEach(chitietDhEntity -> {
             SanphamEntity sanphamEntity = (SanphamEntity) openSession().createQuery("from SanphamEntity where maSp=" + chitietDhEntity.getMaSp()).getSingleResult();
-            list.add(new CartEntity(chitietDhEntity.getSoluong(), chitietDhEntity.getThanhtien(), sanphamEntity));
+            SPkhuyenmaiEntity sPkhuyenmaiEntity = new SPkhuyenmaiEntity();
+            HangSxEntity hangSX = new HangSxEntity();
+            try {
+                hangSX = (HangSxEntity) openSession().createQuery("from HangSxEntity where maHangSx=" + sanphamEntity.getHangSx()).getSingleResult();
+                sPkhuyenmaiEntity = (SPkhuyenmaiEntity) openSession().createQuery("from SPkhuyenmaiEntity where maSp=" + sanphamEntity.getMaSp()).getSingleResult();
+            } catch (NoResultException e) {
+                sPkhuyenmaiEntity = new SPkhuyenmaiEntity();
+                sPkhuyenmaiEntity.setGiamgia(0);
+            }
+            SanPham sanPham = new SanPham(sanphamEntity, sPkhuyenmaiEntity, hangSX.getTenhang());
+            list.add(new CartEntity(chitietDhEntity.getSoluong(), chitietDhEntity.getThanhtien(), sanPham));
         });
         return list;
     }
@@ -42,16 +53,35 @@ public class CartApiController {
         try {
             chitietDhEntity = (ChitietDhEntity) openSession().createQuery("from ChitietDhEntity where maDh=" + maDH + " and maSp=" + maSP).getSingleResult();
             chitietDhEntity.setSoluong(chitietDhEntity.getSoluong() + 1);
-            chitietDhEntity.setThanhtien(chitietDhEntity.getSoluong() * getPrice(maSP));
+            //kiểm tra sale của sản phẩm
+            if (checkSPKM(maSP) > 0) {
+                chitietDhEntity.setThanhtien(chitietDhEntity.getSoluong() * getPrice(maSP));
+            } else
+                chitietDhEntity.setThanhtien(chitietDhEntity.getSoluong() * getPrice(maSP) * (100 - checkSPKM(maSP)) / 100);
+            //==========================
             SellPhonesDBContext.updateObject(chitietDhEntity);
         } catch (NoResultException e) {
             chitietDhEntity.setMaDh(maDH);
             chitietDhEntity.setMaSp(maSP);
             chitietDhEntity.setSoluong(1);
-            chitietDhEntity.setThanhtien(getPrice(maSP));
+            //kiểm tra sale của sản phẩm
+            if (checkSPKM(maSP) > 0) {
+                chitietDhEntity.setThanhtien(getPrice(maSP) * (100 - checkSPKM(maSP)) / 100);
+            } else
+                chitietDhEntity.setThanhtien(getPrice(maSP));
+            //==========================
             SellPhonesDBContext.addNewObject(chitietDhEntity);
         }
         return getAllInCart(maDH);
+    }
+
+    public int checkSPKM(int maSP) {
+        try {
+            SPkhuyenmaiEntity sPkhuyenmaiEntity = (SPkhuyenmaiEntity) openSession().createQuery("from SPkhuyenmaiEntity where maSp=" + maSP).getSingleResult();
+            return sPkhuyenmaiEntity.getGiamgia();
+        } catch (NoResultException e) {
+            return -1;
+        }
     }
 
     //Thêm mới 1 sản phẩm vào giỏ
@@ -63,13 +93,23 @@ public class CartApiController {
         try {
             chitietDhEntity = (ChitietDhEntity) openSession().createQuery("from ChitietDhEntity where maDh=" + donhangKhEntity.getMaDh() + " and maSp=" + maSP).getSingleResult();
             chitietDhEntity.setSoluong(chitietDhEntity.getSoluong() + 1);
-            chitietDhEntity.setThanhtien(chitietDhEntity.getSoluong() * getPrice(maSP));
+            //kiểm tra sale của sản phẩm
+            if (checkSPKM(maSP) > 0) {
+                chitietDhEntity.setThanhtien(chitietDhEntity.getSoluong() * getPrice(maSP));
+            } else
+                chitietDhEntity.setThanhtien(chitietDhEntity.getSoluong() * getPrice(maSP) * (100 - checkSPKM(maSP)) / 100);
+            //==========================
             SellPhonesDBContext.updateObject(chitietDhEntity);
         } catch (NoResultException e) {
             chitietDhEntity.setMaDh(donhangKhEntity.getMaDh());
             chitietDhEntity.setMaSp(maSP);
             chitietDhEntity.setSoluong(1);
-            chitietDhEntity.setThanhtien(getPrice(maSP));
+            //kiểm tra sale của sản phẩm
+            if (checkSPKM(maSP) > 0) {
+                chitietDhEntity.setThanhtien(getPrice(maSP) * (100 - checkSPKM(maSP)) / 100);
+            } else
+                chitietDhEntity.setThanhtien(getPrice(maSP));
+            //==========================
             SellPhonesDBContext.addNewObject(chitietDhEntity);
         }
         return getAllInCart(donhangKhEntity.getMaDh());
@@ -83,7 +123,12 @@ public class CartApiController {
             SellPhonesDBContext.deleteObject(chitietDhEntity);
         } else {
             chitietDhEntity.setSoluong(chitietDhEntity.getSoluong() - 1);
-            chitietDhEntity.setThanhtien(chitietDhEntity.getSoluong() * getPrice(maSP));
+            //kiểm tra sale của sản phẩm
+            if (checkSPKM(maSP) > 0) {
+                chitietDhEntity.setThanhtien(chitietDhEntity.getSoluong() * getPrice(maSP) * (100 - checkSPKM(maSP)) / 100);
+            } else
+                chitietDhEntity.setThanhtien(chitietDhEntity.getSoluong() * getPrice(maSP));
+            //==========================
             SellPhonesDBContext.updateObject(chitietDhEntity);
         }
         return getAllInCart(maDH);
@@ -98,7 +143,12 @@ public class CartApiController {
             SellPhonesDBContext.updateObject(chitietDhEntity);
         } else {
             chitietDhEntity.setSoluong(chitietDhEntity.getSoluong() + 1);
-            chitietDhEntity.setThanhtien(chitietDhEntity.getSoluong() * getPrice(maSP));
+            //kiểm tra sale của sản phẩm
+            if (checkSPKM(maSP) > 0) {
+                chitietDhEntity.setThanhtien(chitietDhEntity.getSoluong() * getPrice(maSP) * (100 - checkSPKM(maSP)) / 100);
+            } else
+                chitietDhEntity.setThanhtien(chitietDhEntity.getSoluong() * getPrice(maSP));
+            //==========================
             SellPhonesDBContext.updateObject(chitietDhEntity);
         }
         return getAllInCart(maDH);
