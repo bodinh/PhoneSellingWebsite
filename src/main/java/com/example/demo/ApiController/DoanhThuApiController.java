@@ -118,6 +118,12 @@ public class DoanhThuApiController {
 
     public List<DoanhThuThang> initdDoanhThuThang() {
         List<DoanhThuThang> doanhThuThang = new ArrayList<>();
+        Collections.sort(doanhThuThang, new Comparator<DoanhThuThang>() {
+            @Override
+            public int compare(DoanhThuThang o1, DoanhThuThang o2) {
+                return 0;
+            }
+        });
         doanhThuThang.add(new DoanhThuThang(1, 0));
         doanhThuThang.add(new DoanhThuThang(2, 0));
         doanhThuThang.add(new DoanhThuThang(3, 0));

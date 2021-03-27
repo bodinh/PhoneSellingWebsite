@@ -55,9 +55,9 @@ public class CartApiController {
             chitietDhEntity.setSoluong(chitietDhEntity.getSoluong() + 1);
             //kiểm tra sale của sản phẩm
             if (checkSPKM(maSP) > 0) {
-                chitietDhEntity.setThanhtien(chitietDhEntity.getSoluong() * getPrice(maSP));
-            } else
                 chitietDhEntity.setThanhtien(chitietDhEntity.getSoluong() * getPrice(maSP) * (100 - checkSPKM(maSP)) / 100);
+            } else
+                chitietDhEntity.setThanhtien(chitietDhEntity.getSoluong() * getPrice(maSP));
             //==========================
             SellPhonesDBContext.updateObject(chitietDhEntity);
         } catch (NoResultException e) {
@@ -95,9 +95,9 @@ public class CartApiController {
             chitietDhEntity.setSoluong(chitietDhEntity.getSoluong() + 1);
             //kiểm tra sale của sản phẩm
             if (checkSPKM(maSP) > 0) {
-                chitietDhEntity.setThanhtien(chitietDhEntity.getSoluong() * getPrice(maSP));
-            } else
                 chitietDhEntity.setThanhtien(chitietDhEntity.getSoluong() * getPrice(maSP) * (100 - checkSPKM(maSP)) / 100);
+            } else
+                chitietDhEntity.setThanhtien(chitietDhEntity.getSoluong() * getPrice(maSP));
             //==========================
             SellPhonesDBContext.updateObject(chitietDhEntity);
         } catch (NoResultException e) {
