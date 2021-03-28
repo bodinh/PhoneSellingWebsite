@@ -8,135 +8,154 @@
     <header th:replace="user/fragments :: navigation"></header>
     <!--    ==============================================BODY==============================================-->
 
-    <!--    =========================LIST PRODUCT======================-->
-    <div id="products-tab" class="wow fadeInUp">
-        <div class="container">
-            <div class="tab-holder">
-                <div class="title">
-                    <h1 th:text="${'Kết quả tìm kiếm cho `'+key+'`'}" ></h1>
-                    <h4 th:text="${totalResult + ' kết quả'}"></h4>
-                    <hr style="clear:both;"/>
-                </div>
-                <!-- Nav tabs -->
-                <ul class="nav nav-tabs" >
-                    <li class="active"><a href="#top-seller" data-toggle="tab">Bán Chạy</a></li>
-                    <li><a href="#new-arrival" data-toggle="tab">Hàng Mới</a></li>
-                    <li><a href="#low-price" data-toggle="tab">Giá Thấp</a></li>
-                    <li><a href="#high-price" data-toggle="tab">Giá Cao</a></li>
-                </ul>
-                <!-- Tab panes -->
-                <div class="tab-content">
-                    <div class="tab-pane active" id="featured">
-                        <div class="product-grid-holder" id="listNoiBat">
-                            <th:block th:each="item : ${products}">
-                                <div class="col-sm-4 col-md-3  no-margin product-item-holder hover">
-                                    <div class="product-item">
-                                        <div class="ribbon green"><span>bán chạy</span></div>
-                                        <div class="ribbon blue" th:if="${item.isnew}"><span>mới !</span></div>
-                                        <div class="image">
-                                            <img th:alt="${item.getTenSp()}"
-                                                 th:src="${'/image/' + item.getMaSp()+ '/' + item.getAnh()}"/>
-                                        </div>
-                                        <div class="body">
-                                            <div class="label-discount green">-20%</div>
-                                            <div class="title">
-                                                <a href="single-product.html" th:text="${item.getTenSp()}"></a>
-                                            </div>
-                                            <div class="brand">sony</div>
-                                        </div>
-                                        <div class="prices">
-                                            <div class="price-prev"
-                                                 th:text="${#numbers.formatDecimal(item.getGia(),0,'DEFAULT',0,'DEFAULT')}"></div>
-                                            <div class="price-current pull-right"
-                                                 th:text="${#numbers.formatDecimal(item.getGia(),0,'DEFAULT',0,'DEFAULT')} +' '+ VNĐ"></div>
-                                        </div>
+    <div class="container-main">
+        <div class="container-main__filter" id="container-filter">
+            <div id="filter__move">
+                <div id="bloc1" th:replace="user/fragments :: filter"></div>
+            </div>
+        </div>
 
-                                        <div class="hover-area">
-                                            <div class="add-cart-button">
-                                                <form action="/cart" method="post">
-                                                    <button type="submit" class="le-button">thêm vào giỏ</button>
-                                                    <input type="hidden" name="maSP" th:value="${item.maSp}"/>
-                                                </form>
+        <!--    =========================LIST PRODUCT======================-->
+        <div class="container-main__product">
+            <div id="bloc2" xml:id="products-tab" class="wow fadeInUp">
+                <div class="container">
+                    <div class="tab-holder">
+                        <div class="title">
+                            <h1 th:text="${'Kết quả tìm kiếm cho `'+key+'`'}" ></h1>
+                            <h4 th:text="${totalResult + ' kết quả'}"></h4>
+                            <hr style="clear:both;"/>
+                        </div>
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs" >
+                            <li class="active" ><a href="#relevant" data-toggle="tab">Bán chạy</a></li>
+                            <li><a href="#low-price" data-toggle="tab">Giá Thấp</a></li>
+                            <li><a href="#high-price" data-toggle="tab">Giá Cao</a></li>
+                        </ul>
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="relevant">
+                                <div class="product-grid-holder" id="relevantProducts">
+                                    <th:block th:each="item : ${topSellerProducts}">
+                                        <div class="col-sm-4 col-md-3  no-margin product-item-holder hover">
+                                            <div class="product-item">
+                                                <div class="ribbon blue" th:if="${item.isnew}"><span>mới !</span></div>
+                                                <div class="image">
+                                                    <img th:alt="${item.getTenSp()}"
+                                                         th:src="${'/image/' + item.getMaSp()+ '/' + item.getAnh()}"/>
+                                                </div>
+                                                <div class="body">
+                                                    <div class="label-discount green">-20%</div>
+                                                    <div class="title">
+                                                        <a href="single-product.html" th:text="${item.getTenSp()}"></a>
+                                                    </div>
+                                                    <div class="brand">sony</div>
+                                                </div>
+                                                <div class="prices">
+                                                    <div class="price-prev"
+                                                         th:text="${#numbers.formatDecimal(item.getGia(),0,'DEFAULT',0,'DEFAULT')}"></div>
+                                                    <div class="price-current pull-right"
+                                                         th:text="${#numbers.formatDecimal(item.getGia(),0,'DEFAULT',0,'DEFAULT')} +' '+ VNĐ"></div>
+                                                </div>
+
+                                                <div class="hover-area">
+                                                    <div class="add-cart-button">
+                                                        <form action="/cart" method="post">
+                                                            <button type="submit" class="le-button">thêm vào giỏ</button>
+                                                            <input type="hidden" name="maSP" th:value="${item.maSp}"/>
+                                                        </form>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </th:block>
                                 </div>
-                            </th:block>
-                            <div class="row">
-                                <div th:if="${totalPageCount > 1}">
-                                    <ul class="pagination">
-                                        <li
-                                                th:class="${currentIndex == 1}? 'page-item disabled' : 'page-item'">
-                                            <a class="page-link" th:href="@{|${baseUrl}1|}">First</a>
-                                        </li>
-                                        <li
-                                                th:class="${currentIndex == 1}? 'page-item disabled': 'page-item' ">
-                                            <a class="page-link" aria-label="Previous"
-                                               th:href="@{|${baseUrl}${currentIndex - 1}|}"
-                                               title='Go to previous page'><span aria-hidden="true">«</span>
-                                                <span class="sr-only">Previous</span></a>
-                                        </li>
-                                        <li th:if="${totalPageCount < 8}"
-                                            th:each="item : ${#numbers.sequence(beginIndex,endIndex)}"
-                                            th:class="${item == currentIndex ? 'page-item active' :'page-item' }">
-                                            <a class="page-link" th:href="@{|${baseUrl}${item}|}"> <span
-                                                    th:text='${item}'>1</span>
-                                            </a>
-                                        </li>
-                                        <th:block th:unless="${totalPageCount < 8}">
-                                            <li th:each="item : ${#numbers.sequence(beginIndex,endIndex)}"
-                                                th:class="${item == currentIndex ? 'page-item active' :'page-item' }">
+                            </div>
+                            <div class="tab-pane active" id="low-price">
+                                <div class="product-grid-holder" id="lowPriceProducts">
+                                    <th:block th:each="item : ${lowPriceProducts}">
+                                        <div class="col-sm-4 col-md-3  no-margin product-item-holder hover">
+                                            <div class="product-item">
+                                                <div class="ribbon blue" th:if="${item.isnew}"><span>mới !</span></div>
+                                                <div class="image">
+                                                    <img th:alt="${item.getTenSp()}"
+                                                         th:src="${'/image/' + item.getMaSp()+ '/' + item.getAnh()}"/>
+                                                </div>
+                                                <div class="body">
+                                                    <div class="label-discount green">-20%</div>
+                                                    <div class="title">
+                                                        <a href="single-product.html" th:text="${item.getTenSp()}"></a>
+                                                    </div>
+                                                    <div class="brand">sony</div>
+                                                </div>
+                                                <div class="prices">
+                                                    <div class="price-prev"
+                                                         th:text="${#numbers.formatDecimal(item.getGia(),0,'DEFAULT',0,'DEFAULT')}"></div>
+                                                    <div class="price-current pull-right"
+                                                         th:text="${#numbers.formatDecimal(item.getGia(),0,'DEFAULT',0,'DEFAULT')} +' '+ VNĐ"></div>
+                                                </div>
 
-                                                <a class="page-link" th:if="${item ==1 }"
-                                                   th:href="@{|${baseUrl}${item}|}"> <span
-                                                        th:text='${item}'>1</span>
-                                                </a>
-                                            </li>
-                                            <li><span>&nbsp; . . . &nbsp;</span></li>
-                                            <li th:if="${currentIndex != 1 && currentIndex != endIndex}"
-                                                th:class="${'page-item active'}">
+                                                <div class="hover-area">
+                                                    <div class="add-cart-button">
+                                                        <form action="/cart" method="post">
+                                                            <button type="submit" class="le-button">thêm vào giỏ</button>
+                                                            <input type="hidden" name="maSP" th:value="${item.maSp}"/>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </th:block>
+                                </div>
+                            </div>
+                            <div class="tab-pane active" id="high-price">
+                                <div class="product-grid-holder" id="highPriceProducts">
+                                    <th:block th:each="item : ${highPriceProducts}">
+                                        <div class="col-sm-4 col-md-3  no-margin product-item-holder hover">
+                                            <div class="product-item">
+                                                <div class="ribbon blue" th:if="${item.isnew}"><span>mới !</span></div>
+                                                <div class="image">
+                                                    <img th:alt="${item.getTenSp()}"
+                                                         th:src="${'/image/' + item.getMaSp()+ '/' + item.getAnh()}"/>
+                                                </div>
+                                                <div class="body">
+                                                    <div class="label-discount green">-20%</div>
+                                                    <div class="title">
+                                                        <a href="single-product.html" th:text="${item.getTenSp()}"></a>
+                                                    </div>
+                                                    <div class="brand">sony</div>
+                                                </div>
+                                                <div class="prices">
+                                                    <div class="price-prev"
+                                                         th:text="${#numbers.formatDecimal(item.getGia(),0,'DEFAULT',0,'DEFAULT')}"></div>
+                                                    <div class="price-current pull-right"
+                                                         th:text="${#numbers.formatDecimal(item.getGia(),0,'DEFAULT',0,'DEFAULT')} +' '+ VNĐ"></div>
+                                                </div>
 
-                                                <a class="page-link" th:href="@{|${baseUrl}${item}|}"> <span
-                                                        th:text='${currentIndex}'>1</span>
-                                                </a>
-                                            </li>
-                                            <li><span>&nbsp; . . . &nbsp;</span></li>
-                                            <li th:each="item : ${#numbers.sequence(beginIndex,endIndex)}"
-                                                th:class="${item == currentIndex ? 'page-item active' :'page-item' }">
-
-                                                <a class="page-link" th:if="@{${item} == ${endIndex} }"
-                                                   th:href="@{|${baseUrl}${item}|}"> <span
-                                                        th:text='${item}'>1</span>
-                                                </a>
-                                            </li>
-                                        </th:block>
-                                        <li
-                                                th:class="${currentIndex == totalPageCount}? 'page-item disabled': 'page-item'">
-                                            <a class="page-link" aria-label="Next"
-                                               th:href="@{|${baseUrl}${currentIndex + 1}|}"
-                                               title='Go to next page'><span
-                                                    aria-hidden="true">»</span> <span
-                                                    class="sr-only">Next</span></a>
-                                        </li>
-                                        <li
-                                                th:class="${currentIndex == totalPageCount}? 'page-item disabled':'page-item'">
-                                            <a class="page-link"
-                                               th:href="@{|${baseUrl}${totalPageCount}|}">Last</a>
-                                        </li>
-                                    </ul>
+                                                <div class="hover-area">
+                                                    <div class="add-cart-button">
+                                                        <form action="/cart" method="post">
+                                                            <button type="submit" class="le-button">thêm vào giỏ</button>
+                                                            <input type="hidden" name="maSP" th:value="${item.maSp}"/>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </th:block>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <!--    =======================END LIST PRODUCT====================-->
+            <div th:replace="user/fragments :: recentlyViewed"></div>
         </div>
     </div>
-    <!--    =======================END LIST PRODUCT====================-->
-
     <!--    =============================================END BODY=========================================-->
-    <div th:replace="user/fragments :: recentlyViewed"></div>
+
     <div th:replace="user/fragments :: footer"></div>
 </div>
 </body>
+
 </html>

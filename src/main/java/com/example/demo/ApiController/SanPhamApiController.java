@@ -1,18 +1,15 @@
 package com.example.demo.ApiController;
 
 import com.example.demo.Hibernate.SanphamEntity;
+import com.example.demo.Hibernate.LoaiSpEntity;
 import com.example.demo.Hibernate.SellPhonesDBContext;
-
-import com.example.demo.constant.ProductConstant;
-import com.example.demo.repository.SanphamRepository;
+import com.example.demo.MyFilter.FilterBrand;
+import com.example.demo.MyFilter.FilterChain;
 import org.hibernate.Session;
-import org.springframework.beans.support.PagedListHolder;
-import org.springframework.lang.Nullable;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -25,8 +22,6 @@ public class SanPhamApiController {
     private Session openSession() {
         return session = SellPhonesDBContext.getSession();
     }
-
-    private final SanphamRepository sanphamRepository = null;
 
     //single item
     @GetMapping("/single/{MaSP}")
@@ -152,26 +147,48 @@ public class SanPhamApiController {
         return result;
     }
 
-    @GetMapping("/{pageNumber}")
+    @GetMapping("/search")
     public ModelAndView findByKeyword(@RequestParam(name = "key") String key,
-                                      @PathVariable(name = "pageNumber") int pageNumber) {
+                                      @RequestParam(name = "category",  required = false, defaultValue = "0") int category,
+                                      @RequestParam(name = "minPrice", required = false, defaultValue = "0") double minPrice,
+                                      @RequestParam(name = "maxPrice", required = false, defaultValue = "0") String maxPrice,
+                                      @RequestParam(name = "brand", required = false) List<Integer> brands,
+                                      @RequestParam(name = "sort", required = false) String sortType) {
         ModelAndView mv = new ModelAndView("search-and-filter.html");
-        List<SanphamEntity> products;
         try {
-            products = openSession().createQuery("from SanphamEntity sp where sp.tenSp like '%" + key + "%'").list();
-            int totalResult=products.size();
-            int beginIndex = ProductConstant.LOAD_LIMIT * (pageNumber-1);
-            int endIndex = beginIndex+ProductConstant.LOAD_LIMIT;
-            products = products.subList(beginIndex, endIndex);
-            int totalPageCount = products.size()/ProductConstant.LOAD_LIMIT;
-            mv.addObject("totalPageCount", totalPageCount);
-            mv.addObject("currentPage", pageNumber);
-            mv.addObject("beginIndex", beginIndex);
-            mv.addObject("endIndex", endIndex);
-            mv.addObject("baseUrl", "/api/sanphams/");
-            mv.addObject("products", products);
-            mv.addObject("totalResult", totalResult);
+            //get list
+            List<SanphamEntity> topSellerProducts = openSession().createQuery("from SanphamEntity sp where sp.tenSp like '%" + key + "%'").list();
+            mv.addObject("topSellerProducts", topSellerProducts);
+            List<SanphamEntity> lowPriceProducts=openSession().createQuery("from SanphamEntity sp where sp.tenSp like '%" + key + "%' order by sp.gia asc ").list();
+            mv.addObject("lowPriceProducts", lowPriceProducts);
+            List<SanphamEntity> highPriceProducts=openSession().createQuery("from SanphamEntity sp where sp.tenSp like '%" + key + "%' order by sp.gia desc ").list();
+            mv.addObject("highPriceProducts", highPriceProducts);
+//
+//            mv.addObject("totalResult", totalResult);
+//
+//            //page distribution
+//            int totalPageCount = totalResult/ProductConstant.LOAD_LIMIT;
+//            mv.addObject("totalPageCount", totalPageCount);
+//            mv.addObject("currentIndex", pageNumber-1);
+//            mv.addObject("beginIndex", beginIndex);
+//            mv.addObject("endIndex", endIndex);
+//            mv.addObject("baseUrl", "/api/sanphams/");
+//            mv.addObject("key", key);
+
+//            List<SanphamEntity> products = openSession().createQuery("from SanphamEntity sp where sp.tenSp like '%" + key + "%'").list();
+//            FilterChain filterChain=new FilterChain();
+//            filterChain.addFilter(new FilterBrand(brands));
+//            List<SanphamEntity> filterList = filterChain.doFilter(products);
+//            mv.addObject("products", filterList);
+
+            List<LoaiSpEntity> categories = openSession().createQuery("from LoaiSpEntity").list();
+            mv.addObject("categories", categories);
+
+            brands = openSession().createQuery("from HangSxEntity").list();
+            mv.addObject("brands", brands);
+
             mv.addObject("key", key);
+            mv.addObject("totalResult", topSellerProducts.size());
         } catch (Exception e) {
             e.printStackTrace();
         }

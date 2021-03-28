@@ -17,7 +17,7 @@
     <link rel="stylesheet" th:href="@{/assets/css/bootstrap.min.css}">
 
     <!-- Customizable CSS -->
-    <link rel="stylesheet" th:href="@{/assets/css/main.css}">
+
     <link rel="stylesheet" th:href="@{/assets/css/green.css}">
     <link rel="stylesheet" th:href="@{/assets/css/owl.carousel.css}">
     <link rel="stylesheet" th:href="@{/assets/css/owl.transitions.css}">
@@ -28,6 +28,10 @@
 
     <!-- Icons/Glyphs -->
     <link rel="stylesheet" th:href="@{/assets/css/font-awesome.min.css}">
+
+    <!-- My css-->
+    <link rel="stylesheet" th:href="@{/assets/css/main.css}">
+
 
     <!-- Favicon -->
     <link rel="shortcut icon" th:href="@{/assets/images/favicon.ico}">
@@ -142,14 +146,13 @@
                 </div><!-- /.contact-row -->
                 <!-- ============================================================= SEARCH AREA ============================================================= -->
                 <div class="search-area">
-                    <form action="/api/sanphams/1", method="get">
+                    <form action="/api/sanphams/search", method="get">
                         <div class="control-group">
                             <input class="search-field" placeholder="Tìm kiếm sản phẩm" name="key" style="width:64%"/>
 
                             <ul class="categories-filter animate-dropdown">
                                 <li class="dropdown">
 
-                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Tất cả các loại</a>
 
                                     <ul class="dropdown-menu" role="menu" id="allCategories">
 
@@ -1375,6 +1378,61 @@
         </div>
     </section><!-- /#recently-reviewd -->
     <!-- ========================================= RECENTLY VIEWED : END ========================================= -->
+
+    <!-- ========================================= FILTER : START ========================================= -->
+    <div class="container-fluid" th:fragment="filter">
+        <div class="row d-flex justify-content-center">
+            <div class="col-md-12">
+                <div class="card">
+                    <article class="filter-group">
+                        <header class="card-header"> <a href="#" data-toggle="collapse" data-target="#collapse_aside1" data-abc="true" aria-expanded="true" class="collapsed"> <i class="icon-control fa fa-chevron-down"></i>
+                            <h6 class="title">DANH MỤC SẢN PHẨM </h6>
+                        </a> </header>
+                        <div class="filter-content collapse" id="collapse_aside1" style="">
+                            <div class="card-body">
+                                <ul class="list-menu">
+                                    <th:block th:each="item : ${categories}">
+                                        <li><a href="/api/sanphams/search?key=&category=" data-abc="true" th:text="${item.getTenLoai} "> </a></li>
+                                    </th:block>
+                                </ul>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="filter-group">
+                        <header class="card-header">
+                            <a href="#" data-toggle="collapse" data-target="#collapse_aside2" data-abc="true" aria-expanded="true" class="collapsed"> <i class="icon-control fa fa-chevron-down"></i>
+                                <h6 class="title">GIÁ </h6>
+                            </a>
+                        </header>
+                        <div class="filter-content collapse" id="collapse_aside2" style="">
+                            <div class="card-body"> <input type="range" class="custom-range" min="0" max="100" name="">
+                                <div class="form-row">
+                                    <div class="form-group col-md-6"> <label>Nhỏ nhất</label> <input class="form-control" type="number" name="minPrice"> </div>
+                                    <div class="form-group text-right col-md-6"> <label>Lớn nhất</label> <input class="form-control" type="number" name="maxPrice"> </div>
+                                </div> <a href="" class="highlight-button btn btn-medium button xs-margin-bottom-five" data-abc="true">Áp dụng</a>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="filter-group">
+                        <header class="card-header"> <a href="#" data-toggle="collapse" data-target="#collapse_aside4" data-abc="true" class="collapsed" aria-expanded="true"> <i class="icon-control fa fa-chevron-down"></i>
+                            <h6 class="title">THƯƠNG HIỆU </h6>
+                        </a> </header>
+                        <div class="filter-content collapse" id="collapse_aside4" style="">
+                            <div class="card-body">
+                                <th:block th:each="item : ${brands}">
+                                    <label class="custom-control">
+                                        <input type="checkbox" class="custom-control-input">
+                                        <div class="custom-control-label" th:text="${item.getTenhang}"></div>
+                                    </label>
+                                </th:block>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ========================================= FILTER : END ========================================= -->
 
     <!-- ============================================================= FOOTER ============================================================= -->
     <footer id="footer" class="color-bg" th:fragment="footer">
