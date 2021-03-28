@@ -30,10 +30,10 @@ public class HomeController {
         List<SanPham> listSanPhamsHot = listSanPham.getAllHot();
         List<SanPham> listSanPhamsNew = listSanPham.getAllNew();
         List<SanPham> listSanPhamsSale = listSanPham.getAllSale();
-        model.addAttribute("listSanPhamsHot", listSanPhamsHot.subList(0, 8));
-        model.addAttribute("listSanPhamsNew", listSanPhamsNew.subList(0, 8));
+        model.addAttribute("listSanPhamsHot", listSanPhamsHot.subList(0, 5));
+        model.addAttribute("listSanPhamsNew", listSanPhamsNew.subList(0, 5));
         if(listSanPhamsHot.size() != 0){
-            model.addAttribute("listSanPhamsSale", listSanPhamsSale.subList(0, 8));
+            model.addAttribute("listSanPhamsSale", listSanPhamsSale.subList(0, 0));
         }else {
             model.addAttribute("listSanPhamsSale", listSanPhamsSale);
         }

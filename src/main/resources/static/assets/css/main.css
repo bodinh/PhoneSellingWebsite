@@ -47,6 +47,14 @@ input::-webkit-inner-spin-button {
 input[type=number] {
   -moz-appearance: textfield;
 }
+#block_container
+{
+  text-align:center;
+}
+#bloc1, #bloc2
+{
+  display:inline;
+}
 .light-bg {
   background-color: #f8f8f8;
 }
