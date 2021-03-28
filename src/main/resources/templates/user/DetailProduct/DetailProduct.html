@@ -2,3 +2,207 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <head th:replace="user/fragments :: head"/>
+<body>
+<div class="wrapper">
+    <nav th:replace="user/fragments :: topBar"></nav>
+    <header th:replace="user/fragments :: navigation"></header>
+<div>
+
+    <div class="container mt-5 ">
+
+
+        <iframe id="pxcelframe" src="//t.sharethis.com/a/t_.htm?ver=1.464.22118&amp;cid=c010#rnd=1616953013591&amp;cid=c010&amp;dmn=localhost&amp;gdpr_domain=.consensu.org&amp;gdpr_method=cookie&amp;tt=t.dhj&amp;dhjLcy=37&amp;lbl=pxcel&amp;flbl=pxcel&amp;ll=d&amp;ver=1.464.22118&amp;ell=d&amp;cck=__stid&amp;pn=%2FProduct%2Findex%2F1000&amp;qs=na&amp;rdn=localhost&amp;rpn=%2F&amp;rqs=na&amp;cc=VN&amp;cont=AS&amp;ipaddr=" style="display: none;"></iframe><script src="https://apis.google.com/_/scs/apps-static/_/js/k=oz.gapi.vi.xobcwZcPZ2k.O/m=auth2/rt=j/sv=1/d=1/ed=1/am=AQ/rs=AGLTcCOTkbX-Yg3aBZv1S9HkThIg84StZQ/cb=gapi.loaded_0" async=""></script><script type="text/javascript" id="async-buttons" src="https://ws.sharethis.com/button/async-buttons.js"></script><script src="/Scripts/jquery-3.5.1.js"></script>
+        <script src="/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+        <div>
+            <div id="single-product" class="">
+                <div class="container">
+                    <div class="no-margin col-xs-12 col-sm-6 col-md-5 gallery-holder">
+                        <div class="product-item-holder size-big single-product-gallery small-gallery">
+                            <div id="owl-single-product" class="owl-carousel owl-theme" style="opacity: 1; display: block;">
+                                <div class="owl-wrapper-outer"><div class="owl-wrapper" style="width: 1440px; left: 0px; display: block; transition: all 0ms ease 0s; transform: translate3d(0px, 0px, 0px);"><div class="owl-item" style="width: 360px;"><div class="owl-wrapper-outer">
+                                    <div class="owl-wrapper-outer"><div class="owl-wrapper" style="width: 1440px; left: 0px; display: block; transition: all 0ms ease 0s; transform: translate3d(0px, 0px, 0px);">
+                                        <div class="owl-item" style="width: 360px;">
+                                            <div class="single-product-gallery-item" id="slide1">
+                                                <a data-rel="prettyphoto" href="#">
+                                                    <img class="img-responsive" th:alt="${product.sp.tenSp}" th:src="${'/image/' + product.sp.maSp+ '/' + product.sp.anh}"   width="353">
+                                                </a>
+                                            </div>
+                                        </div>
+
+                                    </div></div>
+                                </div></div></div></div><!-- /.single-product-gallery-item -->
+                                <!-- /.single-product-gallery-item -->
+                                <!-- /.single-product-gallery-item -->
+                            </div><!-- /.single-product-slider -->
+
+                            <div class="single-product-gallery-thumbs gallery-thumbs">
+                                <div id="owl-single-product-thumbnails" class="owl-carousel owl-theme" style="opacity: 1; display: block;">
+                                    <div class="owl-wrapper-outer"><div class="owl-wrapper" style="width: 480px; left: 0px; display: block; transition: all 0ms ease 0s; transform: translate3d(0px, 0px, 0px);"><div class="owl-item" style="width: 120px;"><div class="owl-wrapper-outer">
+                                        <div class="owl-wrapper-outer"><div class="owl-wrapper" style="width: 480px; left: 0px; display: block; transition: all 0ms ease 0s; transform: translate3d(0px, 0px, 0px);">
+
+                                        </div></div>
+                                    </div></div></div></div>
+                                </div><!-- /#owl-single-product-thumbnails -->
+                            </div><!-- /.gallery-thumbs -->
+                        </div><!-- /.single-product-gallery -->
+                    </div><!-- /.gallery-holder -->
+                    <div class="no-margin col-xs-12 col-sm-7 body-holder">
+                        <div class="body">
+
+
+                            <div class="title"><a href="#" th:text="${product.sp.tenSp}"></a></div>
+
+                            <div class="brand"></div>
+                            <div class="prices">
+                                <div class="price-current" th:text="${'Giá: ' + product.sp.gia}"> </div>
+                            </div>
+                            <script>
+                                function Add() {
+                                    var num = parseInt(document.getElementById("number").value, 10);
+                                    num = isNaN(num) ? 1 : num;
+                                    num = num + 1;
+                                    if (num > 0) num = num - 1;
+
+                                    document.getElementById('number').value = num;
+                                }
+                                function Subtrac() {
+                                    var num = parseInt(document.getElementById("number").value, 10);
+                                    num = isNaN(num) ? 1 : num;
+                                    if (num > 1) num--;
+                                    document.getElementById('number').value = num;
+                                }
+                            </script>
+<!--                            <div class="qnt-holder">-->
+<!--                                <div class="le-quantity">-->
+<!--                                    <form>-->
+<!--                                        <a class="minus" href="#" onclick="Subtrac();"></a>-->
+<!--                                        <input name="quantity" id="number" class="sl" readonly="readonly" type="text" value="0">-->
+<!--                                        <a class="plus" href="#" onclick="Add();"></a>-->
+<!--                                    </form>-->
+<!--                                </div>-->
+<!--                                <a id="addto-cart" href="#" class="le-button huge">Cho vào giỏ</a>-->
+<!--                            </div>&lt;!&ndash; /.qnt-holder &ndash;&gt;-->
+                            <div class="hover-area">
+                                <div class="add-cart-button">
+                                    <form action="/cart" method="post">
+                                        <button type="button" th:onclick="'addnewProduct('+${product.sp.maSp}+','+${session.maDH}+')'" class="le-button">thêm vào giỏ</button>
+                                        <input type="hidden" name="maSP"
+                                               th:value="${product.sp.maSp}"/>
+                                    </form>
+                                </div>
+                            </div>
+                        </div><!-- /.body -->
+                    </div><!-- /.body-holder -->
+                </div><!-- /.container -->
+            </div><!-- /.single-product -->
+
+
+            <!-- ========================================= SINGLE PRODUCT TAB ========================================= -->
+            <section id="single-product-tab">
+                <div class="container">
+                    <div class="tab-holder">
+                        <ul class="nav nav-tabs simple">
+
+                            <li id="thongso" class="active"><a data-ajax="true" data-ajax-method="GET" data-ajax-mode="replace" data-ajax-update="#description" href="/Product/Thongso">Thông số kỹ thuật</a></li>
+
+                        </ul><!-- /.nav-tabs -->
+                        <div class="tab-content" id="description"><div class="tab-pane active" id="additional-info">
+                            <h2 th:text="${'Thông số kỹ thuật của ' + product.sp.tenSp}"></h2><br>
+                            <ul class="tabled-data">
+                                <li>
+                                    <label>Bộ nhớ đệm / Ram : </label>
+                                    <div class="value" style="padding-left:10px;">12 GB</div>
+                                </li>
+                                <li>
+                                    <label>Bộ nhớ trong : </label>
+                                    <div class="value" style="padding-left:10px;">256 GB</div>
+                                </li>
+                                <li>
+                                    <label>Cảm biến : </label>
+                                    <div class="value" style="padding-left:10px;">Mở khóa bằng khuôn mặt, Mở khoá vân tay dưới màn hình</div>
+                                </li>
+                                <li>
+                                    <label>Chipset : </label>
+                                    <div class="value" style="padding-left:10px;">Samsung Exynos 9825</div>
+                                </li>
+                                <li>
+                                    <label>Độ phân giải màn hình : </label>
+                                    <div class="value" style="padding-left:10px;">3040 x 1440 pixels</div>
+                                </li>
+                                <li>
+                                    <label>Hệ điều hành : </label>
+                                    <div class="value" style="padding-left:10px;">Android</div>
+                                </li>
+                                <li>
+                                    <label>Kích thước : </label>
+                                    <div class="value" style="padding-left:10px;">77.2 mm x 162.3 mm x 7.9 mm</div>
+                                </li>
+                                <li>
+                                    <label>Kích thước màn hình : </label>
+                                    <div class="value" style="padding-left:10px;">6.8 inches</div>
+                                </li>
+                                <li>
+                                    <label>Loại màn hình : </label>
+                                    <div class="value" style="padding-left:10px;">Dynamic AMOLED QHD+ Infinity-O</div>
+                                </li>
+                                <li>
+                                    <label>Loại SIM : </label>
+                                    <div class="value" style="padding-left:10px;">2 SIM (Nano-SIM)</div>
+                                </li>
+                                <li>
+                                    <label>Phiên bản hệ điều hành : </label>
+                                    <div class="value" style="padding-left:10px;">Android 9.0 (Pie)</div>
+                                </li>
+                                <li>
+                                    <label>Pin : </label>
+                                    <div class="value" style="padding-left:10px;">4300 mAh, Quick Charge 45W</div>
+                                </li>
+                                <li>
+                                    <label>Trọng lượng : </label>
+                                    <div class="value" style="padding-left:10px;">196 g</div>
+                                </li>
+                            </ul>
+
+                        </div><!-- /.tab-pane #additional-info -->
+                        </div><!-- /.tab-content -->
+                    </div><!-- /.tab-holder -->
+                </div><!-- /.container -->
+            </section><!-- /#single-product-tab -->
+            <!-- ========================================= SINGLE PRODUCT TAB : END ========================================= -->
+            <!-- ========================================= SAN PHAM LIEN QUAN ========================================= -->
+            <!-- /#recently-reviewd -->
+
+            <!-- ========================================= RECENTLY VIEWED : END ========================================= -->
+        </div>
+
+        <script>
+            $("#mota").click(function () {
+                this.classList.add("active");
+                var element = document.getElementById("thongso");
+                element.classList.remove("active");
+                var element1 = document.getElementById("binhluan");
+                element1.classList.remove("active");
+            })
+            $("#thongso").click(function () {
+                this.classList.add("active");
+                var element = document.getElementById("mota");
+                element.classList.remove("active");
+                var element1 = document.getElementById("binhluan");
+                element1.classList.remove("active");
+            })
+            $("#binhluan").click(function () {
+                this.classList.add("active");
+                var element = document.getElementById("mota");
+                element.classList.remove("active");
+                var element1 = document.getElementById("thongso");
+                element1.classList.remove("active");
+            })
+            document.title = 'Chi tiết sản phẩm'
+        </script>
+
+    </div>
+</div>
+    <div th:replace="user/fragments :: recentlyViewed"></div>
+    <div th:replace="user/fragments :: footer"></div>
+</div>
+</body>
