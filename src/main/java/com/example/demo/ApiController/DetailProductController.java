@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import org.hibernate.Session;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
@@ -24,7 +25,8 @@ private Session openSession(){
         return session = SellPhonesDBContext.getSession();
     }
 @GetMapping("/product/detail/{MaSP}")
-public ThongSoKT_SamPhamPK GetSanPham(@PathVariable(name = "MaSP") int MaSP) {
+public ModelAndView GetSanPham(@PathVariable(name = "MaSP") int MaSP) {
+    ModelAndView mv = new ModelAndView("user/DetailProduct/DetailProduct.html");
     SanphamEntity sanPham = null;
     List<ThongsokythuatEntity> lsThongSoKT = null;
     try {
@@ -37,7 +39,8 @@ public ThongSoKT_SamPhamPK GetSanPham(@PathVariable(name = "MaSP") int MaSP) {
     ThongSoKT_SamPhamPK re = new ThongSoKT_SamPhamPK();
     re.sp = sanPham;
     re.lsThongSo = lsThongSoKT;
-    return re;
+    mv.addObject("product",re);
+    return mv;
 
 }
 //@GetMapping("/product/detail/{MaSP}")
